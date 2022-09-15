@@ -30,6 +30,7 @@ class ProductResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'status' => $this->status == 1 ? 'Borrador' : 'Publicado',
+            'category_id' => $this->category_id,
             'category' => CategoryResource::make($this->whenLoaded('category')),
         ];
     }

@@ -28,8 +28,8 @@ class LoginController extends Controller
         // Solicitud de token a la API desde cliente externo
         $response = Http::asForm()->post('http://api.trivicare.test/oauth/token', [
             'grant_type' => 'password',
-            'client_id' => '973327d9-0c4e-4865-9372-b68d50978ed0',
-            'client_secret' => 'VTE2oQd0Wwh0yamf8InqwUs6NTyJm63A5SvMx788',
+            'client_id' => '973bd2ef-601d-435b-a5b2-666435d949e4',
+            'client_secret' => '00jpvr483TqPio35jg1u5GybsDzgKK7k13aHnmUc',
             'username' => $request->username,
             'password' => $request->password,
             'scope' => '*',
@@ -46,7 +46,11 @@ class LoginController extends Controller
         Auth::login($user);
 
 
-        return response()->json($access_token);
+        return response()->json([
+            $user,
+            $access_token,
+
+        ]);
     }
 
     public function logout(Request $request)

@@ -35,7 +35,7 @@ class Product extends Model
     // Propiedad para filtrar por los campos de la tabla
     protected $allowFilter = ['id', 'name', 'slug', 'price', 'category_id'];
     // Propiedad para ordenar por los campos de la tabla
-    protected $allowSort = ['id', 'name', 'slug'];
+    protected $allowSort = ['id', 'name', 'price'];
 
     // Relacion de uno a uno con la tabla categories
     public function category()

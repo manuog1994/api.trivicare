@@ -56,3 +56,41 @@ Route::post('cart/details', [ShoppingCartController::class, 'cartDetails'])->nam
 
 // Orders
 Route::post('orders/{id}', [OrderController::class, 'orderItems'])->name('orders.items');
+
+
+use Illuminate\Support\Facades\Http;
+
+use Illuminate\Support\Str;
+ 
+Route::get('/redirect', function (Request $request) {
+    $request->session()->put('state', $state = Str::random(40));
+ 
+    $query = http_build_query([
+        'client_id' => $request->client_id,
+        'redirect_uri' => $request->url,
+        'response_type' => 'code',
+        'scope' => '',
+        'state' => $state,
+    ]);
+ 
+    return redirect('http://api.trivicare.test/oauth/authorize?'.$query);
+});
+ 
+Route::get('/callback', function (Request $request) {
+    $state = $request->session()->pull('state');
+ 
+    throw_unless(
+        strlen($state) > 0 && $state === $request->state,
+        InvalidArgumentException::class
+    );
+ 
+    $response = Http::asForm()->post('http://api.trivicare.test/oauth/token', [
+        'grant_type' => 'authorization_code',
+        'client_id' => $request->client_id,
+        'client_secret' => $request->client_secret,
+        'redirect_uri' => $request->url,
+        'code' => $request->code,
+    ]);
+ 
+    return $response->json();
+});
