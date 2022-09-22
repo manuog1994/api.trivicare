@@ -43,5 +43,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // Relacion de uno a muchos con la tabla reviews
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 
 }

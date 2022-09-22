@@ -39,11 +39,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-     
+
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'sanctum',
             'provider' => 'users',
         ],
+
 
     ],
     /*

@@ -3,13 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Order\OrderController;
 
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\Api\Product\ProductController;
-use App\Http\Controllers\Api\Cart\ShoppingCartController;
 use App\Http\Controllers\Api\Category\CategoryController;
+
 
 
 /*
@@ -23,22 +23,25 @@ use App\Http\Controllers\Api\Category\CategoryController;
 |
 */
 // Autentication User
-Route::post('login', [LoginController::class, 'login'])->name('login');
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('index', [RegisterController::class, 'index'])->name('index');
-Route::get('index-profile', [RegisterController::class, 'indexProfile'])->name('index-profile');
+Route::middleware('auth:sanctum')->get('user', function (Request $request) {
+    return $request->user();
+});
 
-Route::get('show/{user}', [RegisterController::class, 'show'])->name('show');
-Route::get('show-profile/{userProfile}', [RegisterController::class, 'showProfile'])->name('show-profile');
 
-Route::post('register', [RegisterController::class, 'register'])->name('register');
-Route::post('register-profile', [RegisterController::class, 'registerUserProfile'])->middleware('auth:api')->name('register-profile');
+// User
 
-Route::put('update', [RegisterController::class, 'update'])->middleware('auth:api')->name('update');
-Route::put('update-profile/{user_profile}', [RegisterController::class, 'updateUserProfile'])->middleware('auth:api')->name('update-profile');
+Route::post('update-email/{id}', [RegisterController::class, 'updateEmail']);
+Route::post('update-password/{id}', [RegisterController::class, 'updatePassword']);
 
-Route::delete('destroy/{user}/{user_profile}', [RegisterController::class, 'destroy'])->middleware('auth:api')->name('destroy');
+// User Profile
+Route::get('show-profile/{userId}', [RegisterController::class, 'showProfile'])->middleware('auth:sanctum')->name('show-profile');
+
+Route::post('register-profile', [RegisterController::class, 'registerUserProfile'])->middleware('auth:sanctum')->name('register-profile');
+
+Route::delete('delete-profile/{user_profile}', [RegisterController::class, 'deleteProfile'])->middleware('auth:sanctum')->name('delete-profile');
+
+Route::delete('destroy/{user}', [RegisterController::class, 'destroy'])->middleware('auth:sanctum')->name('destroy');
 
 
 
@@ -48,49 +51,10 @@ Route::apiResource('categories', CategoryController::class)->names('categories')
 // Products
 Route::apiResource('products', ProductController::class )->names('products');
 
-// Carts
-Route::apiResource('carts', ShoppingCartController::class)->names('carts');
-
-Route::post('cart/delete', [ShoppingCartController::class, 'destroyAll'])->name('cart.delete.all');
-Route::post('cart/details', [ShoppingCartController::class, 'cartDetails'])->name('cart.details');
+// Reviews
+Route::apiResource('reviews', ReviewController::class)->names('reviews');
 
 // Orders
-Route::post('orders/{id}', [OrderController::class, 'orderItems'])->name('orders.items');
+//Route::post('orders/{id}', [OrderController::class, 'orderItems'])->name('orders.items');
 
 
-use Illuminate\Support\Facades\Http;
-
-use Illuminate\Support\Str;
- 
-Route::get('/redirect', function (Request $request) {
-    $request->session()->put('state', $state = Str::random(40));
- 
-    $query = http_build_query([
-        'client_id' => $request->client_id,
-        'redirect_uri' => $request->url,
-        'response_type' => 'code',
-        'scope' => '',
-        'state' => $state,
-    ]);
- 
-    return redirect('http://api.trivicare.test/oauth/authorize?'.$query);
-});
- 
-Route::get('/callback', function (Request $request) {
-    $state = $request->session()->pull('state');
- 
-    throw_unless(
-        strlen($state) > 0 && $state === $request->state,
-        InvalidArgumentException::class
-    );
- 
-    $response = Http::asForm()->post('http://api.trivicare.test/oauth/token', [
-        'grant_type' => 'authorization_code',
-        'client_id' => $request->client_id,
-        'client_secret' => $request->client_secret,
-        'redirect_uri' => $request->url,
-        'code' => $request->code,
-    ]);
- 
-    return $response->json();
-});

@@ -9,13 +9,7 @@ use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api')->except('index', 'show');
-        $this->middleware(['auth:api', 'scopes:create', 'can:create'])->only('store');
-        $this->middleware(['auth:api', 'scopes:update', 'can:update'])->only('update');
-        $this->middleware(['auth:api', 'scopes:delete', 'can:delete'])->only('delete');            
-    }
+
     /**
      * Display a listing of the resource.
      *

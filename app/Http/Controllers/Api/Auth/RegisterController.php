@@ -7,57 +7,12 @@ use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\UserProfileResource;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function index()
-    {
-        return UserResource::collection(User::all());
-    }
-
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-
-        return UserResource::make($user);
-    }
-
-    public function show(User $user)
-    {
-        return UserResource::make($user);
-    }
-
-
-    public function update(Request $request, User $user)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-        ]);
-        
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-        
-        return UserResource::make($user);
-    }
-
-
-
     // UserProfile
 
 
@@ -70,6 +25,8 @@ class RegisterController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
+            'name' => 'required|string',
+            'lastname' => 'required|string',
             'address' => 'required|string',
             'optional_address' => 'nullable|string',
             'city' => 'required|string',
@@ -77,17 +34,14 @@ class RegisterController extends Controller
             'country' => 'required|string',
             'zipcode' => 'required|string',
             'phone' => 'required|string',
-            'gender' => 'required|string',
-            'birth_date' => 'required|string',
+            'gender' => 'nullable|string',
+            'birth_date' => 'nullable|string',
         ]);
-        // $header = $request->header('Authorization');
-        // $token = str_replace('Bearer', '', $header);
-        // $access_token = AccessToken::where('access_token', $token)->first();
-
-        // $user = User::find($access_token->user_id);
 
         $user_profile = UserProfile::create([
                 'user_id' => $request->user_id,
+                'name' => $request->name,
+                'lastname' => $request->lastname,
                 'address' => $request->address,
                 'optional_address' => $request->optional_address,
                 'city' => $request->city,
@@ -102,36 +56,78 @@ class RegisterController extends Controller
         return UserProfileResource::make($user_profile);
     }
 
-    public function showUserProfile(UserProfile $user_profile)
+    public function showProfile($userId, UserProfile $user_profile)
     {
+        $user_profile = UserProfile::where('user_id', $userId)->get();
+
         return UserProfileResource::make($user_profile);
     }
 
-    public function updateUserProfile(Request $request, UserProfile $user_profile)
+    public function updateEmail($id, Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'address' => 'required|string',
-            'optional_address' => 'nullable|string',
-            'city' => 'required|string',
-            'state' => 'required|string',
-            'country' => 'required|string',
-            'zipcode' => 'required|string',
-            'phone' => 'required|string',
-            'gender' => 'required|string',
-            'birth_date' => 'required|string',
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email',
         ]);
 
-        $user_profile->update($request->all());
+        if($validator->fails()){
+            return response()->json($validator->errors(), 422);
+        }
 
-    
-        return UserProfileResource::make($user_profile);
+        $user = User::find($id);
+
+        $user->email = $request->email;
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'success',
+        ]);
+    }
+    public function updatePassword($id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 422);
+        }
+
+        if (!Hash::check($request->old_password, $request->user()->password)) {
+            return response()->json([
+                'message' => 'La contraseña actual no coincide con nuestros registros.',
+            ], 422);
+        }
+        
+        $user = User::find($id);
+
+        $user->password = bcrypt($request->password);
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'success',
+        ]);
     }
 
-    public function destroy(User $user, UserProfile $user_profile)
+    public function deleteProfile(UserProfile $user_profile)
     {
-        $user->delete();
         $user_profile->delete();
+
+        return response()->json(null, 204);
+    }
+
+
+    public function destroy(User $user)
+    {
+        $user_profiles = UserProfile::where('user_id', $user->id)->get();
+        
+        foreach ($user_profiles as $user_profile) {
+            $user_profile->delete();
+        }
+
+        $user->delete();
         return response()->json(null, 204);
     }
 }

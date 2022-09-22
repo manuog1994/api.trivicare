@@ -3,20 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Facades\Auth;
-use App\Models\AccessToken;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Gloudemans\Shoppingcart\Contracts\InstanceIdentifier;
 
 
-class User extends Authenticatable implements InstanceIdentifier
+class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasRoles, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +20,6 @@ class User extends Authenticatable implements InstanceIdentifier
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
     ];
@@ -48,11 +43,7 @@ class User extends Authenticatable implements InstanceIdentifier
         'email_verified_at' => 'datetime',
     ];
 
-    // Relacion uno a uno con AccessToken
-    public function accessToken()
-    {
-        return $this->hasOne(AccessToken::class);
-    }
+   
 
     // Relacion uno a muchos con Order
     public function orders()
@@ -60,28 +51,17 @@ class User extends Authenticatable implements InstanceIdentifier
         return $this->hasMany(Order::class);
     }
 
-
-	/**
-     * Get the unique identifier to load the Cart from
-     *
-     * @return int|string
-     */
-    public function getInstanceIdentifier($options = null)
+    // Relacion uno a muchos con Review
+    public function reviews()
     {
-        return $this->email;
+        return $this->hasMany(Review::class);
     }
 
-    /**
-     * Get the unique identifier to load the Cart from
-     *
-     * @return int|string
-     */
-    public function getInstanceGlobalDiscount($options = null)
+    // Relacion uno a uno con user_detail
+    public function user_detail()
     {
-        return $this->discountRate ?: 0;
+        return $this->hasOne(UserDetail::class);
     }
+
 }
 
-// Inside Controller
-$user = Auth::user();
-$cart = Cart::instance($user);

@@ -132,7 +132,7 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
-        ],
+         ],
     ],
 
     /*
@@ -146,6 +146,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'password' => 'contraseña',
+        'password_confirmation' => 'confirmación de contraseña',
+        'email' => 'correo electrónico',
+        'name' => 'nombre',
+        
+    ],
 
 ];

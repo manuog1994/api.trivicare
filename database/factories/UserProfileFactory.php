@@ -17,7 +17,10 @@ class UserProfileFactory extends Factory
     public function definition()
     {
         return [
+
             'user_id' => \App\Models\User::all()->random()->id,
+            'name' => $this->faker->name,
+            'lastname' => $this->faker->lastName,
             'phone' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
             'city' => $this->faker->city,
