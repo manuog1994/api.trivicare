@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\TagResource;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,13 +26,19 @@ class ProductResource extends JsonResource
             'barcode' => $this->barcode,
             'slug' => $this->slug,
             'sold' => $this->sold,
-            //'review' => ReviewResouce::make($this->whenLoaded('review')),
+            'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
+            'weight' => $this->weight,
+            'size' => $this->size,
+            'dimensions' => $this->dimensions,
+            'rating' => $this->rating,
+            'total_reviews' => $this->total_reviews,
             'discount' => $this->discount,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'status' => $this->status == 1 ? 'Borrador' : 'Publicado',
             'category_id' => $this->category_id,
             'category' => CategoryResource::make($this->whenLoaded('category')),
+            'tags' => TagResource::collection($this->whenLoaded('tags')),
         ];
     }
 }

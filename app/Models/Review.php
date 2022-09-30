@@ -4,16 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ApiTrait;
 
 class Review extends Model
 {
-    use HasFactory;
+    use HasFactory, ApiTrait;
 
     protected $fillable = [
         'user_id',
         'product_id',
         'message',
         'rating',
+        'user_name',
+        'user_lastname',
     ];
 
     // Relacion de uno a muchos con la tabla products

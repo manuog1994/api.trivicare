@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->text('message');
             $table->integer('rating');
+            $table->string('user_name')->nullable()->default('Anónim@');
+            $table->string('user_lastname')->nullable();
             $table->timestamps();
         });
     }

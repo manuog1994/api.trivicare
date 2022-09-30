@@ -17,10 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::included()
-                        ->filter()
-                        ->sort()
-                        ->getOrPaginate();
+        $products = Product::with(['category', 'reviews', 'tags'])->tags()->filter()->sort()->getOrPaginate();
         
         return ProductResource::collection($products);
     }
@@ -45,10 +42,33 @@ class ProductController extends Controller
             'slug' => 'required|string',
             'sold' => 'nullable|numeric',
             'review' => 'nullable|string|exists:reviews,id',
-            'offer' => 'nullable|numeric',
+            'discount' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'size' => 'nullable|numeric',
+            'dimensions' => 'nullable|string',
+            'rating' => 'nullable|numeric',
+            'total_reviews' => 'nullable|numeric',
         ]);
         
-        $product = Product::create($request->all());
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'specifications' => $request->specifications,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'barcode' => $request->barcode,
+            'category_id' => $request->category_id,
+            'slug' => $request->slug,
+            'sold' => $request->sold,
+            'review' => $request->review,
+            'discount' => $request->discount,
+            'weight' => $request->weight,
+            'size' => $request->size,
+            'dimensions' => $request->dimensions,
+            'rating' => $request->rating,
+            'total_reviews' => $request->total_reviews,
+            'price_discount' => $request->price - ($request->price * $request->discount / 100),
+        ]);
         
         return ProductResource::make($product);
     }
@@ -84,10 +104,33 @@ class ProductController extends Controller
             'slug' => 'required|string',
             'sold' => 'nullable|numeric',
             'review' => 'nullable|string|exists:reviews,id',
-            'offer' => 'nullable|numeric',
-        ]);
+            'discount' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'size' => 'nullable|numeric',
+            'dimensions' => 'nullable|string',
+            'rating' => 'nullable|numeric',
+            'total_reviews' => 'nullable|numeric',
+         ]);
         
-        $product->update($request->all());
+        $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'specifications' => $request->specifications,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'barcode' => $request->barcode,
+            'category_id' => $request->category_id,
+            'slug' => $request->slug,
+            'sold' => $request->sold,
+            'review' => $request->review,
+            'discount' => $request->discount,
+            'weight' => $request->weight,
+            'size' => $request->size,
+            'dimensions' => $request->dimensions,
+            'rating' => $request->rating,
+            'total_reviews' => $request->total_reviews,
+            'price_discount' => $request->price - ($request->price * $request->discount / 100),
+        ]);
         
         return ProductResource::make($product);
     }

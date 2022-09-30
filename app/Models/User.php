@@ -57,11 +57,16 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    // Relacion uno a uno con user_detail
-    public function user_detail()
+    // Relacion uno a muchos con UserProfile
+    public function user_profile()
     {
-        return $this->hasOne(UserDetail::class);
+        return $this->hasMany(UserProfile::class);
     }
 
+    // Relacion muchos a muchos con tags
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag');
+    }
 }
 

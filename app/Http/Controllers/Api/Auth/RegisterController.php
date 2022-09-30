@@ -56,12 +56,6 @@ class RegisterController extends Controller
         return UserProfileResource::make($user_profile);
     }
 
-    public function showProfile($userId, UserProfile $user_profile)
-    {
-        $user_profile = UserProfile::where('user_id', $userId)->get();
-
-        return UserProfileResource::make($user_profile);
-    }
 
     public function updateEmail($id, Request $request)
     {

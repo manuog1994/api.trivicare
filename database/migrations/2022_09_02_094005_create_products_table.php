@@ -29,6 +29,11 @@ return new class extends Migration
             $table->foreignId('review_id')->nullable();
             $table->decimal('discount', 10, 2)->nullable();
             $table->decimal('weight', 10, 2)->nullable();
+            $table->decimal('size', 10, 2)->nullable();
+            $table->string('dimensions')->nullable();
+            $table->integer('rating')->nullable()->default(0);
+            $table->integer('total_reviews')->nullable()->default(0);
+            $table->decimal('price_discount', 10, 2)->nullable();
             $table->timestamps();
         });
     }

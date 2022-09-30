@@ -29,9 +29,11 @@ class ProductFactory extends Factory
             'slug' => $this->faker->slug,
             'sold' => $this->faker->randomNumber(2),
             'status' => $this->faker->randomElement([Product::BORRADOR, Product::PUBLICADO]),
-            'review_id' => $this->faker->randomNumber(2),
-            'discount' => $this->faker->randomFloat(2, 1, 100),
+            'discount' => $this->faker->randomFloat(2, 1, 25),
             'weight' => $this->faker->randomFloat(2, 1, 100),
+            'size' => $this->faker->randomNumber(3, 1, 100),
+            'dimensions' => '20x15x10',
+            
         ];
         
     }

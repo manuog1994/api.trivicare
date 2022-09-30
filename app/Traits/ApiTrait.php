@@ -2,38 +2,39 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Database\Eloquent\Builder;
 
 trait ApiTrait{
 
-     // Metodo para obtener relaciones por la query, ?included=posts
-     public function scopeIncluded(Builder $query)
-     {
-         // condicional para saber si el parametro included esta presente en la peticion o si $allowIncluded esta definida
- 
-         if(empty($this->allowIncluded) || empty(request('included'))) {
-             return;
-         }
- 
- 
-         $relations = explode(',', request()->query('included')); // devuelve un array ['posts','users']
-         
-         // con el siguiente metodo evitamos que nos devuelva un error si se escribe bien la query, devolviendo la peticion principal
- 
-         $allowIncluded = collect($this->allowIncluded); // convertir el array en una coleccion de Laravel
- 
-         // iteramos la coleccion
-         foreach ($relations as $key => $relationship) {
-             // si el parametro included no esta presente en la peticion
-             if (!$allowIncluded->contains($relationship)) {
-                 // eliminamos de la coleccion el parametro, y devolvemos la query sin el parametro
-                 unset($relations[$key]);
-             }
-         }
- 
-         $query->with($relations);
-     }
- 
+    // Metodo para obtener relaciones por la query, ?included=posts
+    public function scopeIncluded(Builder $query)
+    {
+        // condicional para saber si el parametro included esta presente en la peticion o si $allowIncluded esta definida
+
+        if(empty($this->allowIncluded) || empty(request('included'))) {
+            return;
+        }
+
+
+        $relations = explode(',', request()->query('included')); // devuelve un array ['posts','users']
+        
+        // con el siguiente metodo evitamos que nos devuelva un error si se escribe bien la query, devolviendo la peticion principal
+
+        $allowIncluded = collect($this->allowIncluded); // convertir el array en una coleccion de Laravel
+
+        // iteramos la coleccion
+        foreach ($relations as $key => $relationship) {
+            // si el parametro included no esta presente en la peticion
+            if (!$allowIncluded->contains($relationship)) {
+                // eliminamos de la coleccion el parametro, y devolvemos la query sin el parametro
+                unset($relations[$key]);
+            }
+        }
+
+        $query->with($relations);
+    }
+    
      // Metodo para filtrar por la query, ?filter[name]=nombre&filter[id]=id incluso no completando el campo
      public function scopeFilter(Builder $query)
      {
@@ -102,6 +103,18 @@ trait ApiTrait{
          }
          // si no esta presente, entonces devolvemos la query
          return $query->get();
+     }
+
+     public function scopeTags(Builder $query)
+     {
+         if (empty(request('tags'))) {
+             return;
+         }
+
+         $query->whereHas('tags', function ($q) {
+            $q->where('tag_id', request('tags'));
+        });
+            
      }
  
 }

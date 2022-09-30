@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class TagResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,14 +14,14 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        if(is_null($this->name)){
+            return "No hay etiquetas";
+        }
         return [
             'id' => $this->id,
-            'name' => $this->user_profile->name,
-            'lastname' => $this->user_profile->lastname,
-            'email' => $this->email,
-            'access_token' => $this->accessToken->access_token,
-            'refresh_token' => $this->accessToken->refresh_token,
-            'expires_at' => $this->accessToken->expires_at,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'color' => $this->color,
         ];
     }
 }
