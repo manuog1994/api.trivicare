@@ -121,5 +121,19 @@ class DatabaseSeeder extends Seeder
         \App\Models\Product::factory(8)->create();
 
         $this->call(ProductTagSeeder::class);
+
+        \App\Models\Cupon::factory(1)->create([
+            'cupon' => 'CUPON10',
+            'discount' => 10,
+            'validity' => '2022-10-12',
+            'status' => \App\Models\Cupon::ACTIVADO,
+        ]);
+
+        \App\Models\Cupon::factory(1)->create([
+            'cupon' => 'CUPON20',
+            'discount' => 20,
+            'validity' => '2022-10-12',
+            'status' => \App\Models\Cupon::ACTIVADO,
+        ]);
     }
 }

@@ -41,9 +41,6 @@ class Product extends Model
     // Propiedad para ordenar por los campos de la tabla
     protected $allowSort = ['id', 'name', 'price_discount'];
 
-    protected $allowTags = ['id', 'name', 'tag_id'];
-
-
     // Relacion de uno a uno con la tabla categories
     public function category()
     {
@@ -59,7 +56,7 @@ class Product extends Model
     // Relacion de muchos a muchos con la tabla tags con la tabla pivote product_tag
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->withPivot('product_id', 'tag_id', 'name', 'slug');
     }
 
 }

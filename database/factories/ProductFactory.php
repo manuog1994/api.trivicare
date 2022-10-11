@@ -33,6 +33,7 @@ class ProductFactory extends Factory
             'weight' => $this->faker->randomFloat(2, 1, 100),
             'size' => $this->faker->randomNumber(3, 1, 100),
             'dimensions' => '20x15x10',
+            // 'price_discount' => $this->price - ($this->price * $this->discount / 100),
             
         ];
         

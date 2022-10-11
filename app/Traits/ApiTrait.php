@@ -5,6 +5,8 @@ namespace App\Traits;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Database\Eloquent\Builder;
 
+use function PHPSTORM_META\map;
+
 trait ApiTrait{
 
     // Metodo para obtener relaciones por la query, ?included=posts
@@ -107,14 +109,15 @@ trait ApiTrait{
 
      public function scopeTags(Builder $query)
      {
-         if (empty(request('tags'))) {
-             return;
-         }
+        if (empty(request('tags'))) {
+            return;
+        }
+        
+        $tags = explode(',', request('tags'));
 
-         $query->whereHas('tags', function ($q) {
-            $q->where('tag_id', request('tags'));
-        });
-            
+        $query->whereHas('tags', function ($q) use ($tags) {
+            $q->whereIn('tag_id', $tags);
+        });            
      }
  
 }

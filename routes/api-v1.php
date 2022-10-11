@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Tag\TagController;
 
+use App\Http\Controllers\Api\Cupon\CuponController;
 use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Review\ReviewController;
@@ -57,6 +58,9 @@ Route::apiResource('reviews', ReviewController::class)->names('reviews');
 
 // Tags
 Route::apiResource('tags', TagController::class)->names('tags');
+
+// Cupons
+Route::apiResource('cupons', CuponController::class)->names('cupons');
 
 // Orders
 //Route::post('orders/{id}', [OrderController::class, 'orderItems'])->name('orders.items');
