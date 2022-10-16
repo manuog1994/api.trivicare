@@ -48,6 +48,8 @@ class ProductController extends Controller
             'dimensions' => 'nullable|string',
             'rating' => 'nullable|numeric',
             'total_reviews' => 'nullable|numeric',
+            'status' => 'nullable|numeric',
+            'new' => 'nullable|numeric',
         ]);
         
         $product = Product::create([
@@ -68,6 +70,8 @@ class ProductController extends Controller
             'rating' => $request->rating,
             'total_reviews' => $request->total_reviews,
             'price_discount' => $request->price - ($request->price * $request->discount / 100),
+            'status' => $request->status,
+            'new' => $request->new,
         ]);
         
         return ProductResource::make($product);
@@ -110,6 +114,8 @@ class ProductController extends Controller
             'dimensions' => 'nullable|string',
             'rating' => 'nullable|numeric',
             'total_reviews' => 'nullable|numeric',
+            'status' => 'nullable|numeric',
+            'new' => 'nullable|numeric',
          ]);
         
         $product->update([
@@ -130,6 +136,8 @@ class ProductController extends Controller
             'rating' => $request->rating,
             'total_reviews' => $request->total_reviews,
             'price_discount' => $request->price - ($request->price * $request->discount / 100),
+            'status' => $request->status,
+            'new' => $request->new,
         ]);
         
         return ProductResource::make($product);

@@ -13,7 +13,7 @@ class Cupon extends Model
     const ACTIVADO = 2;
 
     protected $fillable = [
-        'cupon',
+        'code',
         'discount',
         'validity',
         'status',

@@ -39,6 +39,7 @@ class ProductResource extends JsonResource
             'category_id' => $this->category_id,
             'category' => CategoryResource::make($this->whenLoaded('category')),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
+            'new' => $this->new == 1 ? 'Nuevo' : 'Viejo',
         ];
     }
 }

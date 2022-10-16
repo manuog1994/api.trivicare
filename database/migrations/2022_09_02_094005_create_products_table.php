@@ -34,6 +34,7 @@ return new class extends Migration
             $table->integer('rating')->nullable()->default(0);
             $table->integer('total_reviews')->nullable()->default(0);
             $table->decimal('price_discount', 10, 2)->nullable();
+            $table->enum('new', [Product::NUEVO, Product::VIEJO])->default(Product::NUEVO);
             $table->timestamps();
         });
     }

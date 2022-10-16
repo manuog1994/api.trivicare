@@ -17,7 +17,7 @@ class CuponController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cupon' => 'required|string',
+            'code' => 'required|string',
             'discount' => 'required|integer',
             'validity' => 'required|date',
             'status' => 'required|integer',

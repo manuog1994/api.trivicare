@@ -30,6 +30,7 @@ class TagController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'tag' => 'required|string',
             'slug' => 'required|string',
             'color' => 'nullable|string',
         ]);

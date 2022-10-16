@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('cupons', function (Blueprint $table) {
             $table->id();
-            $table->string('cupon');
+            $table->string('code');
             $table->integer('discount');
             $table->date('validity');
             $table->enum('status', [Cupon::DESACTIVADO, Cupon::ACTIVADO])->default(Cupon::DESACTIVADO);

@@ -43,78 +43,96 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Tag::factory(1)->create([
-            'name' => 'pomegranate',
+            'name' => 'Pomegranate',
+            'tag' => 'pomegranate',
             'slug' => 'pomegranate',
             'color' => '#E94B4C',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'cannabidiol',
+            'name' => 'Cannabidiol',
+            'tag' => 'cannabidiol',
             'slug' => 'cannabidiol',
             'color' => '#C6D42E',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'acidohialuronico',
+            'name' => 'Ácido Hialurónico',
+            'tag' => 'acidohialuronico',
             'slug' => 'acido-hialuronico',
             'color' => '#DD88B8',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'aloevera',
+            'name' => 'Aloe Vera',
+            'tag' => 'aloevera',
             'slug' => 'aloe-vera',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'aceitedegranada',
+            'name' => 'Aceite de Granada',
+            'tag' => 'aceitedegranada',
             'slug' => 'aceite-de-granada',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'viñaroja',
+            'name' => 'Viña Roja',
+            'tag' => 'viñaroja',
             'slug' => 'vina-roja',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'hiperico',
+            'name' => 'Hipérico',
+            'tag' => 'hiperico',
             'slug' => 'hiperico',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'arnica',
+            'name' => 'Árnica',
+            'tag' => 'arnica',
             'slug' => 'arnica',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'extractodeacai',
+            'name' => 'Extracto de Acai',
+            'tag' => 'extractodeacai',
             'slug' => 'extracto-de-acai',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'mantecadekarite',
+            'name' => 'Manteca de Karité',
+            'tag' => 'mantecadekarite',
             'slug' => 'manteca-de-karite',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'vitaminae',
+            'name' => 'Vitamina E',
+            'tag' => 'vitaminae',
             'slug' => 'vitamina-e',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'aceitedealmendrasdulces',
+            'name' => 'Aceite de Almendras Dulces',
+            'tag' => 'aceitedealmendrasdulces',
             'slug' => 'aceite-de-almendras-dulces',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'aceitedejojoba',
+            'name' => 'Aceite de Jojoba',
+            'tag' => 'aceitedejojoba',
             'slug' => 'aceite-de-jojoba',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'ginseng',
+            'name' => 'Ginseng',
+            'tag' => 'ginseng',
             'slug' => 'ginseg',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'ginkgobiloba',
+            'name' => 'Ginkgo Biloba',
+            'tag' => 'ginkgobiloba',
             'slug' => 'ginkgo-biloba',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'calendula',
+            'name' => 'Caléndula',
+            'tag' => 'calendula',
             'slug' => 'calendula',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'extractodementa',
+            'name' => 'Extracto de Menta',
+            'tag' => 'extractodementa',
             'slug' => 'extracto-de-menta',
         ]);
         \App\Models\Tag::factory(1)->create([
-            'name' => 'aguadeazahar',
+            'name' => 'Agua de Azahar',
+            'tag' => 'aguadeazahar',
             'slug' => 'agua-de-azahar',
         ]);
 
@@ -123,16 +141,16 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductTagSeeder::class);
 
         \App\Models\Cupon::factory(1)->create([
-            'cupon' => 'CUPON10',
+            'code' => 'CUPON10',
             'discount' => 10,
-            'validity' => '2022-10-12',
+            'validity' => '2022-10-20',
             'status' => \App\Models\Cupon::ACTIVADO,
         ]);
 
         \App\Models\Cupon::factory(1)->create([
-            'cupon' => 'CUPON20',
+            'code' => 'CUPON20',
             'discount' => 20,
-            'validity' => '2022-10-12',
+            'validity' => '2022-10-20',
             'status' => \App\Models\Cupon::ACTIVADO,
         ]);
     }

@@ -15,6 +15,8 @@ class Product extends Model
 
     const BORRADOR = 1;
     const PUBLICADO = 2;
+    const NUEVO = 1;
+    const VIEJO = 2;
 
     protected $fillable = [
         'name',
@@ -35,6 +37,7 @@ class Product extends Model
         'rating',
         'total_reviews',
         'price_discount',
+        'new',
      ];
      // Propiedad para filtrar por los campos de la tabla
     protected $allowFilter = ['id', 'name', 'slug', 'price', 'category_id', 'tags'];
