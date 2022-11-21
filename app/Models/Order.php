@@ -9,16 +9,26 @@ class Order extends Model
 {
     use HasFactory;
 
-    const STATUS_PENDING = 'pending';
-    const STATUS_PROCESSING = 'processing';
-    const STATUS_COMPLETED = 'completed';
+    // ESTADO DEL PAGO
+    const PENDIENTE = 1;
+    const PROCESANDO = 2;
+    const PAGADO = 3;
+
+    // ESTADO DEL PEDIDO
+    const RECIBIDO = 1;
+    const PREPARANDO = 2;
+    const ENVIADO = 3;
+    const ENTREGADO = 4;
 
     protected $fillable = [
+        'number_bill',
         'user_id',
-        'product_collection',
+        'user_profile_id',
+        'products',
         'total',
-        'count',
+        'coupon',
         'order_date',
+        'paid',
         'status',
     ];
 

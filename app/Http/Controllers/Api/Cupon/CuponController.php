@@ -9,6 +9,12 @@ use App\Http\Resources\CuponResource;
 
 class CuponController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:create')->only('store');
+    }
+    
     public function index()
     {
         return CuponResource::collection(Cupon::all());

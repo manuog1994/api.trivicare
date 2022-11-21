@@ -18,15 +18,22 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->json('product_collection');
+            $table->foreignId('user_profile_id')->constrained()->onDelete('cascade');
+            $table->string('products');
             $table->decimal('total', 8, 2);
-            $table->integer('count');
-            $table->date('order_date');
+            $table->string('coupon')->nullable();
+            $table->string('order_date');
+            $table->enum('paid', [
+                Order::PENDIENTE,
+                Order::PROCESANDO,
+                Order::PAGADO,
+            ])->default(Order::PENDIENTE);
             $table->enum('status', [
-                Order::STATUS_PENDING,
-                Order::STATUS_PROCESSING,
-                Order::STATUS_COMPLETED,
-            ])->default(Order::STATUS_PENDING);
+                Order::RECIBIDO,
+                Order::PREPARANDO,
+                Order::ENVIADO,
+                Order::ENTREGADO,
+            ])->default(Order::RECIBIDO);
             $table->timestamps();
         });
     }

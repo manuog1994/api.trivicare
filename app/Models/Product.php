@@ -29,7 +29,6 @@ class Product extends Model
         'slug',
         'sold',
         'status',
-        'review',
         'discount',
         'weight',
         'size',
@@ -60,6 +59,12 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class)->withPivot('product_id', 'tag_id', 'name', 'slug');
+    }
+
+    // Relacion de uno a muchos con la tabla images
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 
 }

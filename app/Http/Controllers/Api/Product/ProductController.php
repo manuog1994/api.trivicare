@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api\Product;
 
+use App\Models\Tag;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 
@@ -15,9 +18,17 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('index', 'show');
+        $this->middleware('can:create')->only('store');
+        $this->middleware('can:edit')->only('update', 'status');
+        $this->middleware('can:delete')->only('destroy');
+    }
+
     public function index()
     {
-        $products = Product::with(['category', 'reviews', 'tags'])->tags()->filter()->sort()->getOrPaginate();
+        $products = Product::with(['category', 'reviews', 'images', 'tags'])->tags()->filter()->sort()->getOrPaginate();
         
         return ProductResource::collection($products);
     }
@@ -41,7 +52,6 @@ class ProductController extends Controller
             'category_id' => 'required|numeric|exists:categories,id',
             'slug' => 'required|string',
             'sold' => 'nullable|numeric',
-            'review' => 'nullable|string|exists:reviews,id',
             'discount' => 'nullable|numeric',
             'weight' => 'nullable|numeric',
             'size' => 'nullable|numeric',
@@ -50,6 +60,7 @@ class ProductController extends Controller
             'total_reviews' => 'nullable|numeric',
             'status' => 'nullable|numeric',
             'new' => 'nullable|numeric',
+            'tags' => 'nullable',
         ]);
         
         $product = Product::create([
@@ -70,9 +81,34 @@ class ProductController extends Controller
             'rating' => $request->rating,
             'total_reviews' => $request->total_reviews,
             'price_discount' => $request->price - ($request->price * $request->discount / 100),
-            'status' => $request->status,
-            'new' => $request->new,
+            'status' => Product::BORRADOR,
+            'new' => Product::NUEVO,
         ]);
+
+        if ($request->has('tags')) {
+            $tags = json_decode($request->tags);
+            foreach ($tags as $tag) {
+                DB::table('product_tag')->insert([
+                    'product_id' => $product->id,
+                    'tag_id' => $tag,
+                    'name' => Tag::where('id', $tag)->first()->name,
+                    'slug' => Tag::where('id', $tag)->first()->slug,
+                ]);
+            }
+        }
+
+        if($request->has('images')){
+            $files = $request->images;
+            foreach ($files as $key => $value) {
+                $file_name = time().$key. '-' . $value->getClientOriginalName();
+                $value->move(public_path('images'), $file_name);
+                Image::create([
+                    'name' => $file_name,
+                    'path' => "images/$file_name",
+                    'product_id' => $product->id,
+                ]);
+            }
+        }
         
         return ProductResource::make($product);
     }
@@ -95,28 +131,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, Product $product)
+    public function update(Product $product, Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'specifications' => 'required|string',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric',
-            'barcode' => 'nullable|numeric',
-            'category_id' => 'required|numeric|exists:categories,id',
-            'slug' => 'required|string',
-            'sold' => 'nullable|numeric',
-            'review' => 'nullable|string|exists:reviews,id',
-            'discount' => 'nullable|numeric',
-            'weight' => 'nullable|numeric',
-            'size' => 'nullable|numeric',
-            'dimensions' => 'nullable|string',
-            'rating' => 'nullable|numeric',
-            'total_reviews' => 'nullable|numeric',
-            'status' => 'nullable|numeric',
-            'new' => 'nullable|numeric',
-         ]);
+
         
         $product->update([
             'name' => $request->name,
@@ -128,17 +145,25 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'slug' => $request->slug,
             'sold' => $request->sold,
-            'review' => $request->review,
             'discount' => $request->discount,
             'weight' => $request->weight,
             'size' => $request->size,
             'dimensions' => $request->dimensions,
             'rating' => $request->rating,
-            'total_reviews' => $request->total_reviews,
             'price_discount' => $request->price - ($request->price * $request->discount / 100),
-            'status' => $request->status,
-            'new' => $request->new,
         ]);
+
+        if ($request->has('tags')) {
+            $tags = json_decode($request->tags);
+            foreach ($tags as $tag) {
+                DB::table('product_tag')->insert([
+                    'product_id' => $product->id,
+                    'tag_id' => $tag,
+                    'name' => Tag::where('id', $tag)->first()->name,
+                    'slug' => Tag::where('id', $tag)->first()->slug,
+                ]);
+            }
+        }
         
         return ProductResource::make($product);
     }
@@ -153,6 +178,20 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
         
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Producto eliminado correctamente'
+        ], 204);
+    }
+
+    public function status(Product $product)
+    {
+        if ($product->status == Product::BORRADOR) {
+            $product->status = Product::PUBLICADO;
+        } else {
+            $product->status = Product::BORRADOR;
+        }
+        $product->save();
+
+        return response()->json(['data' => $product]);
     }
 }

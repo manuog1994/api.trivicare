@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Tag;
 
 use App\Models\Tag;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\TagResource;
@@ -10,6 +11,13 @@ use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('index', 'show');
+        $this->middleware('can:create')->only('store');
+        $this->middleware('can:delete')->only('destroy', 'delete');
+    }
+
     public function index()
     {
         $tags = Tag::all();
@@ -46,5 +54,14 @@ class TagController extends Controller
         $tag->delete();
         
         return response()->json(null, 204);
+    }
+
+    public function delete(Product $product, Tag $tag)
+    {
+        DB::table('product_tag')->where('product_id', $product->id)->where('tag_id', $tag->id)->delete();
+        
+        return response()->json([
+            'message' => 'Tag deleted successfully'
+        ], 200);
     }
 }

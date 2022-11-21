@@ -19,6 +19,8 @@ class UserSeeder extends Seeder
              'email' => 'manuel@trivicare.com',
             'password' => bcrypt('12345678'),
         ]);
+
+        $user->assignRole('admin');
         
         User::factory()->count(20)->create();
     }

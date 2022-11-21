@@ -6,14 +6,18 @@ use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\UserProfileResource;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    // UserProfile
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('registerUserProfile');
+        $this->middleware('can:create')->only('indexUserProfiles', 'showProfile');
+
+    }
 
 
     public function indexUserProfile()

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\TagResource;
+use App\Http\Resources\ImageResource;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -40,6 +41,7 @@ class ProductResource extends JsonResource
             'category' => CategoryResource::make($this->whenLoaded('category')),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
             'new' => $this->new == 1 ? 'Nuevo' : 'Viejo',
+            'images' => ImageResource::collection($this->whenLoaded('images')),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -22,6 +23,7 @@ class UserResource extends JsonResource
             'access_token' => $this->accessToken->access_token,
             'refresh_token' => $this->accessToken->refresh_token,
             'expires_at' => $this->accessToken->expires_at,
+            'role' => 'Administrador',
         ];
     }
 }

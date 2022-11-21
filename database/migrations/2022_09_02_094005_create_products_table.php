@@ -21,11 +21,11 @@ return new class extends Migration
             $table->string('specifications');
             $table->decimal('price', 10, 2);
             $table->integer('stock');
-            $table->bigInteger('barcode')->nullable();
+            $table->bigInteger('barcode')->unique()->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('slug')->unique();
             $table->integer('sold')->nullable();
-            $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR);
+            $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR)->nullable();
             $table->foreignId('review_id')->nullable();
             $table->decimal('discount', 10, 2)->nullable();
             $table->decimal('weight', 10, 2)->nullable();
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->integer('rating')->nullable()->default(0);
             $table->integer('total_reviews')->nullable()->default(0);
             $table->decimal('price_discount', 10, 2)->nullable();
-            $table->enum('new', [Product::NUEVO, Product::VIEJO])->default(Product::NUEVO);
+            $table->enum('new', [Product::NUEVO, Product::VIEJO])->default(Product::NUEVO)->nullable();
             $table->timestamps();
         });
     }

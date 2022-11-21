@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Category\CategoryController;
+use App\Http\Controllers\Api\Image\ImageController;
 
 
 
@@ -27,7 +28,7 @@ use App\Http\Controllers\Api\Category\CategoryController;
 // Autentication User
 
 Route::middleware('auth:sanctum')->get('user', function (Request $request) {
-    return $request->user()->load('user_profile');
+    return $request->user()->load(['user_profile', 'roles']);
 });
 
 
@@ -37,7 +38,7 @@ Route::post('update-email/{id}', [RegisterController::class, 'updateEmail']);
 Route::post('update-password/{id}', [RegisterController::class, 'updatePassword']);
 
 // User Profile
-Route::get('show-profile/{userId}', [RegisterController::class, 'showProfile'])->middleware('auth:sanctum')->name('show-profile');
+Route::get('show-profile/{userId}', [RegisterController::class, 'showProfile'])->name('show-profile');
 
 Route::post('register-profile', [RegisterController::class, 'registerUserProfile'])->middleware('auth:sanctum')->name('register-profile');
 
@@ -52,6 +53,7 @@ Route::apiResource('categories', CategoryController::class)->names('categories')
 
 // Products
 Route::apiResource('products', ProductController::class )->names('products');
+Route::put('products/status/{product}', [ProductController::class, 'status'])->name('products.status');
 
 // Reviews
 Route::apiResource('reviews', ReviewController::class)->names('reviews');
@@ -62,7 +64,15 @@ Route::apiResource('tags', TagController::class)->names('tags');
 // Cupons
 Route::apiResource('cupons', CuponController::class)->names('cupons');
 
+// Images
+Route::apiResource('images', ImageController::class)->names('images');
+
+// Products-Tags
+Route::delete('products/{product}/tags/{tag}', [TagController::class, 'delete'])->name('products.tags.delete');
+
 // Orders
-//Route::post('orders/{id}', [OrderController::class, 'orderItems'])->name('orders.items');
+Route::apiResource('orders', OrderController::class)->names('orders');
+Route::get('users', [OrderController::class, 'getUser'])->name('orders.getUser');
+Route::put('orders/status/{order}', [OrderController::class, 'status'])->name('orders.status');
 
 

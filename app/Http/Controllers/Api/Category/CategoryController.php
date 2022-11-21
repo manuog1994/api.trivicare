@@ -14,6 +14,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('index', 'show');
+        $this->middleware('can:create')->only('store', 'update', 'destroy');
+    }
+
     public function index()
     {
         $categories = Category::included()
