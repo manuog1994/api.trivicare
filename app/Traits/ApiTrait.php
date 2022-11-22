@@ -119,5 +119,18 @@ trait ApiTrait{
             $q->whereIn('tag_id', $tags);
         });            
      }
+
+     public function scopeStatus(Builder $query)
+     {
+         // condicional para saber si el parametro filter esta presente en la peticion o si $allowFilter esta definida
+         if(empty($this->allowStatus) || empty(request('status'))) {
+             return;
+         }
+
+            $status = request('status');
+
+            $query->where('status', '!=', $status);
+     }
+
  
 }

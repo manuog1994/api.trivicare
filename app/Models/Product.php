@@ -39,7 +39,7 @@ class Product extends Model
         'new',
      ];
      // Propiedad para filtrar por los campos de la tabla
-    protected $allowFilter = ['id', 'name', 'slug', 'price', 'category_id', 'tags'];
+    protected $allowFilter = ['id', 'name', 'slug', 'price', 'category_id', 'tags', 'status'];
     // Propiedad para ordenar por los campos de la tabla
     protected $allowSort = ['id', 'name', 'price_discount'];
 

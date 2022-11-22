@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ApiTrait;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, ApiTrait;
 
     // ESTADO DEL PAGO
     const PENDIENTE = 1;
@@ -31,6 +32,10 @@ class Order extends Model
         'paid',
         'status',
     ];
+
+    protected $allowSort = ['id'];
+    protected $allowStatus = ['status'];
+    protected $allowFilter = ['status'];
 
     // Relacion uno a muchos inversa con User
     public function user()

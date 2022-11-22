@@ -13,14 +13,14 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
-        $this->middleware('can:create')->only('index', 'getUser');
+        //$this->middleware('auth:sanctum');
+        //$this->middleware('can:create')->only('index', 'getUser');
 
     }
 
     public function index()
     {
-        $orders = Order::with(['user', 'user.user_profile'])->get();
+        $orders = Order::with(['user', 'user.user_profile'])->sort()->filter()->status()->getOrPaginate();
 
         return OrderResource::collection($orders);
     }
