@@ -20,6 +20,7 @@ class Order extends Model
     const PREPARANDO = 2;
     const ENVIADO = 3;
     const ENTREGADO = 4;
+    const CANCELADO = 5;
 
     protected $fillable = [
         'number_bill',
@@ -31,11 +32,12 @@ class Order extends Model
         'order_date',
         'paid',
         'status',
+        'shipping',
     ];
 
     protected $allowSort = ['id'];
     protected $allowStatus = ['status'];
-    protected $allowFilter = ['status'];
+    protected $allowFilter = ['status', 'user_id', 'user_profile_id'];
 
     // Relacion uno a muchos inversa con User
     public function user()

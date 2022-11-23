@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_profile_id')->constrained()->onDelete('cascade');
-            $table->string('products');
+            $table->json('products');
             $table->decimal('total', 8, 2);
             $table->string('coupon')->nullable();
             $table->string('order_date');
@@ -33,7 +33,9 @@ return new class extends Migration
                 Order::PREPARANDO,
                 Order::ENVIADO,
                 Order::ENTREGADO,
+                Order::CANCELADO,
             ])->default(Order::RECIBIDO);
+            $table->decimal('shipping', 4, 2)->nullable();
             $table->timestamps();
         });
     }

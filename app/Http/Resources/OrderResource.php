@@ -28,6 +28,7 @@ class OrderResource extends JsonResource
             'updated_at' => $this->updated_at,
             'user' => $this->whenLoaded('user'),
             'user_profile' => $this->whenLoaded('user_profile'),
+            'shipping' => $this->shipping
         ];
     }
 }

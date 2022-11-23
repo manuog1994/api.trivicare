@@ -129,7 +129,7 @@ trait ApiTrait{
 
             $status = request('status');
 
-            $query->where('status', '!=', $status);
+            $query->where('status', '!=', $status, 'OR', 'status', '=', 5);
      }
 
  

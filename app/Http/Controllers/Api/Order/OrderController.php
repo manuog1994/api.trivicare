@@ -4,17 +4,18 @@ namespace App\Http\Controllers\Api\Order;
 
 use Carbon\Carbon;
 use App\Models\Order;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
-use App\Models\UserProfile;
+use App\Http\Resources\UserProfileResource;
 
 class OrderController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth:sanctum');
-        //$this->middleware('can:create')->only('index', 'getUser');
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:create')->only('getUser');
 
     }
 
@@ -27,7 +28,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $this->middleware('auth:sanctum');
 
         $request->validate([
             'user_id' => 'required|integer|exists:users,id',
@@ -45,6 +45,7 @@ class OrderController extends Controller
             'order_date' => Carbon::now()->format('d-m-Y' . ' ' . 'H:i'),
             'paid' => Order::PENDIENTE,
             'status' => Order::RECIBIDO,
+            'shipping' => $request->shipping,
         ]);
 
         return response()->json([
@@ -61,10 +62,9 @@ class OrderController extends Controller
     public function getUser()
     {
         $userProfile = UserProfile::all();
+        $userProfile->load('user');
 
-        return response()->json([
-            'data' => $userProfile,
-        ]);
+        return UserProfileResource::collection($userProfile);
     }
 
     public function status(Order $order, Request $request)
