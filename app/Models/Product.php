@@ -19,10 +19,12 @@ class Product extends Model
     const VIEJO = 2;
 
     protected $fillable = [
+        'id',
         'name',
         'description',
         'specifications',
         'price',
+        'price_base',
         'stock',
         'barcode',
         'category_id',

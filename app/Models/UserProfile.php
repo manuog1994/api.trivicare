@@ -30,4 +30,10 @@ class UserProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Relacion uno a muchos con Invoice
+    public function invoices()
+    {
+        return $this->hasMany(InvoiceOrder::class);
+    }
 }

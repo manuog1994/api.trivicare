@@ -12,7 +12,7 @@ class CuponController extends Controller
     public function __construct()
     {
         //$this->middleware('auth:sanctum');
-        $this->middleware('can:create')->only('store');
+        $this->middleware('can:create')->only('store', 'destroy');
     }
     
     public function index()
@@ -32,6 +32,16 @@ class CuponController extends Controller
         $cupon = Cupon::create($request->all());
 
         return CuponResource::make($cupon);
+    }
+
+    public function destroy($id)
+    {
+        $cupon = Cupon::find($id);
+        $cupon->delete();
+
+        return response()->json([
+            'message' => 'Cupon deleted successfully'
+        ]);
     }
 
 }

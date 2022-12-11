@@ -129,7 +129,22 @@ trait ApiTrait{
 
             $status = request('status');
 
-            $query->where('status', '!=', $status, 'OR', 'status', '=', 5);
+            $query->where('status', '!=', 4);
+            $query->where('status', '!=', 5);
+     }
+
+     public function scopeHistory(Builder $query)
+     {
+         // condicional para saber si el parametro filter esta presente en la peticion o si $allowFilter esta definida
+         if(empty($this->allowHistory) || empty(request('history'))) {
+             return;
+         }
+         // obtenemos el parametro filter de la peticion
+         $histories = request('history');
+         // metemos los filtros en una coleccion para poder iterarlo
+         $query->where('status', '!=', 1);
+         $query->where('status', '!=', 2);
+         $query->where('status', '!=', 3);
      }
 
  

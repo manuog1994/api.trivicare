@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('specifications');
             $table->decimal('price', 10, 2);
+            $table->decimal('price_base', 10, 2)->nullable();
             $table->integer('stock');
             $table->bigInteger('barcode')->unique()->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->integer('sold')->nullable();
             $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR)->nullable();
             $table->foreignId('review_id')->nullable();
-            $table->decimal('discount', 10, 2)->nullable();
+            $table->integer('discount')->nullable();
             $table->decimal('weight', 10, 2)->nullable();
             $table->decimal('size', 10, 2)->nullable();
             $table->string('dimensions')->nullable();

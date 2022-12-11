@@ -16,11 +16,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+
         $schedule->call(function () {
-            if(DB::table('products')->where('created_at', '<', now()->addMinutes(60))->count() > 0) {
+            if(DB::table('products')->where('created_at', '<', now()->addDays(30))->count() > 0) {
                 DB::table('products')->update(['new' => 1]);
             }
-        })->everyMinute();
+        })->everyFourHours();
+
+        // $schedule->call(function () {
+        //     if(DB::table('orders')->where('created_at', '<', now()->addMinutes(15))->count() > 0 && DB::table('orders')->where('paid', 2)->count() > 0) {
+        //         DB::table('orders')->where('paid', 2)->update(['paid' => 4]);
+        //         DB::table('orders')->where('status', 1)->update(['status' => 5]);
+        //         DB::table('orders')->where('token_id')->update(['token_id' => null]);
+        //     }
+        // })->everyFifteenMinutes();
     }
 
     /**

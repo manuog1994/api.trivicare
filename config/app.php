@@ -195,6 +195,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Cartalyst\Stripe\Laravel\Facades\StripeServiceProvider::class,
+
     ],
 
     /*
@@ -210,6 +212,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        //'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'Invoice' => LaravelDaily\Invoices\Facades\Invoice::class,
     ])->toArray(),
 
 ];
