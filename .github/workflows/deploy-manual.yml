@@ -37,5 +37,5 @@ jobs:
         uses: deployphp/action@master
         with:
           private-key: ${{ secrets.PRIVATE_KEY }}
-          know_hosts: ${{ secrets.KNOW_HOSTS }}
+          know_hosts: ${{ secrets.KNOWN_HOSTS }}
           dep: deploy ${{ github.event.inputs.deploy_env }} -v
