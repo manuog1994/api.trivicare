@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'v1/categories', 'v1/products', 'v1/*', 'sanctum/csrf-cookie', 'login', 'register', 'logout'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'register', 'logout'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://api.trivicare.com'],
 
     'allowed_origins_patterns' => [],
 

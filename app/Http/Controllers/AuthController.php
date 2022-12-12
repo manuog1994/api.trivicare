@@ -33,6 +33,9 @@ class AuthController extends Controller
         if(!Auth::attempt($request->only('email', 'password'))){
             throw new AuthenticationException();
         }
+
+        $request->session()->regenerate();
+
     }
 
     public function register(Request $request)
@@ -72,7 +75,7 @@ class AuthController extends Controller
             'title' => 'Muchas gracias por registrarte en Trivicare.com',
             'body' => 'Gracias por registrarte en Trivicare.com. Ahora puedes disfrutar de todos nuestros servicios.',
             'email' => $user->email,
-            'url' => 'http://api.trivicare.test/verify-email/' . $token,
+            'url' => 'https://api.trivicare.com/verify-email/' . $token,
         ];
 
         Mail::to($user->email)->send(new VerificationMail($mailData));

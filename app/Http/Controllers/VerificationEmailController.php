@@ -44,7 +44,7 @@ class VerificationEmailController extends Controller
             'title' => 'Aqui tienes tu enlace de verificación de correo electrónico',
             'body' => 'Este es un enlace de verificación de correo electrónico.',
             'email' => $user->email,
-            'url' => 'http://api.trivicare.test/verify-email/' . $token,
+            'url' => 'https://api.trivicare.com/verify-email/' . $token,
         ];
 
         Mail::to($user->email)->send(new VerificationMail($mailData));
