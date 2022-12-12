@@ -7,9 +7,8 @@ config:
 
 hosts:
   api:
-    remote_user: tara
+    remote_user: root
     hostname: api.trivicare.com
-    port: 52
     deploy_path: "/var/www/{{hostname}}"
 
 tasks:
