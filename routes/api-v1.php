@@ -16,7 +16,6 @@ use App\Http\Controllers\VerificationEmailController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
-use App\Http\Controllers\AuthController;
 
 
 
@@ -95,12 +94,6 @@ Route::post('forgot-password', [ ForgotPasswordController::class, 'forgotPasswor
 Route::post('newsletter', [ NewsletterController::class, 'subscribe' ])->name('newsletter');
 Route::post('unsubscribe-newsletter', [ NewsletterController::class, 'unsubscribe' ])->name('unsubscribe-newsletter');
 
-//Auth Routes
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login')->name('login');
-    Route::post('register', 'register')->name('register');
-    Route::post('logout', 'logout')->name('logout');
-});
 
 
 

@@ -28,11 +28,11 @@ Route::get('/error', function () {
     return view('errors.404');
 })->name('error.404');
 
-// Route::controller(AuthController::class)->group(function () {
-//     Route::post('login', 'login')->name('login');
-//     Route::post('register', 'register')->name('register');
-//     Route::post('logout', 'logout')->name('logout');
-// });
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login')->name('login');
+    Route::post('register', 'register')->name('register');
+    Route::post('logout', 'logout')->name('logout');
+});
 
 //Route::get('/payment/{token_id}', [StrapiController::class, 'payment'])->name('payment');
 Route::get('stripe/{token_id}', [StripeController::class, 'stripe']);

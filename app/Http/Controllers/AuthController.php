@@ -34,7 +34,7 @@ class AuthController extends Controller
             throw new AuthenticationException();
         }
 
-        //$request->session()->regenerate();
+        $request->session()->regenerate();
 
     }
 
