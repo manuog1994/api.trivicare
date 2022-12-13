@@ -478,7 +478,7 @@
                                                                 <td align="center"
                                                                     style="padding:0;Margin:0;font-size:0px"><img
                                                                         class="adapt-img"
-                                                                        src="https://i.ibb.co/pxy5L9G/Trivi-Care-color-3.png" alt
+                                                                        src="{{ asset('order/trivicare_byn_positivo.png') }}" alt
                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                                                         width="375">
                                                                 </td>
@@ -756,9 +756,9 @@
                                                                                 width="33.33%" id="esd-menu-id-0"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email"
+                                                                                    href="https://trivicare.com"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#ffffff;font-size:14px"><img
-                                                                                        src="https://i.ibb.co/6X6jg7c/58991620296762845.png"
+                                                                                        src="{{ asset('order/ico_envio.png') }}"
                                                                                         alt="Envio gratis a partir de 50 €"
                                                                                         title="Envio gratis a partir de 50 €"
                                                                                         align="absmiddle" width="25"
@@ -768,9 +768,9 @@
                                                                                 width="33.33%"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0;border-left:1px solid #ececeb"
                                                                                 id="esd-menu-id-1"><a target="_blank"
-                                                                                    href="https://viewstripo.email"
+                                                                                    href="https://trivicare.com"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#ffffff;font-size:14px"><img
-                                                                                        src="https://i.ibb.co/GFxqt9W/55781620296763104.png"
+                                                                                        src="{{ asset('order/ico_calidad.png') }}"
                                                                                         alt="Productos de calidad"
                                                                                         title="Productos de calidad"
                                                                                         align="absmiddle" width="25"
@@ -780,9 +780,9 @@
                                                                                 width="33.33%"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0;border-left:1px solid #ececeb"
                                                                                 id="esd-menu-id-2"><a target="_blank"
-                                                                                    href="https://viewstripo.email"
+                                                                                    href="https://trivicare.com"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#ffffff;font-size:14px"><img
-                                                                                        src="https://i.ibb.co/GJLP3wH/88291620296763036.png"
+                                                                                        src="{{ asset('order/ico_mejor.png') }}"
                                                                                         alt="La mejor elección"
                                                                                         title="La mejor elección"
                                                                                         align="absmiddle" width="25"
@@ -870,7 +870,7 @@
                                                                                     href="https://www.facebook.com/trivicare"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#926B4A;font-size:14px"><img
                                                                                         title="Facebook"
-                                                                                        src="https://i.ibb.co/CbfBVXx/facebook-logo-black.png"
+                                                                                        src="{{ asset('order/facebook-logo-black.png') }}"
                                                                                         alt="Fb" width="32"
                                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                                             </td>
@@ -880,7 +880,7 @@
                                                                                     href="https://www.instagram.com/trivicare/"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#926B4A;font-size:14px"><img
                                                                                         title="Instagram"
-                                                                                        src="https://i.ibb.co/X2ZPt4V/instagram-logo-black.png"
+                                                                                        src="{{ asset('order/instagram-logo-black.png') }}"
                                                                                         alt="Inst" width="32"
                                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                                             </td>
@@ -890,7 +890,7 @@
                                                                                     href="https://www.tiktok.com/@trivicare"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#926B4A;font-size:14px"><img
                                                                                         title="TikTok"
-                                                                                        src="https://i.ibb.co/bNWSv0X/tiktok-logo-black.png"
+                                                                                        src="{{ asset('order/tiktok-logo-black.png') }}"
                                                                                         alt="Tt" width="32"
                                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                                             </td>
