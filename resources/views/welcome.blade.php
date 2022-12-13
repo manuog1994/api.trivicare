@@ -28,7 +28,7 @@
                 </div>
                 <div style="border-top: 1px solid white; margin-bottom:3rem; "></div>
                 <div style="display:block; margin-left:auto; margin-right:auto; background: white; padding: 1rem; border-radius: 5px; width: 10rem; text-align:center;">
-                    <a href="https://www.trivicare.com">Ir a la página</a>
+                    <a href="https://trivicare.com">Ir a la página</a>
                 </div>
             </div>
         </div>
