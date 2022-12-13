@@ -39,4 +39,8 @@ return [
     'order number'           => 'Número de orden',
     'number'                 => 'número',
     'receipt'                => 'Recibo',
+    'city'                   => 'Ciudad',
+    'country'                => 'País',
+    'state'                  => 'Provincia',
+    'postal_code'            => 'Código postal',
 ];

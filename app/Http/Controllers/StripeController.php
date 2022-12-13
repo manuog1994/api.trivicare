@@ -96,6 +96,10 @@ class StripeController extends Controller
         $customer = new Party([
             'name'          =>  $user_profile->name . ' ' . $user_profile->lastname,
             'address'       => $user_profile->address,
+            'postal_code'   => $user_profile->zipcode,
+            'city'          => $user_profile->city,
+            'state'         => $user_profile->state,
+            'country'       => $user_profile->country,
             'custom_fields' => [
                 'email' => $user->email,
                 'teléfono' => $user_profile->phone,
