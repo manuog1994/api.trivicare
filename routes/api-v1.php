@@ -16,6 +16,7 @@ use App\Http\Controllers\VerificationEmailController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
+use App\Http\Controllers\AuthController;
 
 
 
