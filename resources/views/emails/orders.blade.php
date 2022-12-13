@@ -1297,28 +1297,28 @@
                                                                                 id="esd-menu-id-0"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://trivicare.com/about"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#666666;font-size:14px">Sobre
                                                                                     nosotros</a></td>
                                                                             <td align="center" valign="top" width="25%"
                                                                                 id="esd-menu-id-1"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://trivicare.com"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#666666;font-size:14px">Novedades</a>
                                                                             </td>
                                                                             <td align="center" valign="top" width="25%"
                                                                                 id="esd-menu-id-2"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://trivicare.com"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#666666;font-size:14px">Más
                                                                                     vendidos</a></td>
                                                                             <td align="center" valign="top" width="25%"
                                                                                 id="esd-menu-id-2"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://trivicare.com/contact"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#666666;font-size:14px">Nuestros
                                                                                     distribuidores</a></td>
                                                                         </tr>
