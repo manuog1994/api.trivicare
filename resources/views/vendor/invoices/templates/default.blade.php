@@ -234,9 +234,15 @@
 
                         @if($invoice->buyer->address)
                             <p class="buyer-address">
-                                {{ __('invoices::invoice.address') }}: {{ $invoice->buyer->address }}
+                                {{ $invoice->buyer->address }}
                             </p>
                         @endif
+                            <p class="buyer-address">
+                                {{ $invoice->buyer->postal_code }}, {{ $invoice->buyer->city }}, {{ $invoice->buyer->state }}
+                            </p>
+                            <p class="buyer-address">
+                                {{ $invoice->buyer->country }}
+                            </p>
 
                         @if($invoice->buyer->code)
                             <p class="buyer-code">
