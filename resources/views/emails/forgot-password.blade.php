@@ -478,7 +478,7 @@
                                                                 <td align="center"
                                                                     style="padding:0;Margin:0;font-size:0px"><img
                                                                         class="adapt-img"
-                                                                        src="{{ asset('order/trivicare_byn_positivo.png') }}" alt
+                                                                        src="{{ asset('order/trivicare_header_logo.png') }}" alt
                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                                                         width="375">
                                                                 </td>

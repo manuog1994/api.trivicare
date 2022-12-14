@@ -21,7 +21,7 @@ use App\Http\Controllers\VerificationEmailController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('https://trivicare.com');
 });
 
 Route::get('/error', function () {

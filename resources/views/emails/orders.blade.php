@@ -478,7 +478,7 @@
                                                                 <td align="center"
                                                                     style="padding:0;Margin:0;font-size:0px"><img
                                                                         class="adapt-img"
-                                                                        src="{{ asset('order/trivicare_byn_positivo.png') }}" alt
+                                                                        src="{{ asset('order/trivicare_header_logo.png') }}" alt
                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                                                         width="375">
                                                                 </td>
@@ -1179,7 +1179,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/my-account"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Mi
                                                                             perfil</a></span>
