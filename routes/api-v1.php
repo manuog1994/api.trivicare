@@ -3,8 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\StripeController;
 
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Api\Tag\TagController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Api\Cupon\CuponController;
@@ -93,6 +94,11 @@ Route::post('forgot-password', [ ForgotPasswordController::class, 'forgotPasswor
 // Newsletter
 Route::post('newsletter', [ NewsletterController::class, 'subscribe' ])->name('newsletter');
 Route::post('unsubscribe-newsletter', [ NewsletterController::class, 'unsubscribe' ])->name('unsubscribe-newsletter');
+
+// Stripe
+Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+Route::post('init', [StripeController::class, 'initialize'])->name('stripe.initialize');
+
 
 
 

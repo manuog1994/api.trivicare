@@ -36,7 +36,6 @@ Route::controller(AuthController::class)->group(function () {
 
 //Route::get('/payment/{token_id}', [StrapiController::class, 'payment'])->name('payment');
 Route::get('stripe/{token_id}', [StripeController::class, 'stripe']);
-Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
 Route::get('/cancel', function () {
     return view('cancel');
