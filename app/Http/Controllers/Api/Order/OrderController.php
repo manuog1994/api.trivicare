@@ -186,10 +186,12 @@ class OrderController extends Controller
         $order->save();
            
         $client = new Party([
-            'name'          => 'Trivicare Natural Cosmetics',
-            'phone'         => '(34) 613 036 942',
+            'name' => 'Trivicare Natural Cosmetics',
             'custom_fields' => [
+                'name' => 'Cristina Triviño Cortés',
+                'DNI' => '45923103S',
                 'email' => 'info@trivicare.com',
+                'teléfono' => '613036942',
             ],
         ]);
 
@@ -201,6 +203,7 @@ class OrderController extends Controller
             'state'         => $user_profile->state,
             'country'       => $user_profile->country,
             'custom_fields' => [
+                'DNI' => $user_profile->dni,
                 'email' => $user->email,
                 'teléfono' => $user_profile->phone,
             ],
@@ -217,11 +220,12 @@ class OrderController extends Controller
             $discnt = $coupon->discount;
         }
 
+        //make a generator number for the invoice
+
 
         $invoice = Invoice::make('receipt')
-            // ability to include translated invoice status
-            // in case it was paid
-            ->sequence($order->id)
+            ->series('BIG')
+            ->sequence(667)
             ->status(__('invoices::invoice.paid'))
             ->serialNumberFormat('{SEQUENCE}/{SERIES}')
             ->seller($client)
@@ -299,6 +303,7 @@ class OrderController extends Controller
         return response()->json([
             'success' => true,
             'data' => $order,
+            'invoice' => $invoice,
             'message' => 'Pedido realizado correctamente'
         ]);
     }
