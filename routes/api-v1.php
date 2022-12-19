@@ -80,6 +80,7 @@ Route::delete('products/{product}/tags/{tag}', [TagController::class, 'delete'])
 Route::apiResource('orders', OrderController::class)->names('orders');
 Route::get('users', [OrderController::class, 'getUser'])->name('orders.getUser');
 Route::put('orders/status/{order}', [OrderController::class, 'status'])->name('orders.status');
+Route::post('order-paid/{token_id}', [OrderController::class, 'paid'])->name('order-paid');
 
 // Invoice
 Route::apiResource('invoice', InvoiceOrderController::class)->names('invoice');
@@ -97,7 +98,6 @@ Route::post('unsubscribe-newsletter', [ NewsletterController::class, 'unsubscrib
 
 // Stripe
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
-Route::post('init', [StripeController::class, 'initialize'])->name('stripe.initialize');
 
 
 
