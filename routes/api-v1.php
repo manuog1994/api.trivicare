@@ -81,6 +81,7 @@ Route::apiResource('orders', OrderController::class)->names('orders');
 Route::get('users', [OrderController::class, 'getUser'])->name('orders.getUser');
 Route::put('orders/status/{order}', [OrderController::class, 'status'])->name('orders.status');
 Route::post('order-paid/{token_id}', [OrderController::class, 'paid'])->name('order-paid');
+Route::post('order-paid-paypal/{token_id}', [OrderController::class, 'paidPaypal'])->name('order-paid-paypal');
 
 // Invoice
 Route::apiResource('invoice', InvoiceOrderController::class)->names('invoice');

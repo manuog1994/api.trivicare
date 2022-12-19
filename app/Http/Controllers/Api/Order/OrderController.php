@@ -303,4 +303,19 @@ class OrderController extends Controller
         ]);
     }
 
+    public function paidPaypal($token_id, Request $request)
+    {
+        $order = Order::where('id', $request->order_id)->first();
+        $order->token_id = $token_id;
+        $order->status = 1;
+        $order->paid = 2;
+        $order->save();
+        return response()->json([
+            'success' => true,
+            'data' => $order,
+            'message' => 'Token guardado correctamente'
+        ]);
+    }
+
+
 }
