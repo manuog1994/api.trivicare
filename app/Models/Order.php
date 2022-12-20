@@ -36,6 +36,9 @@ class Order extends Model
         'status',
         'shipping',
         'token_id',
+        'shipping_method',
+        'invoice_paper',
+        'note'
     ];
 
     protected $allowSort = ['id'];

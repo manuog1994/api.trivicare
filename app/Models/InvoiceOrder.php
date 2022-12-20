@@ -15,6 +15,7 @@ class InvoiceOrder extends Model
         'order_id',
         'user_profile_id',
         'url',
+        'invoice_number',
 
     ];
 }

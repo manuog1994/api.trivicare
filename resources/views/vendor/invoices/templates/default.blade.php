@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>#TCN{{ $invoice->sequence }}</title>
+        <title>#Fatura electrónica</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
         <style type="text/css" media="screen">
@@ -155,7 +155,7 @@
                         <h4 class="text-uppercase">
                             <strong class="color-theme">Factura</strong>
                         </h4>
-                        <p>Número de Factura <strong class="color-theme-2">#TNC{{ $invoice->sequence }}</strong></p>
+                        <p>Número de Factura <strong class="color-theme-2">{{ $invoice->getSerialNumber() }}</strong></p>
                         <p>{{ __('invoices::invoice.date') }}: <strong class="color-theme-3">{{ $invoice->getDate() }}</strong></p>
                     </td>
                     <td class="border-0 pl-0">

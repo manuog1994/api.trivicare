@@ -31,6 +31,8 @@ class OrderResource extends JsonResource
             'invoice' => $this->whenLoaded('invoice'),
             'shipping' => $this->shipping,
             'token_id' => $this->token_id,
+            'invoice_paper' => $this->invoice_paper,
+            'note' => $this->note,
         ];
     }
 }

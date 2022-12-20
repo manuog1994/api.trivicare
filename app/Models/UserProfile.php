@@ -22,7 +22,8 @@ class UserProfile extends Model
         'zipcode',
         'gender',
         'birth_date',
-        'phone'
+        'phone',
+        'dni',
     ];
 
     // Relacion uno a uno con usuario

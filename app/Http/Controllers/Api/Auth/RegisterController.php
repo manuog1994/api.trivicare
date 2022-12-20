@@ -40,6 +40,7 @@ class RegisterController extends Controller
             'phone' => 'required|string',
             'gender' => 'nullable|string',
             'birth_date' => 'nullable|string',
+            'dni' => 'required|string'
         ]);
 
         $user_profile = UserProfile::create([
@@ -55,6 +56,7 @@ class RegisterController extends Controller
                 'phone' => $request->phone,
                 'gender' => $request->gender,
                 'birth_date' => $request->birth_date,
+                'dni' => $request->dni,
             ]);
     
         return UserProfileResource::make($user_profile);

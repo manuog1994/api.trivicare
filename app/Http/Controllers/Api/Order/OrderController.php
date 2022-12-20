@@ -23,8 +23,10 @@ use LaravelDaily\Invoices\Classes\Party;
 use App\Http\Resources\UserProfileResource;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 
+
 class OrderController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth:sanctum');
@@ -61,6 +63,9 @@ class OrderController extends Controller
             'paid' => Order::PENDIENTE,
             'status' => Order::RECIBIDO,
             'shipping' => $request->shipping,
+            'shipping_method' => $request->shipping_method,
+            'invoice_paper' => $request->invoice_paper,
+            'note' => $request->note,
         ]);
 
         $couponFirst = 'ORDERFIRST';
@@ -165,6 +170,7 @@ class OrderController extends Controller
 
     public function paid($token_id)
     {
+
         $order = Order::where('token_id', $token_id)->first();
 
         $user_profile = UserProfile::where('id', $order->user_profile_id)->first();
@@ -219,15 +225,27 @@ class OrderController extends Controller
             $coupon = Cupon::where('code', $order->coupon)->first();
             $discnt = $coupon->discount;
         }
-
         //make a generator number for the invoice
+        $invt = InvoiceOrder::all();
+        $year = Carbon::now()->format('y');
+        $last = substr($invt->last()->invoice_number, 0, -6);
+        $headerInv = '#TNC' . $year;
 
+        
+        if($invt->count() == 0 || $last != $headerInv){
+            $invoice_number = '#TNC'. $year . '/' . str_pad(1, 5, '0', STR_PAD_LEFT);
+        }else {
+            $last_invoice = $invt->last();
+            $invoice_number = str_replace('#TNC' . $year . '/', '', $last_invoice->invoice_number);
+            $invoice_number += 1;
+            $invoice_number = '#TNC'. $year . '/' . str_pad($invoice_number, 5, '0', STR_PAD_LEFT);
+        }
 
         $invoice = Invoice::make('receipt')
-            ->series('BIG')
-            ->sequence(667)
+            //->series('#TNC'. strval($year)) 
+            //->sequence(number_format(substr($invoice_number, -5)))
+            ->serialNumberFormat($invoice_number)
             ->status(__('invoices::invoice.paid'))
-            ->serialNumberFormat('{SEQUENCE}/{SERIES}')
             ->seller($client)
             ->buyer($customer)
             ->date(now()->subWeeks(3))
@@ -257,6 +275,7 @@ class OrderController extends Controller
             'order_id' => $order->id,
             'user_profile_id' => $user_profile->id,
             'url' => $link,
+            'invoice_number' => $invoice_number,
         ]);
 
         //send email
@@ -302,8 +321,6 @@ class OrderController extends Controller
            
         return response()->json([
             'success' => true,
-            'data' => $order,
-            'invoice' => $invoice,
             'message' => 'Pedido realizado correctamente'
         ]);
     }
