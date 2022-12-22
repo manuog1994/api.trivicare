@@ -155,7 +155,7 @@ class GoogleController extends Controller
                 'user' => $user,
             ], 200);
             
-        }else if(!$user && $email) { 
+        }else if(!$user) { 
             $user->provider_id = $userFromGoogle->id;
             $user->provider_name = 'google';
             $user->google_access_token_json = json_encode($accessToken);
