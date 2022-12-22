@@ -149,22 +149,35 @@ class GoogleController extends Controller
             ];
 
             Mail::to($user->email)->send(new VerificationMail($mailData));
+
+            return response()->json([
+                'message' => 'User Created',
+                'user' => $user,
+            ], 200);
             
         }else if(!$user && $email) { 
             $user->provider_id = $userFromGoogle->id;
             $user->provider_name = 'google';
             $user->google_access_token_json = json_encode($accessToken);
             $user->save();
+
+            return response()->json([
+                'message' => 'Email Already Exists',
+                'user' => $user,
+            ], 200);
+            
         } else {
             $user->google_access_token_json = json_encode($accessToken);
             $user->save();
+
+            return response()->json([
+                'message' => 'Access Token Updated',
+                'user' => $user,
+            ], 200);
         }
 
 
         //$token = $user->createToken("Google")->accessToken;
-        return response()->json([
-            'user' => $user,
-        ], 201);
     } // postLogin
 
 
