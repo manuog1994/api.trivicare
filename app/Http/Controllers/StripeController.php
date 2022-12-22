@@ -53,7 +53,7 @@ class StripeController extends Controller
             ]);
 
             $order = Order::where('id', $request->orderId)->first();
-            $order->paid = Order::PROCESANDO;
+            $order->paid = 'PROCESANDO';
             $order->token_id = $paymentIntent->client_secret;
             $order->save();
 

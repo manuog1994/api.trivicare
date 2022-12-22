@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RoleSeeder::class);
-        $this->call(UserSeeder::class);
-        UserProfile::factory(21)->create();
+        //$this->call(RoleSeeder::class);
+        //$this->call(UserSeeder::class);
+        //UserProfile::factory(21)->create();
 
         \App\Models\Category::factory(1)->create([
             'name' => 'Facial',
@@ -144,14 +144,14 @@ class DatabaseSeeder extends Seeder
         \App\Models\Cupon::factory(1)->create([
             'code' => 'CUPON10',
             'discount' => 10,
-            'validity' => '2022-10-20',
+            'validity' => '2022-12-31',
             'status' => \App\Models\Cupon::ACTIVADO,
         ]);
 
         \App\Models\Cupon::factory(1)->create([
             'code' => 'CUPON20',
             'discount' => 20,
-            'validity' => '2022-10-20',
+            'validity' => '2022-12-31',
             'status' => \App\Models\Cupon::ACTIVADO,
         ]);
     }

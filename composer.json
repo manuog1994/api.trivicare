@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "doctrine/dbal": "^3.5",
+        "google/apiclient": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
         "haruncpi/laravel-id-generator": "^1.1",
         "laravel/framework": "^9.19",

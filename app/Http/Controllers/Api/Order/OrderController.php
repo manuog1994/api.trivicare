@@ -66,14 +66,8 @@ class OrderController extends Controller
             'shipping_method' => $request->shipping_method,
             'invoice_paper' => $request->invoice_paper,
             'note' => $request->note,
+            'token_id' => $request->token_id,
         ]);
-
-        $couponFirst = 'ORDERFIRST';
-
-        if(strpos($request->coupon, $couponFirst) !== false){
-            $coupon = Cupon::where('code', $request->coupon)->first();
-            $coupon->delete();
-        }
 
 
         return response()->json([
@@ -108,12 +102,14 @@ class OrderController extends Controller
 
         $products = json_decode($order->products);
 
+        $invoice_number = InvoiceOrder::where('order_id', $order->id)->first();
+
         if($request->status == 3){
             $mailData = [
                 'title' => 'Confirmación de pedido',
                 'body' => 'Gracias por tu pedido. Te adjuntamos la factura de tu pedido.',
                 'date' => $order->order_date,
-                'order' => '#TNC' . $order->id,
+                'order' => $invoice_number->invoice_number,
                 'user' => $user_profile->name . ' ' . $user_profile->lastname,
                 'address' => $user_profile->address,
                 'city' => $user_profile->city,
@@ -187,14 +183,18 @@ class OrderController extends Controller
         }
 
         $order->status = 1;
-        $order->paid = 3;
+        if(strlen($order->token_id) == 23) {
+            $order->paid = 'CONTRAREEMBOLSO';
+        } else {
+            $order->paid = 'PAGADO';
+        }
         $order->token_id = null;
         $order->save();
            
         $client = new Party([
             'name' => 'Trivicare Natural Cosmetics',
             'custom_fields' => [
-                'name' => 'Cristina Triviño Cortés',
+                'Nombre' => 'Cristina Triviño Cortés',
                 'DNI' => '45923103S',
                 'email' => 'info@trivicare.com',
                 'teléfono' => '613036942',
@@ -228,18 +228,29 @@ class OrderController extends Controller
         //make a generator number for the invoice
         $invt = InvoiceOrder::all();
         $year = Carbon::now()->format('y');
-        $last = substr($invt->last()->invoice_number, 0, -6);
-        $headerInv = '#TNC' . $year;
+
 
         
-        if($invt->count() == 0 || $last != $headerInv){
+        if($invt->count() == 0){
+
             $invoice_number = '#TNC'. $year . '/' . str_pad(1, 5, '0', STR_PAD_LEFT);
+
         }else {
+
+            $last = substr($invt->last()->invoice_number, 0, -6);
+            $headerInv = '#TNC' . $year;
+
+            if($last != $headerInv) {
+                $invoice_number = '#TNC'. $year . '/' . str_pad(1, 5, '0', STR_PAD_LEFT);
+            } 
+
             $last_invoice = $invt->last();
             $invoice_number = str_replace('#TNC' . $year . '/', '', $last_invoice->invoice_number);
             $invoice_number += 1;
             $invoice_number = '#TNC'. $year . '/' . str_pad($invoice_number, 5, '0', STR_PAD_LEFT);
         }
+
+        $dateInv= Carbon::now()->format('d/m/Y');
 
         $invoice = Invoice::make('receipt')
             //->series('#TNC'. strval($year)) 
@@ -248,7 +259,7 @@ class OrderController extends Controller
             ->status(__('invoices::invoice.paid'))
             ->seller($client)
             ->buyer($customer)
-            ->date(now()->subWeeks(3))
+            ->date(now())
             ->dateFormat('d/m/Y')
             ->payUntilDays(14)
             ->currencySymbol('€')
@@ -256,7 +267,7 @@ class OrderController extends Controller
             ->currencyFormat('{SYMBOL}{VALUE}')
             ->currencyThousandsSeparator('.')
             ->currencyDecimalPoint(',')
-            ->filename('TNC' . $order->id . '-' . $user_profile->name . '-' . str_replace(' ', '-', $user_profile->lastname))
+            ->filename($dateInv . '_' . substr($invoice_number, 7, 5))
             ->addItems($items)
             ->setCustomData($discnt)
             ->taxableAmount($order->subTotal)
@@ -284,7 +295,7 @@ class OrderController extends Controller
             'title' => 'Confirmación de pedido',
             'body' => 'Gracias por tu pedido. Te adjuntamos la factura de tu pedido.',
             'date' => $order->order_date,
-            'order' => '#TNC' . $order->id,
+            'order' => $invoice_number,
             'user' => $user_profile->name . ' ' . $user_profile->lastname,
             'address' => $user_profile->address,
             'city' => $user_profile->city,
@@ -317,11 +328,19 @@ class OrderController extends Controller
             ];
             Mail::to($user->email)->send(new FirstOrderMail($dataOne));
         } 
+
+        $couponFirst = 'ORDERFIRST';
+
+        if(strpos($order->coupon, $couponFirst) !== false){
+            $coupon = Cupon::where('code', $order->coupon)->first();
+            $coupon->delete();
+        }
             
            
         return response()->json([
             'success' => true,
-            'message' => 'Pedido realizado correctamente'
+            'message' => 'Pedido realizado correctamente',
+            'token' => $token_id , strlen($token_id),
         ]);
     }
 
@@ -330,7 +349,7 @@ class OrderController extends Controller
         $order = Order::where('id', $request->order_id)->first();
         $order->token_id = $token_id;
         $order->status = 1;
-        $order->paid = 2;
+        $order->paid = 'PROCESANDO';
         $order->save();
         return response()->json([
             'success' => true,

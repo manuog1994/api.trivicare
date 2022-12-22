@@ -15,6 +15,9 @@ class Order extends Model
     const PROCESANDO = 2;
     const PAGADO = 3;
     const RECHAZADO = 4;
+    const CONTRAREEMBOLSO = 5;
+    const TRANSFERENCIA = 6;
+
 
     // ESTADO DEL PEDIDO
     const RECIBIDO = 1;

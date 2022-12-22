@@ -1,13 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 //use App\Http\Controllers\StrapiController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\AuthController;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\VerificationEmailController;
+use Illuminate\Auth\AuthenticationException;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,18 +49,8 @@ Route::get('/cancel', function () {
 //Verify Email
 Route::get('/verify-email/{token}', [ VerificationEmailController::class, 'verify' ])->name('verify.email');
 
-// Route::get('/email', function () {
-//     $mailData = [
-//         'title' => 'Aqui tiene su nueva contraseña.',
-//         'body' => 'Hemos generado una contraseña temporal para que acceda a su perfil.',
-//         'order' => '#123456',
-//         'date' => '2021-01-01',
-//         'url' => 'http://localhost:8000',
-//         'password' => '123456',
-//     ];
-//     return view('emails.forgot-password', compact('mailData'));
-// })->name('email');
+
 //Auth::routes(['verify' => true]);
 
-
+//Google auth
 

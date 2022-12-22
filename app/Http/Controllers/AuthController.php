@@ -6,12 +6,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\VerificationMail;
 use App\Models\VerificationToken;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\AuthenticationException;
-
+use Illuminate\Auth\Passwords\PasswordBroker;
 
 class AuthController extends Controller
 {
@@ -19,7 +20,8 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required|string',
+            'password' => 'string',
+            'provider_id' => 'string',
         ]);
 
         if ($validator->fails()) {
@@ -28,6 +30,17 @@ class AuthController extends Controller
                 'message' => 'Validation Error.',
                 'errors' => $validator->errors(),
             ], 422);
+        }
+
+        if(!$request->password && $request->provider_id){
+            $user = User::where('email', $request->email)->first();
+
+            Auth::login($user);
+
+            return response()->json([
+                'user' => $user,
+                'provider_id' => $request->provider_id,
+            ]);
         }
         
         if(!Auth::attempt($request->only('email', 'password'))){
@@ -56,6 +69,7 @@ class AuthController extends Controller
         $user = new User;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->newsletter = $request->newsletter;
 
         $user->save();
 

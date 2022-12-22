@@ -1,13 +1,16 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\StripeController;
-
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Api\Tag\TagController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\Api\Auth\GoogleController;
 use App\Http\Controllers\Api\Cupon\CuponController;
 use App\Http\Controllers\Api\Image\ImageController;
 use App\Http\Controllers\Api\Order\OrderController;
@@ -36,7 +39,6 @@ use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
 Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     return $request->user()->load(['user_profile', 'roles']);
 });
-
 
 // User
 
@@ -100,8 +102,14 @@ Route::post('unsubscribe-newsletter', [ NewsletterController::class, 'unsubscrib
 // Stripe
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
+//Google auth'
 
+Route::get('auth/url', [GoogleController::class, 'getAuthUrl']);
+Route::post('auth/code', [GoogleController::class, 'postLogin']);
 
+Route::middleware('auth:sanctum')->get('auth/user', function (Request $request) {
+    return $request->user()->load(['user_profile', 'roles']);
+});
 
 
 
