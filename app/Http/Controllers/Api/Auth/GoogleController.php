@@ -8,9 +8,7 @@ use App\Mail\VerificationMail;
 use App\Models\VerificationToken;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller as Controller;
 
 class GoogleController extends Controller
@@ -117,17 +115,17 @@ class GoogleController extends Controller
             ->where('provider_id', $userFromGoogle->id)
             ->first();
 
-        $email = User::where('email', $userFromGoogle->email)->first();
+        $email = $userFromGoogle->email;
 
         /**
          */
-        if(!$user && !$email) {
+        if($user == null && $email == null) {
             $user = User::create([
                 'provider_id' => $userFromGoogle->id,
                 'provider_name' => 'google',
                 'google_access_token_json' => json_encode($accessToken),
                 'email' => $userFromGoogle->email,
-                'password' => bcrypt('C0d3c@mp'),
+                //'password' => bcrypt('C0d3c@mp'),
             ]);
             
             //generate random string
@@ -151,32 +149,34 @@ class GoogleController extends Controller
             Mail::to($user->email)->send(new VerificationMail($mailData));
 
             return response()->json([
-                'message' => 'User Created',
-                'user' => $user,
+                'message' => 'User created',
+                'user' => $user
             ], 200);
             
-        }else if(!$user) { 
+        } else if ($email != null) {
+            $user = User::where('email', $email)->first();
             $user->provider_id = $userFromGoogle->id;
             $user->provider_name = 'google';
             $user->google_access_token_json = json_encode($accessToken);
             $user->save();
 
             return response()->json([
-                'message' => 'Email Already Exists',
-                'user' => $user,
+                'message' => 'User already exists',
+                'user' => $user
             ], 200);
-            
+
         } else {
+            $user = User::where('email', $email)->first();
             $user->google_access_token_json = json_encode($accessToken);
             $user->save();
 
             return response()->json([
-                'message' => 'Access Token Updated',
-                'user' => $user,
+                'message' => 'User already exists',
+                'user' => $user
             ], 200);
         }
 
-
+        
         //$token = $user->createToken("Google")->accessToken;
     } // postLogin
 

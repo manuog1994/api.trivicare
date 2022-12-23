@@ -32,8 +32,9 @@ class AuthController extends Controller
             ], 422);
         }
 
-        if(!$request->password && $request->provider_id){
-            $user = User::where('email', $request->email)->first();
+
+        if($request->provider_id != null){
+            $user = User::where('provider_id', $request->provider_id)->first();
 
             Auth::login($user);
 
