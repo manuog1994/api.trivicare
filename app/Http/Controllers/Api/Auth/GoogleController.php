@@ -38,6 +38,7 @@ class GoogleController extends Controller
             [
                 \Google\Service\Oauth2::USERINFO_EMAIL,
                 \Google\Service\Oauth2::OPENID,
+                \Google\Service\Oauth2::USERINFO_PROFILE,
             ]
         );
         $client->setIncludeGrantedScopes(true);
@@ -115,7 +116,7 @@ class GoogleController extends Controller
             ->where('provider_id', $userFromGoogle->id)
             ->first();
 
-        $email = $userFromGoogle->email;
+        $email = User::where('email', $userFromGoogle->email)->first();
 
         /**
          */
@@ -125,6 +126,7 @@ class GoogleController extends Controller
                 'provider_name' => 'google',
                 'google_access_token_json' => json_encode($accessToken),
                 'email' => $userFromGoogle->email,
+                'name' => $userFromGoogle->name,
                 //'password' => bcrypt('C0d3c@mp'),
             ]);
             
@@ -153,7 +155,7 @@ class GoogleController extends Controller
                 'user' => $user
             ], 200);
             
-        } else if ($email != null) {
+        } else if ($email != null && $user == null) {
             $user = User::where('email', $email)->first();
             $user->provider_id = $userFromGoogle->id;
             $user->provider_name = 'google';
@@ -166,7 +168,6 @@ class GoogleController extends Controller
             ], 200);
 
         } else {
-            $user = User::where('email', $email)->first();
             $user->google_access_token_json = json_encode($accessToken);
             $user->save();
 
