@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\VerificationEmailController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Category\CategoryController;
+use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
 
 
@@ -111,6 +112,9 @@ Route::middleware('auth:sanctum')->get('auth/user', function (Request $request) 
     return $request->user()->load(['user_profile', 'roles']);
 });
 
+
+// Contact Form
+Route::post('contact', [ContactFormController::class, 'contactPost'])->name('contact.post');
 
 
 
