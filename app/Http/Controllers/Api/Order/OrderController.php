@@ -121,6 +121,8 @@ class OrderController extends Controller
                 'subTotal' => round($order->total * 1.21, 2),
                 'shipping' => $order->shipping,
                 'total' => round(($order->total * 1.21) + $order->shipping, 2),
+                'track' => $request->track,
+                'urlTrack' => $request->urlTrack,
             ];
              
             Mail::to($user->email)->send(new SendOrderMail($mailData));
@@ -131,7 +133,7 @@ class OrderController extends Controller
                 'title' => 'Confirmación de pedido',
                 'body' => 'Gracias por tu pedido. Te adjuntamos la factura de tu pedido.',
                 'date' => $order->order_date,
-                'order' => '#TNC' . $order->id,
+                'order' => $invoice_number->invoice_number,
                 'user' => $user_profile->name . ' ' . $user_profile->lastname,
                 'address' => $user_profile->address,
                 'city' => $user_profile->city,

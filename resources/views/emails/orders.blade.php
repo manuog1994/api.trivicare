@@ -651,41 +651,6 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td align="left" style="padding:20px;Margin:0">
-                                            <table cellpadding="0" cellspacing="0" width="100%"
-                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                <tr>
-                                                    <td align="center" valign="top"
-                                                        style="padding:0;Margin:0;width:560px">
-                                                        <table cellpadding="0" cellspacing="0" width="100%"
-                                                            role="presentation"
-                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                            <tr>
-                                                                <td align="center" style="padding:0;Margin:0">
-                                                                    <!--[if mso]><a href="https://trivicare.com/my-orders" target="_blank" hidden>
-	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://trivicare.com/my-orders" 
-                style="height:41px; v-text-anchor:middle; width:233px" arcsize="50%" stroke="f"  fillcolor="#666666">
-		<w:anchorlock></w:anchorlock>
-		<center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:15px; font-weight:400; line-height:15px;  mso-text-raise:1px'>Ver estado de tu pedido</center>
-	</v:roundrect></a>
-<![endif]-->
-                                                                    <!--[if !mso]><!-- --><span
-                                                                        class="msohide es-button-border"
-                                                                        style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://trivicare.com/my-orders"
-                                                                            class="es-button" target="_blank"
-                                                                            style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:inline-block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center">Ver
-                                                                            estado de tu pedido</a></span>
-                                                                    <!--<![endif]-->
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td align="left"
                                             style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px">
                                             <table cellpadding="0" cellspacing="0" width="100%"
@@ -980,41 +945,6 @@
                                                                         <span>{{ $mailData['user'] }}</span><br>{{ $mailData['address'] }}<br>{{ $mailData['zipcode'] }}<br>{{ $mailData['city'] }}
                                                                         ({{ $mailData['state'] }})<br>{{ $mailData['country'] }}
                                                                     </p>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" style="padding:20px;Margin:0">
-                                            <table cellpadding="0" cellspacing="0" width="100%"
-                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                <tr>
-                                                    <td align="center" valign="top"
-                                                        style="padding:0;Margin:0;width:560px">
-                                                        <table cellpadding="0" cellspacing="0" width="100%"
-                                                            role="presentation"
-                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                            <tr>
-                                                                <td align="center" style="padding:0;Margin:0">
-                                                                    <!--[if mso]><a href="https://trivicare.com/my-orders" target="_blank" hidden>
-	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://trivicare.com/my-orders" 
-                style="height:41px; v-text-anchor:middle; width:237px" arcsize="50%" stroke="f"  fillcolor="#666666">
-		<w:anchorlock></w:anchorlock>
-		<center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:15px; font-weight:400; line-height:15px;  mso-text-raise:1px'>Ver estado de mi pedido</center>
-	</v:roundrect></a>
-<![endif]-->
-                                                                    <!--[if !mso]><!-- --><span
-                                                                        class="msohide es-button-border"
-                                                                        style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:inline-block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://trivicare.com/my-orders"
-                                                                            class="es-button" target="_blank"
-                                                                            style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:inline-block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center">Ver
-                                                                            estado de mi pedido</a></span>
-                                                                    <!--<![endif]-->
                                                                 </td>
                                                             </tr>
                                                         </table>

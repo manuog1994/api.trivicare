@@ -113,7 +113,18 @@ class RegisterController extends Controller
 
     public function deleteProfile(UserProfile $user_profile)
     {
-        $user_profile->delete();
+        $user_profile->name = 'deleted';
+        $user_profile->lastname = 'deleted';
+        $user_profile->address = 'deleted';
+        $user_profile->optional_address = 'deleted';
+        $user_profile->city = 'deleted';
+        $user_profile->state = 'deleted';
+        $user_profile->country = 'deleted';
+        $user_profile->zipcode = 00000;
+        $user_profile->phone = 000000000;
+        $user_profile->dni = 'deleted';
+        $user_profile->birth_date = '0000-00-00';
+        $user_profile->save();;
 
         return response()->json(null, 204);
     }
@@ -123,11 +134,28 @@ class RegisterController extends Controller
     {
         $user_profiles = UserProfile::where('user_id', $user->id)->get();
         
-        foreach ($user_profiles as $user_profile) {
-            $user_profile->delete();
+        if($user_profiles->count() > 0){
+            foreach ($user_profiles as $user_profile) {
+                $user_profile->name = 'deleted';
+                $user_profile->lastname = 'deleted';
+                $user_profile->address = 'deleted';
+                $user_profile->optional_address = 'deleted';
+                $user_profile->city = 'deleted';
+                $user_profile->state = 'deleted';
+                $user_profile->country = 'deleted';
+                $user_profile->zipcode = 00000;
+                $user_profile->phone = 000000000;
+                $user_profile->dni = 'deleted';
+                $user_profile->birth_date = '0000-00-00';
+                $user_profile->save();
+            }
         }
 
-        $user->delete();
+        $user->name = 'deleted';
+        $user->email = 'deleted' . $user->id . '@deleted.com';
+        $user->password = bcrypt('deleted');
+        $user->email_verified_at = null;
+        $user->save();
         return response()->json(null, 204);
     }
 }

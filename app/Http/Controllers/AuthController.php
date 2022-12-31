@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Newsletter;
 use Illuminate\Http\Request;
 use App\Mail\VerificationMail;
 use App\Models\VerificationToken;
@@ -72,30 +73,33 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->newsletter = $request->newsletter;
-
         $user->save();
 
+        if ($request->newsletter == true) {
+            $newsletter = new Newsletter;
+            $newsletter->email = $request->email;
+            $newsletter->save();
+        }
 
-        //generate random string
-        $rand_token = openssl_random_pseudo_bytes(16);
-        //change binary to hexadecimal
-        $token = bin2hex($rand_token);
+        // //generate random string
+        // $rand_token = openssl_random_pseudo_bytes(16);
+        // //change binary to hexadecimal
+        // $token = bin2hex($rand_token);
 
-        VerificationToken::create([
-            'user_id' => $user->id,
-            'token' => $token,
-        ]);
+        // VerificationToken::create([
+        //     'user_id' => $user->id,
+        //     'token' => $token,
+        // ]);
 
-        //generate email verification
-        $mailData = [
-            'title' => 'Muchas gracias por registrarte en Trivicare.com',
-            'body' => 'Gracias por registrarte en Trivicare.com. Ahora puedes disfrutar de todos nuestros servicios.',
-            'email' => $user->email,
-            'url' => 'https://api.trivicare.com/verify-email/' . $token,
-        ];
+        // //generate email verification
+        // $mailData = [
+        //     'title' => 'Muchas gracias por registrarte en Trivicare.com',
+        //     'body' => 'Gracias por registrarte en Trivicare.com. Ahora puedes disfrutar de todos nuestros servicios.',
+        //     'email' => $user->email,
+        //     'url' => 'https://api.trivicare.com/verify-email/' . $token,
+        // ];
 
-        Mail::to($user->email)->send(new VerificationMail($mailData));
+        // Mail::to($user->email)->send(new VerificationMail($mailData));
         
         return response()->json([
             'success' => true,
@@ -108,6 +112,13 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+    }
+
+    //function for refresh token
+    public function refresh(Request $request)
+    {
+        $request->session()->regenerateToken();
+        return response()->json(['message' => 'Token refreshed']);
     }
 
 }

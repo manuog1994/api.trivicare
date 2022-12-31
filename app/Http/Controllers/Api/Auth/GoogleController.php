@@ -130,25 +130,25 @@ class GoogleController extends Controller
                 //'password' => bcrypt('C0d3c@mp'),
             ]);
             
-            //generate random string
-            $rand_token = openssl_random_pseudo_bytes(16);
-            //change binary to hexadecimal
-            $token = bin2hex($rand_token);
+            // //generate random string
+            // $rand_token = openssl_random_pseudo_bytes(16);
+            // //change binary to hexadecimal
+            // $token = bin2hex($rand_token);
 
-            VerificationToken::create([
-                'user_id' => $user->id,
-                'token' => $token,
-            ]);
+            // VerificationToken::create([
+            //     'user_id' => $user->id,
+            //     'token' => $token,
+            // ]);
             
-            //generate email verification
-            $mailData = [
-                'title' => 'Muchas gracias por registrarte en Trivicare.com',
-                'body' => 'Gracias por registrarte en Trivicare.com. Ahora puedes disfrutar de todos nuestros servicios.',
-                'email' => $user->email,
-                'url' => 'https://api.trivicare.com/verify-email/' . $token,
-            ];
+            // //generate email verification
+            // $mailData = [
+            //     'title' => 'Muchas gracias por registrarte en Trivicare.com',
+            //     'body' => 'Gracias por registrarte en Trivicare.com. Ahora puedes disfrutar de todos nuestros servicios.',
+            //     'email' => $user->email,
+            //     'url' => 'https://api.trivicare.com/verify-email/' . $token,
+            // ];
 
-            Mail::to($user->email)->send(new VerificationMail($mailData));
+            // Mail::to($user->email)->send(new VerificationMail($mailData));
 
             return response()->json([
                 'message' => 'User created',
