@@ -442,6 +442,13 @@
         }
 
     </style>
+    <script type="text/javascript">
+        copyToClipboard = function (input) {
+            input.select();
+            document.execCommand('copy');
+            document.getElementById('copy').innerHTML = 'Copiado!';
+        };
+    </script>
 </head>
 
 <body
@@ -551,8 +558,10 @@
                     <tr style="text-align:center;">
                         <td>
                             <h3>Te damos las gracias por realizar tu primera compra en TriviCare.</h3>
-                            <p style="margin-bottom:2rem;">Te invitamos a que nos sigas en nuestras redes sociales para que estés al tanto de nuestras promociones y descuentos.</p>
-                            <p>Además te queremos obsequiar con un cupón de descuento del 10% para tu próxima compra, solo tienes que ingresar el siguiente código en el carrito de compras: <strong>{{ $dataOne['cupon'] }}</strong></p>
+                            <p style="padding-bottom:20px;width:700px;margin:auto;">Te invitamos a que nos sigas en nuestras redes sociales para que estés al tanto de nuestras promociones y descuentos.</p>
+                            <p style="width: 700px; margin:auto; padding-bottom: 15px;">Además te queremos obsequiar con un cupón de descuento del 10% para tu próxima compra, solo tienes que ingresar el siguiente código en el carrito de compras:</p>
+                            <input style="background-color: #999999; padding: 10px 30px;text-align:center;" type="text" value="{{ $dataOne['cupon'] }}" onclick="copyToClipboard(this)">
+                            <p id="copy" style="font-style:italic;"><small>Haz click sobre el código y se copiará de forma automática a tu portapapeles.</small></p>
                             <p>Este cupón caducará en 30 días, así que no lo dudes ¡Aprovéchalo en tu pedido!.</p>
                         </td>
                     </tr>
@@ -638,7 +647,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Envios
                                                                             FAQ</a></span>
@@ -658,7 +667,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Devoluciones
                                                                             FAQ</a></span>
@@ -690,7 +699,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Pedidos
                                                                             FAQ</a></span>
@@ -710,7 +719,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/my-account/"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Mi
                                                                             perfil</a></span>

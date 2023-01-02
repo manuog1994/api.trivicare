@@ -636,7 +636,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Envios
                                                                             FAQ</a></span>
@@ -656,7 +656,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Devoluciones
                                                                             FAQ</a></span>
@@ -688,7 +688,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Pedidos
                                                                             FAQ</a></span>
@@ -708,7 +708,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/my-account"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Mi
                                                                             perfil</a></span>
@@ -826,28 +826,28 @@
                                                                                 id="esd-menu-id-0"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://trivicare.com/about"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#666666;font-size:14px">Sobre
                                                                                     nosotros</a></td>
                                                                             <td align="center" valign="top" width="25%"
                                                                                 id="esd-menu-id-1"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://trivicare.com"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#666666;font-size:14px">Novedades</a>
                                                                             </td>
                                                                             <td align="center" valign="top" width="25%"
                                                                                 id="esd-menu-id-2"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://trivicare.com/products"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#666666;font-size:14px">Más
                                                                                     vendidos</a></td>
                                                                             <td align="center" valign="top" width="25%"
                                                                                 id="esd-menu-id-2"
                                                                                 style="Margin:0;padding-left:5px;padding-right:5px;padding-top:10px;padding-bottom:10px;border:0">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://trivicare.com/contact"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;display:block;font-family:arial, 'helvetica neue', helvetica, sans-serif;color:#666666;font-size:14px">Nuestros
                                                                                     distribuidores</a></td>
                                                                         </tr>
@@ -901,8 +901,7 @@
                                                                     style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;color:#666666;font-size:12px">
-                                                                        Estas recibiendo este email por la compra de
-                                                                        productos en nuestra página web.<br></p>
+                                                                        Ya no recibirás ningún correo más de carácter promocional o comercial.<br></p>
                                                                 </td>
                                                             </tr>
                                                         </table>

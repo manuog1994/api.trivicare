@@ -41,7 +41,9 @@ class Order extends Model
         'token_id',
         'shipping_method',
         'invoice_paper',
-        'note'
+        'note',
+        'payment_method',
+        'track',
     ];
 
     protected $allowSort = ['id'];

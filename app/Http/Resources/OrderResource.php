@@ -33,6 +33,8 @@ class OrderResource extends JsonResource
             'token_id' => $this->token_id,
             'invoice_paper' => $this->invoice_paper,
             'note' => $this->note,
+            'payment_method' => $this->payment_method,
+            'track' => $this->track,
         ];
     }
 }

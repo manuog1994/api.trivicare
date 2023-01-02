@@ -707,7 +707,7 @@
                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:560px">
                                             @foreach ($mailData['products'] as $product)
                                                 <tr>
-                                                    <td class="esdev-mso-td" valign="top" style="padding:0;Margin:0">
+                                                    <td class="esdev-mso-td" valign="top" style="padding:0;Margin:0;padding-bottom:10px;">
                                                         <table cellpadding="0" cellspacing="0" class="es-left"
                                                             align="left"
                                                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
@@ -751,7 +751,7 @@
                                                                                 class="es-m-p0t es-m-p0b es-m-txt-l"
                                                                                 style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px">
                                                                                 <h3
-                                                                                    style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#333333">
+                                                                                    style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;font-style:normal;font-weight:bold;color:#333333">
                                                                                     <strong class="p_name">{{ $product->name }}</strong></h3>
                                                                             </td>
                                                                         </tr>
@@ -1037,7 +1037,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Envios
                                                                             FAQ</a></span>
@@ -1057,7 +1057,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Devoluciones
                                                                             FAQ</a></span>
@@ -1089,7 +1089,7 @@
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
                                                                         style="border-style:solid;border-color:#2CB543;background:#666666;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a
-                                                                            href="https://viewstripo.email"
+                                                                            href="https://trivicare.com/questions"
                                                                             class="es-button msohide" target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#666666;border-width:10px 20px 10px 20px;display:block;background:#666666;border-radius:30px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;mso-hide:all;border-left-width:20px;border-right-width:20px">Pedidos
                                                                             FAQ</a></span>

@@ -97,6 +97,11 @@ class OrderController extends Controller
         $order->status = $request->status;
         $order->save();
 
+        if($request->track){
+            $order->track = $request->track;
+            $order->save();
+        }
+
         $user = User::where('id', $order->user_id)->first();
         $user_profile = UserProfile::where('id', $order->user_profile_id)->first();
 
@@ -122,7 +127,7 @@ class OrderController extends Controller
                 'shipping' => $order->shipping,
                 'total' => round(($order->total * 1.21) + $order->shipping, 2),
                 'track' => $request->track,
-                'urlTrack' => $request->urlTrack,
+                'shippingMethod' => $order->shipping_method,
             ];
              
             Mail::to($user->email)->send(new SendOrderMail($mailData));
@@ -244,12 +249,13 @@ class OrderController extends Controller
 
             if($last != $headerInv) {
                 $invoice_number = '#TNC'. $year . '/' . str_pad(1, 5, '0', STR_PAD_LEFT);
+            } else {
+                $last_invoice = $invt->last();
+                $invoice_number = str_replace('#TNC' . $year . '/', '', $last_invoice->invoice_number);
+                $invoice_number += 1;
+                $invoice_number = '#TNC'. $year . '/' . str_pad($invoice_number, 5, '0', STR_PAD_LEFT);
             } 
 
-            $last_invoice = $invt->last();
-            $invoice_number = str_replace('#TNC' . $year . '/', '', $last_invoice->invoice_number);
-            $invoice_number += 1;
-            $invoice_number = '#TNC'. $year . '/' . str_pad($invoice_number, 5, '0', STR_PAD_LEFT);
         }
 
         $dateInv= Carbon::now()->format('d/m/Y');
