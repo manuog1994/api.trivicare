@@ -51,7 +51,7 @@ Route::get('/cancel', function () {
 Route::get('/verify-email/{token}', [ VerificationEmailController::class, 'verify' ])->name('verify.email');
 
 
-// View email !! No Borrar
+// // View email !! No Borrar
 
 // Route::get('/email', function () {
 //     $products = [
@@ -93,7 +93,7 @@ Route::get('/verify-email/{token}', [ VerificationEmailController::class, 'verif
 //         'state' => 'NY',
 //         'zipcode' => '12345',
 //         'country' => 'USA',
-//         'urlTrack' => 'https://trivicare.com',
+//         'urlTrack' => 'https://www.ordertracker.com/es/track/123456789',
 //         'track' => '123456789',
 //         'order' => '123456789',
 //         'date' => '2021-01-01',
@@ -104,7 +104,6 @@ Route::get('/verify-email/{token}', [ VerificationEmailController::class, 'verif
 //         'user' => 'John Doe',
 //         'shippingMethod' => 'gls',
 //         'password' => '12223112',
-
 //     ];
 
 //     $cupon = [
@@ -120,6 +119,6 @@ Route::get('/verify-email/{token}', [ VerificationEmailController::class, 'verif
 //         'cupon' => $cupon['code'],
 //     ];
 
-//     return view('emails.unsubscribe', compact('mailData', 'dataOne'));
+//     return view('emails.sendOrder', compact('mailData', 'dataOne'));
 // });
 

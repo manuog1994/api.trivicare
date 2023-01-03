@@ -109,6 +109,14 @@ class OrderController extends Controller
 
         $invoice_number = InvoiceOrder::where('order_id', $order->id)->first();
 
+        $urlTrack = '';
+
+        if ($order->shipping_method == 'correos') {
+            $urlTrack = 'https://www.correos.es/es/es/herramientas/localizador/envios/detalle?tracking-number=' . $request->track;
+        } else if ($order->shipping_method == 'gls') {
+            $urlTrack = 'https://www.ordertracker.com/es/track/' . $request->track;
+        }
+
         if($request->status == 3){
             $mailData = [
                 'title' => 'Confirmación de pedido',
@@ -127,6 +135,7 @@ class OrderController extends Controller
                 'shipping' => $order->shipping,
                 'total' => round(($order->total * 1.21) + $order->shipping, 2),
                 'track' => $request->track,
+                'urlTrack' => $urlTrack,
                 'shippingMethod' => $order->shipping_method,
             ];
              

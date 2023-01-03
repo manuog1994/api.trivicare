@@ -679,13 +679,13 @@
                                                                         Numero de seguimiento:
                                                                     </p>
                                                                     <p>
-                                                                        <strong>
-                                                                            {{-- copiar al hacer click --}}
-                                                                            <input style="background-color: #c3c3c3;padding:10px 20px; text-align:center;" type="text" value="{{ $mailData['track'] }}" onclick="copyToClipboard(this)" readonly>
-                                                                        </strong>
+                                                                        <a href="{{ $mailData['urlTrack'] }}"
+                                                                            style="background-color:#999999; padding: 10px 30px; color: #ffffff; font-size: 20px; font-weight: bold; text-decoration-line: none;">
+                                                                            {{ $mailData['track'] }}
+                                                                        </a>
                                                                     </p>
                                                                     <p style="font-style: italic;">
-                                                                        <small id="copy">Haz click sobre el número para copiarlo en tu portapapeles.</small>
+                                                                        <small id="copy">Haz click sobre el número para ir a la página de seguimiento.</small>
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -796,7 +796,7 @@
                                                                                 class="es-m-p0t es-m-p0b es-m-txt-l"
                                                                                 style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px">
                                                                                 <h3
-                                                                                    style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;font-style:normal;font-weight:bold;color:#333333">
+                                                                                    style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:1rem;font-style:normal;font-weight:bold;color:#333333">
                                                                                     <strong class="p_name">{{ $product->name }}</strong></h3>
                                                                             </td>
                                                                         </tr>
