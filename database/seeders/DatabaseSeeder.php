@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call(RoleSeeder::class);
-        //$this->call(UserSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
         //UserProfile::factory(21)->create();
 
         \App\Models\Category::factory(1)->create([

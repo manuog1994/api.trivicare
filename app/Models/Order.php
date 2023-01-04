@@ -30,6 +30,7 @@ class Order extends Model
         'id',
         'user_id',
         'user_profile_id',
+        'guest_id',
         'products',
         'subTotal',
         'total',
@@ -61,6 +62,11 @@ class Order extends Model
     public function user_profile()
     {
         return $this->belongsTo(UserProfile::class);
+    }
+
+    public function guest()
+    {
+        return $this->belongsTo(Guest::class);
     }
 
     // Relacion uno a muchos inversa con Invoice

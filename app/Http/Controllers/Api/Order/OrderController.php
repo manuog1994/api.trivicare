@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Order;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Cupon;
+use App\Models\Guest;
 use App\Models\Order;
 use App\Mail\OrderMail;
 use App\Models\Product;
@@ -27,15 +28,9 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 class OrderController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth:sanctum');
-        //$this->middleware('can:create')->only('getUser');
-
-    }
-
     public function index()
     {
+        $this->middleware('auth:sanctum');
         $orders = Order::with(['user', 'user.user_profile', 'invoice'])->sort()->filter()->status()->history()->getOrPaginate();
 
         return OrderResource::collection($orders);
@@ -45,14 +40,17 @@ class OrderController extends Controller
     {
 
         $request->validate([
-            'user_id' => 'required|integer|exists:users,id',
-            'user_profile_id' => 'required|integer|exists:user_profiles,id',
             'products' => 'required',
             'total' => 'required',
          ]);
-
+        
+        if($request->user_id == null){
+            $request->user_id = 3;
+            $request->user_profile_id = 1;
+        }
 
         $order = Order::create([
+            'guest_id' => $request->guest_id,
             'user_id' => $request->user_id,
             'user_profile_id' => $request->user_profile_id,
             'products' => $request->products,
@@ -78,13 +76,13 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
+        $this->middleware('auth:sanctum');
         return OrderResource::make($order);
     }
 
     public function getUser()
     {
-        //$user = auth('api')->user();
-        
+
         $userProfile = UserProfile::all();
         $userProfile->load('user');
 
@@ -94,6 +92,7 @@ class OrderController extends Controller
 
     public function status(Order $order, Request $request)
     {
+        $this->middleware('auth:sanctum');
         $order->status = $request->status;
         $order->save();
 
@@ -102,19 +101,25 @@ class OrderController extends Controller
             $order->save();
         }
 
-        $user = User::where('id', $order->user_id)->first();
-        $user_profile = UserProfile::where('id', $order->user_profile_id)->first();
-
+        
         $products = json_decode($order->products);
-
+        
         $invoice_number = InvoiceOrder::where('order_id', $order->id)->first();
-
+        
         $urlTrack = '';
-
+        
         if ($order->shipping_method == 'correos') {
             $urlTrack = 'https://www.correos.es/es/es/herramientas/localizador/envios/detalle?tracking-number=' . $request->track;
         } else if ($order->shipping_method == 'gls') {
             $urlTrack = 'https://www.ordertracker.com/es/track/' . $request->track;
+        }
+
+        if($order->guest_id == null){
+            $user = User::where('id', $order->user_id)->first();
+            $user_profile = UserProfile::where('id', $order->user_profile_id)->first();
+        }else{
+            $user = Guest::where('id', $order->guest_id)->first();
+            $user_profile = Guest::where('id', $order->guest_id)->first();
         }
 
         if($request->status == 3){
@@ -182,12 +187,16 @@ class OrderController extends Controller
 
     public function paid($token_id)
     {
-
+        $this->middleware('auth:sanctum');
         $order = Order::where('token_id', $token_id)->first();
 
-        $user_profile = UserProfile::where('id', $order->user_profile_id)->first();
-
-        $user = User::where('id', $order->user_id)->first();
+        if($order->guest_id == null){
+            $user = User::where('id', $order->user_id)->first();
+            $user_profile = UserProfile::where('id', $order->user_profile_id)->first();
+        }else{
+            $user = Guest::where('id', $order->guest_id)->first();
+            $user_profile = Guest::where('id', $order->guest_id)->first();
+        }
 
         $products = json_decode($order->products);
 
@@ -299,9 +308,9 @@ class OrderController extends Controller
 
         // Then send email to party with link
         $inv = InvoiceOrder::create([
-            'filename' => $filename,
+            'user_profile_id' => $order->user_profile->id,
             'order_id' => $order->id,
-            'user_profile_id' => $user_profile->id,
+            'filename' => $filename,
             'url' => $link,
             'invoice_number' => $invoice_number,
         ]);
@@ -331,7 +340,7 @@ class OrderController extends Controller
 
         //send email if is the first order
 
-        if($user->orders()->count() == 1){
+        if($user->orders()->count() == 1 && $order->guest_id == null){
             $cupon = Cupon::create([
                 'code' => 'ORDERFIRST' . $user->id . $user_profile->id,
                 'discount' => 10,
@@ -363,6 +372,7 @@ class OrderController extends Controller
 
     public function paidPaypal($token_id, Request $request)
     {
+        //$this->middleware('auth:sanctum');
         $order = Order::where('id', $request->order_id)->first();
         $order->token_id = $token_id;
         $order->status = 1;

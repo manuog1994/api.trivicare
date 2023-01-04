@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Tag\TagController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\GoogleController;
 use App\Http\Controllers\Api\Cupon\CuponController;
+use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\Image\ImageController;
 use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\Api\Auth\RegisterController;
@@ -103,7 +104,7 @@ Route::post('unsubscribe-newsletter', [ NewsletterController::class, 'unsubscrib
 // Stripe
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
-//Google auth'
+//Google auth
 
 Route::get('auth/url', [GoogleController::class, 'getAuthUrl']);
 Route::post('auth/code', [GoogleController::class, 'postLogin']);
@@ -115,6 +116,11 @@ Route::middleware('auth:sanctum')->get('auth/user', function (Request $request) 
 
 // Contact Form
 Route::post('contact', [ContactFormController::class, 'contactPost'])->name('contact.post');
+
+// Guest
+Route::post('guest-store', [GuestController::class, 'store'])->name('guests.store');
+Route::get('guests-show/{$id}', [GuestController::class, 'show'])->name('guests.show');
+Route::delete('guests-delete/{$id}', [GuestController::class, 'destroy'])->name('guests.destroy');
 
 
 
