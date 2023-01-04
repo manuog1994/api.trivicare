@@ -374,7 +374,7 @@ class OrderController extends Controller
     {
         //$this->middleware('auth:sanctum');
         $order = Order::where('id', $request->order_id)->first();
-        $order->token_id = $token_id;
+        $order->token_id = $request->token_id;
         $order->status = 1;
         $order->paid = 'PROCESANDO';
         $order->save();
