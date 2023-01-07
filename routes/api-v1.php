@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\VerificationEmailController;
 use App\Http\Controllers\Api\Product\ProductController;
+use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
@@ -122,5 +123,8 @@ Route::post('guest-store', [GuestController::class, 'store'])->name('guests.stor
 Route::get('guests-show/{$id}', [GuestController::class, 'show'])->name('guests.show');
 Route::delete('guests-delete/{$id}', [GuestController::class, 'destroy'])->name('guests.destroy');
 
+// Reserve
+
+Route::post('reserve', [ReserveController::class, 'store'])->name('reserve.store');
 
 

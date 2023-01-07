@@ -45,6 +45,7 @@ class Order extends Model
         'note',
         'payment_method',
         'track',
+        'token_reserve',
     ];
 
     protected $allowSort = ['id'];

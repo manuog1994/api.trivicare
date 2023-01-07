@@ -9,6 +9,7 @@ use App\Models\Guest;
 use App\Models\Order;
 use App\Mail\OrderMail;
 use App\Models\Product;
+use App\Models\Reserve;
 use App\Mail\SendOrderMail;
 use App\Models\UserProfile;
 use App\Mail\FirstOrderMail;
@@ -65,6 +66,7 @@ class OrderController extends Controller
             'invoice_paper' => $request->invoice_paper,
             'note' => $request->note,
             'token_id' => $request->token_id,
+            'token_reserve' => $request->token_reserve,
         ]);
 
 
@@ -189,6 +191,8 @@ class OrderController extends Controller
     {
         $this->middleware('auth:sanctum');
         $order = Order::where('token_id', $token_id)->first();
+        $reserve = Reserve::where('token_reserve', $order->token_reserve)->first();
+        $reserve->delete();
 
         if($order->guest_id == null){
             $user = User::where('id', $order->user_id)->first();
@@ -200,12 +204,9 @@ class OrderController extends Controller
 
         $products = json_decode($order->products);
 
-        foreach ($products as $item) {
-            $product = Product::findOrFail($item->id);
-            $product->stock = $product->stock - $item->cartQuantity;
-            $product->sold = $product->sold + $item->cartQuantity;
-            $product->save();
-        }
+        foreach ($products as $product) {
+            $product = Product::where('id', $product->id)->first();
+        } 
 
         $order->status = 1;
         if(strlen($order->token_id) == 23) {
@@ -240,9 +241,12 @@ class OrderController extends Controller
             ],
         ]);
 
+        
         foreach($products as $item) {
+            echo $item->name;
             $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
         }
+
 
         if($order->coupon == null) {
             $discnt = null; 
@@ -372,7 +376,7 @@ class OrderController extends Controller
 
     public function paidPaypal($token_id, Request $request)
     {
-        //$this->middleware('auth:sanctum');
+        $this->middleware('auth:sanctum');
         $order = Order::where('id', $request->order_id)->first();
         $order->token_id = $request->token_id;
         $order->status = 1;
