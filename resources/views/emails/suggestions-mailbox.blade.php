@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Se ha producido un nuevo error</title>
+    <title>Sugerencias</title>
 </head>
 <body>
-    <h2>A un usuario le ha ocurrido el siguiente error</h2>
-    <p>{{ $mailData['message'] }}</p>
+    <h2>Nombre: {{ $mailData['name'] }}</h2>
+    <p>Correo: {{ $mailData['email'] }}</p>
+    <p>Tipo: {{ $mailData['type'] }}</p>
+    <p>Mensaje: {{ $mailData['message'] }}</p>
 </body>
 </html>

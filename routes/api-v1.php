@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
+use App\Http\Controllers\Api\Suggestion\SuggestionController;
 
 
 
@@ -131,5 +132,8 @@ Route::post('reserve', [ReserveController::class, 'store'])->name('reserve.store
 //Error message
 
 Route::post('error-message', [ErrorController::class, 'sendError'])->name('error-message');
+
+// Suggestions Mailbox
+Route::post('suggestions', [SuggestionController::class, 'sendSuggestion'])->name('suggestions.post');
 
 
