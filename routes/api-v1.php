@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Tag\TagController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\GoogleController;
 use App\Http\Controllers\Api\Cupon\CuponController;
+use App\Http\Controllers\Api\Error\ErrorController;
 use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\Image\ImageController;
 use App\Http\Controllers\Api\Order\OrderController;
@@ -126,5 +127,9 @@ Route::delete('guests-delete/{$id}', [GuestController::class, 'destroy'])->name(
 // Reserve
 
 Route::post('reserve', [ReserveController::class, 'store'])->name('reserve.store');
+
+//Error message
+
+Route::post('error-message', [ErrorController::class, 'sendError'])->name('error-message');
 
 
