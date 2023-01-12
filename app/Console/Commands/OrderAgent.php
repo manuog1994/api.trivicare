@@ -32,5 +32,9 @@ class OrderAgent extends Command
         foreach ($orders as $order) {
             $order->delete();
         }
+        $orders = Order::where('paid', 'PENDIENTE')->where('created_at', '<', now()->subDay())->get();
+        foreach ($orders as $order) {
+            $order->delete();
+        }
     }
 }

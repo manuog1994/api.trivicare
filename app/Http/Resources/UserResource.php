@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Spatie\Permission\Models\Role;
+use App\Http\Resources\NotificationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -24,6 +25,7 @@ class UserResource extends JsonResource
             'refresh_token' => $this->accessToken->refresh_token,
             'expires_at' => $this->accessToken->expires_at,
             'role' => 'Administrador',
+            'notifications' => NotificationResource::collection($this->notifications),
         ];
     }
 }

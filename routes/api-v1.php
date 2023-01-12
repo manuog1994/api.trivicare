@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
 use App\Http\Controllers\Api\Suggestion\SuggestionController;
+use App\Http\Controllers\Api\Notification\NotificationController;
 
 
 
@@ -42,7 +43,7 @@ use App\Http\Controllers\Api\Suggestion\SuggestionController;
 // Autentication User
 
 Route::middleware('auth:sanctum')->get('user', function (Request $request) {
-    return $request->user()->load(['user_profile', 'roles']);
+    return $request->user()->load(['user_profile', 'roles', 'notifications']);
 });
 
 // User
@@ -135,5 +136,10 @@ Route::post('error-message', [ErrorController::class, 'sendError'])->name('error
 
 // Suggestions Mailbox
 Route::post('suggestions', [SuggestionController::class, 'sendSuggestion'])->name('suggestions.post');
+
+//Notifications
+Route::get('notifications/{user}', [NotificationController::class, 'show'])->name('notifications.show');
+Route::put('notifications/{notification}', [NotificationController::class, 'read'])->name('notifications.read');
+Route::delete('notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
 
 
