@@ -46,6 +46,7 @@ class Order extends Model
         'payment_method',
         'track',
         'token_reserve',
+        'manual_order',
     ];
 
     protected $allowSort = ['id'];

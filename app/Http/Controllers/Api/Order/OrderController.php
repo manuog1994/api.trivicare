@@ -16,6 +16,7 @@ use App\Mail\FirstOrderMail;
 use App\Models\InvoiceOrder;
 use Illuminate\Http\Request;
 use App\Mail\CancelOrderMail;
+use App\Models\Notifications;
 use App\Mail\CompleteOrderMail;
 use LaravelDaily\Invoices\Invoice;
 use App\Http\Controllers\Controller;
@@ -147,6 +148,15 @@ class OrderController extends Controller
             ];
              
             Mail::to($user->email)->send(new SendOrderMail($mailData));
+
+            $notification = Notifications::create([
+                'user_id' => $order->user_id,
+                'type' => 'send',
+                'title' => 'Pedido enviado',
+                'message' => 'Tu pedido ha sido enviado. Puedes ver el estado de tu pedido en la sección Mis Pedidos.',
+                'read' => 0,
+            ]);
+
         }
         
         if($request->status == 4){
@@ -169,6 +179,23 @@ class OrderController extends Controller
             ];
              
             Mail::to($user->email)->send(new CompleteOrderMail($mailData));
+
+            $notification = Notifications::create([
+                'user_id' => $order->user_id,
+                'type' => 'complete',
+                'title' => 'Pedido Entregado',
+                'message' => 'Tu pedido ha sido entregado, esperamos que lo disfrutes.',
+                'read' => 0,
+            ]);
+
+            $notification_review = Notifications::create([
+                'user_id' => $order->user_id,
+                'type' => 'review',
+                'title' => '¿Qué te ha parecido tu pedido?',
+                'message' => 'Queremos saber tu opinión sobre los productos. Pulsa en el botón para valorarlos.',
+                'url' => '/review?token=' . $order->token_id,
+                'read' => 0,
+            ]);
         }
 
         if($request->status == 5){
@@ -214,7 +241,6 @@ class OrderController extends Controller
         } else {
             $order->paid = 'PAGADO';
         }
-        $order->token_id = null;
         $order->save();
            
         $client = new Party([
@@ -243,8 +269,7 @@ class OrderController extends Controller
 
         
         foreach($products as $item) {
-            echo $item->name;
-            $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
+             $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
         }
 
 
@@ -389,5 +414,12 @@ class OrderController extends Controller
         ]);
     }
 
-
+    public function orderToken($token_id)
+    {
+        $this->middleware('auth:sanctum');
+        $order = Order::where('token_id', $token_id)->first();
+        return response()->json([
+            'data' => $order,
+        ]);
+    }
 }

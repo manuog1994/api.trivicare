@@ -41,56 +41,25 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required|integer',
-            'product_id' => 'required|integer',
-            'message' => 'required|string',
-            'rating' => 'required|integer',
-            'user_name' => 'nullable|string',
-            'user_lastname' => 'nullable|string',
+        $request->validate([
+            'user_id' => 'required',
+            'product_id' => 'required',
+            'message' => 'required',
+            'rating' => 'required',
+            'user_profile_id' => 'required',
         ]);
-
-        if($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $validator->errors(),
-            ], 400);
-        };
-
-        $user = User::findOrFail($request->user_id);
-
-        if($user->user_profile->count() <= 0 && $request->user_name == '' && $request->user_lastname == '') {
-            $review = Review::create([
-                'user_id' => $request->user_id,
-                'product_id' => $request->product_id,
-                'message' => $request->message,
-                'rating' => $request->rating,
-                'user_name' => 'Anónim@',
-            ]);
-
-        }else if ($user->user_profile->count() <= 0) {
-            $review = Review::create([
-                'user_id' => $request->user_id,
-                'product_id' => $request->product_id,
-                'message' => $request->message,
-                'rating' => $request->rating,
-                'user_name' => $request->user_name,
-                'user_lastname' => $request->user_lastname,
-            ]);
-
-        } else {
-            $user_profile = UserProfile::where('user_id', $user->id)->first();
-            
-            $review = Review::create([
-                'user_id' => $request->user_id,
-                'product_id' => $request->product_id,
-                'message' => $request->message,
-                'rating' => $request->rating,
-                'user_name' => $user_profile->name,
-                'user_lastname' => $user_profile->lastname,
-            ]);
-
-        }
+    
+        $user_profile = UserProfile::where('id', $request->user_profile_id)->first();
+        
+        $review = Review::create([
+            'user_id' => $request->user_id,
+            'user_profile_id' => $request->user_profile_id,
+            'product_id' => $request->product_id,
+            'message' => $request->message,
+            'rating' => $request->rating,
+            'user_name' => $user_profile->name,
+            'user_lastname' => $user_profile->lastname,
+        ]);
 
 
         $product = Product::findOrFail($request->product_id);

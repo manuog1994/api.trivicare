@@ -53,72 +53,72 @@ Route::get('/verify-email/{token}', [ VerificationEmailController::class, 'verif
 
 // // View email !! No Borrar
 
-// Route::get('/email', function () {
-//     $products = [
-//         [
-//             'name' => 'Product 1',
-//             'price' => '10',
-//             'cartQuantity' => '1',
-//             'discount' => 0,
-//             'subTotal' => 10.50,
-//         ],
-//         [
-//             'name' => 'Product 2',
-//             'price' => '20',
-//             'cartQuantity' => '2',
-//             'discount' => 0,
-//             'subTotal' => 40.50,
-//         ],
-//         [
-//             'name' => 'Product 3',
-//             'price' => '30',
-//             'cartQuantity' => '3',
-//             'discount' => 0,
-//             'subTotal' => 90.50,
-//         ],
-//     ];
+Route::get('/email', function () {
+    $products = [
+        [
+            'name' => 'Product 1',
+            'price' => '10',
+            'cartQuantity' => '1',
+            'discount' => 0,
+            'subTotal' => 10.50,
+        ],
+        [
+            'name' => 'Product 2',
+            'price' => '20',
+            'cartQuantity' => '2',
+            'discount' => 0,
+            'subTotal' => 40.50,
+        ],
+        [
+            'name' => 'Product 3',
+            'price' => '30',
+            'cartQuantity' => '3',
+            'discount' => 0,
+            'subTotal' => 90.50,
+        ],
+    ];
 
-//     $encode = json_encode($products);
-//     $decode = json_decode($encode);
-
-
+    $encode = json_encode($products);
+    $decode = json_decode($encode);
 
 
-//     $mailData = [
-//         'name' => 'John Doe',
-//         'email' => 'jonhdoe@jonhdoe',
-//         'phone' => '123456789',
-//         'address' => '1234 Main St',
-//         'city' => 'New York',
-//         'state' => 'NY',
-//         'zipcode' => '12345',
-//         'country' => 'USA',
-//         'urlTrack' => 'https://www.ordertracker.com/es/track/123456789',
-//         'track' => '123456789',
-//         'order' => '123456789',
-//         'date' => '2021-01-01',
-//         'products' => $decode,
-//         'subTotal' => '100.00',
-//         'shipping' => '10.00',
-//         'total' => '110.00',
-//         'user' => 'John Doe',
-//         'shippingMethod' => 'gls',
-//         'password' => '12223112',
-//     ];
 
-//     $cupon = [
-//         'code' => 'ORDERFIRST2113',
-//         'discount' => '10',
-//         'validity' => '2021-01-01',
-//         'status' => '1',
-//     ];
 
-//     $dataOne = [
-//         'title' => 'Gracias por tu primer pedido',
-//         'body' => 'Te damos la bienvenida a la familia Trivicare. Te adjuntamos un cupón de descuento del 10% para tu próxima compra.',
-//         'cupon' => $cupon['code'],
-//     ];
+    $mailData = [
+        'name' => 'John Doe',
+        'email' => 'jonhdoe@jonhdoe',
+        'phone' => '123456789',
+        'address' => '1234 Main St',
+        'city' => 'New York',
+        'state' => 'NY',
+        'zipcode' => '12345',
+        'country' => 'USA',
+        'urlTrack' => 'https://www.ordertracker.com/es/track/123456789',
+        'track' => '123456789',
+        'order' => '123456789',
+        'date' => '2021-01-01',
+        'products' => $decode,
+        'subTotal' => '100.00',
+        'shipping' => '10.00',
+        'total' => '110.00',
+        'user' => 'John Doe',
+        'shippingMethod' => 'gls',
+        'password' => '12223112',
+    ];
 
-//     return view('emails.sendOrder', compact('mailData', 'dataOne'));
-// });
+    $cupon = [
+        'code' => 'ORDERFIRST2113',
+        'discount' => '10',
+        'validity' => '2021-01-01',
+        'status' => '1',
+    ];
+
+    $dataOne = [
+        'title' => 'Gracias por tu primer pedido',
+        'body' => 'Te damos la bienvenida a la familia Trivicare. Te adjuntamos un cupón de descuento del 10% para tu próxima compra.',
+        'cupon' => $cupon['code'],
+    ];
+
+    return view('emails.manualOrder', compact('mailData', 'dataOne'));
+});
 

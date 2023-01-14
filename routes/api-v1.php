@@ -71,6 +71,7 @@ Route::put('products/status/{product}', [ProductController::class, 'status'])->n
 
 // Reviews
 Route::apiResource('reviews', ReviewController::class)->names('reviews');
+Route::get('review/{token_id}', [OrderController::class, 'orderToken'])->name('review.token');
 
 // Tags
 Route::apiResource('tags', TagController::class)->names('tags');
@@ -141,5 +142,10 @@ Route::post('suggestions', [SuggestionController::class, 'sendSuggestion'])->nam
 Route::get('notifications/{user}', [NotificationController::class, 'show'])->name('notifications.show');
 Route::put('notifications/{notification}', [NotificationController::class, 'read'])->name('notifications.read');
 Route::delete('notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+Route::post('notification-delete', [NotificationController::class, 'delete'])->name('notification.delete');
+
+
+// Invoices
+Route::post('new-invoice', [InvoiceOrderController::class, 'newInvoice'])->name('new-invoice');
 
 

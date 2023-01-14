@@ -151,6 +151,15 @@ return [
         'password_confirmation' => 'confirmación de contraseña',
         'email' => 'correo electrónico',
         'name' => 'nombre',
+        'phone' => 'teléfono',
+        'address' => 'dirección',
+        'lastname' => 'apellidos',
+        'country' => 'país',
+        'city' => 'ciudad',
+        'state' => 'provincia',
+        'zipcode' => 'código postal',
+        'products' => 'productos',
+
         
     ],
 
