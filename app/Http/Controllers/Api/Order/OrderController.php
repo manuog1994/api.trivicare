@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Cupon;
 use App\Models\Guest;
 use App\Models\Order;
+use App\Mail\NewOrder;
 use App\Mail\OrderMail;
 use App\Models\Product;
 use App\Models\Reserve;
@@ -223,7 +224,7 @@ class OrderController extends Controller
     {
         $this->middleware('auth:sanctum');
         $order = Order::where('token_id', $token_id)->first();
-        
+
         if($order->token_reserve != null){
             $reserve = Reserve::where('token_reserve', $order->token_reserve)->first();
             $reserve->delete();
@@ -398,7 +399,13 @@ class OrderController extends Controller
             $coupon = Cupon::where('code', $order->coupon)->first();
             $coupon->delete();
         }
-            
+
+        $or = [
+            'name' => $user_profile->name . ' ' . $user_profile->lastname,
+            'state' => $user_profile->state,
+        ];
+        
+        Mail::to('pedidostrivicare@gmail.com')->send(new NewOrder($or));
            
         return response()->json([
             'success' => true,
