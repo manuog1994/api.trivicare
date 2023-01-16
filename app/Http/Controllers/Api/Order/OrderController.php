@@ -223,8 +223,11 @@ class OrderController extends Controller
     {
         $this->middleware('auth:sanctum');
         $order = Order::where('token_id', $token_id)->first();
-        $reserve = Reserve::where('token_reserve', $order->token_reserve)->first();
-        $reserve->delete();
+        
+        if($order->token_reserve != null){
+            $reserve = Reserve::where('token_reserve', $order->token_reserve)->first();
+            $reserve->delete();
+        }
 
         if($order->guest_id == null){
             $user = User::where('id', $order->user_id)->first();
