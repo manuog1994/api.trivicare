@@ -199,6 +199,11 @@ class OrderController extends Controller
         }
 
         if($request->status == 5){
+            foreach($products as $item){
+                $product = Product::where('id', $item->id)->first();
+                $product->stock = $product->stock + $item->cartQuantity;
+                $product->save();
+            }
             $mailData = [
                 'title' => 'Confirmación de pedido',
                 'body' => 'Gracias por tu pedido. Te adjuntamos la factura de tu pedido.',
