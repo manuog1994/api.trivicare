@@ -400,12 +400,12 @@ class OrderController extends Controller
             $coupon->delete();
         }
 
-        $or = [
+        $orderToMail = [
             'name' => $user_profile->name . ' ' . $user_profile->lastname,
             'state' => $user_profile->state,
         ];
         
-        Mail::to('pedidostrivicare@gmail.com')->send(new NewOrder($or));
+        Mail::to('pedidostrivicare@gmail.com')->send(new NewOrder($orderToMail));
            
         return response()->json([
             'success' => true,

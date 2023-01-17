@@ -8,7 +8,7 @@
 </head>
 <body>
     <h4>Tienes un nuevo pedido en la página</h4>
-    <p>El pedido fue realizado por: {{ $or['name'] }}</p>
-    <p>Su provincia de envío es {{ $or['state'] }}</p>
+    <p>El pedido fue realizado por: {{ $orderToMail['name'] }}</p>
+    <p>Su provincia de envío es {{ $orderToMail['state'] }}</p>
 </body>
 </html>

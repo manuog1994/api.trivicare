@@ -13,16 +13,16 @@ class NewOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $mailData;
+    public $orderToMail;
     /**
      * Create a new message instance.
      *
      * @return void
      */
 
-    public function __construct($mailData)
+    public function __construct($orderToMail)
     {
-        $this->mailData = $mailData;
+        $this->orderToMail = $orderToMail;
     }
 
     /**
