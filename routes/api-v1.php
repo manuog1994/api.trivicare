@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Api\Tag\TagController;
@@ -41,6 +42,10 @@ use App\Http\Controllers\Api\Notification\NotificationController;
 */
 
 // Autentication User
+
+Route::post('/register', [AuthController::class, 'registerAPI']);
+Route::post('/login', [AuthController::class, 'loginAPI']);
+Route::post('/logout', [AuthController::class, 'logoutAPI'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     return $request->user()->load(['user_profile', 'roles', 'notifications']);

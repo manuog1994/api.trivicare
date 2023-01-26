@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Api\Review;
 
-use App\Models\User;
 use App\Models\Review;
 use App\Models\Product;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReviewResource;
-use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
 {
@@ -20,17 +18,12 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $reviews = Review::all()->sortByDesc('created_at');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
+        return response()->json([
+            'status' => 'success',
+            'reviews' => ReviewResource::collection($reviews),
+        ], 200);
     }
 
     /**
@@ -49,17 +42,29 @@ class ReviewController extends Controller
             'user_profile_id' => 'required',
         ]);
     
-        $user_profile = UserProfile::where('id', $request->user_profile_id)->first();
+        if($request->user_name && $request->user_lastname) {
+            $review = Review::create([
+                'user_id' => $request->user_id,
+                'user_profile_id' => $request->user_profile_id,
+                'product_id' => $request->product_id,
+                'message' => $request->message,
+                'rating' => $request->rating,
+                'user_name' => $request->user_name,
+                'user_lastname' => $request->user_lastname,
+            ]);
+        } else {
+            $user_profile = UserProfile::where('id', $request->user_profile_id)->first();
         
-        $review = Review::create([
-            'user_id' => $request->user_id,
-            'user_profile_id' => $request->user_profile_id,
-            'product_id' => $request->product_id,
-            'message' => $request->message,
-            'rating' => $request->rating,
-            'user_name' => $user_profile->name,
-            'user_lastname' => $user_profile->lastname,
-        ]);
+            $review = Review::create([
+                'user_id' => $request->user_id,
+                'user_profile_id' => $request->user_profile_id,
+                'product_id' => $request->product_id,
+                'message' => $request->message,
+                'rating' => $request->rating,
+                'user_name' => $user_profile->name,
+                'user_lastname' => $user_profile->lastname,
+            ]);
+        }
 
 
         $product = Product::findOrFail($request->product_id);
@@ -93,63 +98,44 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $review = Review::findOrFail($id);
-        
-        $product = Product::where('id', $review->product_id)->get();
+    public function destroy(Review $review)
+    {   
+        //obtenemos el producto
+        $product = Product::findOrFail($review->product_id);
 
+        //eliminamos la valoración
         $review->delete();
 
+        //inicializamos la variable
         $totalRating = 0;
 
-        foreach($product->reviews as $review) {
-            if(!$review){
+        //recorremos las valoraciones del producto
+        foreach($product->reviews as $item) {
+            if(!$item){
                 $totalRating = 0;
             } else {
-                $totalRating += $review->rating; 
+                $totalRating += $item->rating; 
             }
         }
 
+        //calculamos la media
         if($product->reviews->count() == 0) {
             $totalRating = 0;
         } else {
             $totalRating = $totalRating / $product->reviews->count();
         }
 
+        //actualizamos el producto
         $product->rating = $totalRating;
         $product->total_reviews = $product->reviews->count();
         $product->save();
 
-
+        //devolvemos la respuesta
         return response()->json([
             'status' => 'success',
             'message' => 'Review deleted successfully',
