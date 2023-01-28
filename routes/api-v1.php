@@ -110,6 +110,7 @@ Route::post('forgot-password', [ ForgotPasswordController::class, 'forgotPasswor
 // Newsletter
 Route::post('newsletter', [ NewsletterController::class, 'subscribe' ])->name('newsletter');
 Route::post('unsubscribe-newsletter', [ NewsletterController::class, 'unsubscribe' ])->name('unsubscribe-newsletter');
+Route::post('send-newsletter', [ NewsletterController::class, 'sendNewsletter' ])->name('send-newsletter');
 
 // Stripe
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');

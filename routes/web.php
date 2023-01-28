@@ -119,6 +119,6 @@ Route::get('/email', function () {
         'cupon' => $cupon['code'],
     ];
 
-    return view('emails.manualOrder', compact('mailData', 'dataOne'));
+    return view('emails.newsletter', compact('mailData', 'dataOne'));
 });
 
