@@ -23,6 +23,7 @@ use App\Http\Controllers\VerificationEmailController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
+use App\Http\Controllers\Api\VisitConter\VisitController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
 use App\Http\Controllers\Api\Suggestion\SuggestionController;
@@ -153,5 +154,8 @@ Route::post('notification-delete', [NotificationController::class, 'delete'])->n
 
 // Invoices
 Route::post('new-invoice', [InvoiceOrderController::class, 'newInvoice'])->name('new-invoice');
+
+// Visit Counter
+Route::post('visit', [VisitController::class, 'store'])->name('visit-counter');
 
 
