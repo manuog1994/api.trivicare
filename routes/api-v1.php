@@ -157,5 +157,6 @@ Route::post('new-invoice', [InvoiceOrderController::class, 'newInvoice'])->name(
 
 // Visit Counter
 Route::post('visit', [VisitController::class, 'store'])->name('visit-counter');
+Route::get('visits', [VisitController::class, 'index'])->name('visits');
 
 
