@@ -11,8 +11,7 @@ class VisitController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
-        $this->middleware('can:create')->only('store', 'index');
+        $this->middleware('can:create')->only('index');
     }
 
     public function index()
