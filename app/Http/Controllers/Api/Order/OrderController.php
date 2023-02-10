@@ -45,12 +45,8 @@ class OrderController extends Controller
         $request->validate([
             'products' => 'required',
             'total' => 'required',
-         ]);
+        ]);
         
-        if($request->user_id == null){
-            $request->user_id = 3;
-            $request->user_profile_id = 1;
-        }
 
         $order = Order::create([
             'guest_id' => $request->guest_id,
@@ -69,6 +65,8 @@ class OrderController extends Controller
             'note' => $request->note,
             'token_id' => $request->token_id,
             'token_reserve' => $request->token_reserve,
+            'pickup_point' => $request->pickup_point,
+            'payment_method' => $request->payment_method,
         ]);
 
 

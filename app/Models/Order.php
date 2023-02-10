@@ -47,6 +47,7 @@ class Order extends Model
         'track',
         'token_reserve',
         'manual_order',
+        'pickup_point',
     ];
 
     protected $allowSort = ['id'];

@@ -36,6 +36,8 @@ class OrderResource extends JsonResource
             'payment_method' => $this->payment_method,
             'track' => $this->track,
             'manual_order' => $this->manual_order,
+            'pickup_point' => $this->pickup_point,
+            'shipping_method' => $this->shipping_method,
         ];
     }
 }

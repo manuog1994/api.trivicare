@@ -17,7 +17,9 @@ use App\Http\Controllers\Api\Error\ErrorController;
 use App\Http\Controllers\Api\Guest\GuestController;
 use App\Http\Controllers\Api\Image\ImageController;
 use App\Http\Controllers\Api\Order\OrderController;
+use App\Http\Controllers\Api\State\StateController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\Pickup\PickupController;
 use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\VerificationEmailController;
 use App\Http\Controllers\Api\Product\ProductController;
@@ -158,5 +160,11 @@ Route::post('new-invoice', [InvoiceOrderController::class, 'newInvoice'])->name(
 // Visit Counter
 Route::post('visit', [VisitController::class, 'store'])->name('visit-counter');
 Route::get('visits', [VisitController::class, 'index'])->name('visits');
+
+// Pickup Points
+Route::apiResource('pickup-points', PickupController::class)->names('pickup-points');
+
+// Locations
+Route::apiResource('locations', StateController::class)->names('locations');
 
 
