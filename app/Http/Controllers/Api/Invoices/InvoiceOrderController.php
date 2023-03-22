@@ -84,7 +84,10 @@ class InvoiceOrderController extends Controller
             'status' => Order::ENTREGADO,
             'shipping' => 0,
             'shipping_method' => 'En mano',
+            'payment_method' => 'cash',
             'manual_order' => '1',
+            'email_sent' => true,
+            'confirmation_sent' => true,
         ]);
 
         

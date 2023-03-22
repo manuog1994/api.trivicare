@@ -48,6 +48,8 @@ class Order extends Model
         'token_reserve',
         'manual_order',
         'pickup_point',
+        'email_sent',
+        'confirmation_sent'
     ];
 
     protected $allowSort = ['id'];
