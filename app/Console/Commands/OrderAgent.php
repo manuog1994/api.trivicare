@@ -32,7 +32,8 @@ class OrderAgent extends Command
         foreach ($orders as $order) {
             $order->delete();
         }
-        $orders = Order::where('paid', 'PENDIENTE')->where('created_at', '<', now()->subDay())->get();
+        // borrar todas las ordenes que esten en estado PENDIENTE y que tengan mas de 7 dias
+        $orders = Order::where('paid', 'PENDIENTE')->where('created_at', '<', now()->subDays(7))->get();
         foreach ($orders as $order) {
             $order->delete();
         }

@@ -41,4 +41,12 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
+    'getnet' => [
+        'merchant_code' => env('GETNET_MERCHANT_CODE'),
+        'merchant_code_256' => env('GETNET_MERCHANT_CODE_256'),
+        'terminal' => env('GETNET_TERMINAL'),
+        'url_ok' => env('GETNET_URL_OK'),
+        'url_ko' => env('GETNET_URL_KO'),
+    ]
+
 ];

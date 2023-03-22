@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\VisitConter\VisitController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
+use App\Http\Controllers\Api\RedsysPay\RedsysPayController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
 use App\Http\Controllers\Api\Suggestion\SuggestionController;
 use App\Http\Controllers\Api\Notification\NotificationController;
@@ -97,8 +98,10 @@ Route::delete('products/{product}/tags/{tag}', [TagController::class, 'delete'])
 Route::apiResource('orders', OrderController::class)->names('orders');
 Route::get('users', [OrderController::class, 'getUser'])->name('orders.getUser');
 Route::put('orders/status/{order}', [OrderController::class, 'status'])->name('orders.status');
+Route::put('orders/paid/{order}', [OrderController::class, 'updatePaid'])->name('orders.update.paid');
 Route::post('order-paid/{token_id}', [OrderController::class, 'paid'])->name('order-paid');
 Route::post('order-paid-paypal/{token_id}', [OrderController::class, 'paidPaypal'])->name('order-paid-paypal');
+Route::post('verify-email', [OrderController::class, 'verifyEmail'])->name('verify-email');
 
 // Invoice
 Route::apiResource('invoice', InvoiceOrderController::class)->names('invoice');
@@ -166,5 +169,8 @@ Route::apiResource('pickup-points', PickupController::class)->names('pickup-poin
 
 // Locations
 Route::apiResource('locations', StateController::class)->names('locations');
+
+// Redsys Payment
+Route::post('redsys', [RedsysPayController::class, 'payment'])->name('redsys.post');
 
 

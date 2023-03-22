@@ -8,7 +8,7 @@
     <meta name="x-apple-disable-message-reformatting">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="telephone=no" name="format-detection">
-    <title>TriviCare Natural Cosmetics | Hemos recibido el pago de su pedido</title>
+    <title>TriviCare Natural Cosmetics | Hemos recibido su pedido</title>
     <!--[if (mso 16)]>
     <style type="text/css">
     a {text-decoration: none;}
@@ -504,7 +504,7 @@
                                                                 <td align="center" style="padding:0;Margin:0">
                                                                     <h1
                                                                         style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:30px;font-style:normal;font-weight:bold;color:#333333">
-                                                                        ¡Hemos recibido el pago de su pedido!</h1>
+                                                                        ¡Hemos recibido su pedido!</h1>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -512,10 +512,7 @@
                                                                     style="padding:0;Margin:0;padding-top:5px;padding-bottom:5px">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
-                                                                        En unas horas el pedido será enviado a su
-                                                                        domicilio.&nbsp;En caso de querer cancelar o
-                                                                        modificar su pedido podrá hacerlo contactando con nosotros a este mismo correo, 
-                                                                        siempre y cuando el pedido no haya salido de nuestras instalaciones.</p>
+                                                                        Quedamos a la espera de que realice el pago. Una vez se haya confirmado el pago recibirá un correo con la correspondiente factura.</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -536,121 +533,6 @@
                                     cellspacing="0"
                                     style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px">
                                     <tr>
-                                        <td class="esdev-adapt-off es-m-p10" align="left"
-                                            background="order/66551620375036465.png"
-                                            style="padding:20px;Margin:0;background-image:url('order/66551620375036465.png');background-repeat:no-repeat;background-position:center center">
-                                            <table cellpadding="0" cellspacing="0" class="esdev-mso-table"
-                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:560px">
-                                                <tr>
-                                                    <td class="esdev-mso-td" valign="top" style="padding:0;Margin:0">
-                                                        <table cellpadding="0" cellspacing="0" class="es-left"
-                                                            align="left"
-                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
-                                                            <tr>
-                                                                <td align="left" style="padding:0;Margin:0;width:177px">
-                                                                    <table cellpadding="0" cellspacing="0" width="100%"
-                                                                        bgcolor="#2AB5B2"
-                                                                        style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#2ab5b2"
-                                                                        role="presentation">
-                                                                        <tr>
-                                                                            <td align="center"
-                                                                                style="padding:0;Margin:0;padding-top:10px;padding-left:15px;padding-right:15px;font-size:0px">
-                                                                                <a target="_blank"
-                                                                                    href="https://trivicare.com/my-orders"
-                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#926B4A;font-size:14px"><img
-                                                                                        src="{{ asset('order/ico_check.png') }}"
-                                                                                        alt
-                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
-                                                                                        width="30"></a></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td align="center"
-                                                                                style="Margin:0;padding-top:5px;padding-bottom:10px;padding-left:10px;padding-right:10px">
-                                                                                <p
-                                                                                    style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
-                                                                                    Recibido</p>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                    <td style="padding:0;Margin:0;width:15px"></td>
-                                                    <td class="esdev-mso-td" valign="top" style="padding:0;Margin:0">
-                                                        <table cellpadding="0" cellspacing="0" class="es-left"
-                                                            align="left"
-                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
-                                                            <tr>
-                                                                <td align="left" style="padding:0;Margin:0;width:177px">
-                                                                    <table cellpadding="0" cellspacing="0" width="100%"
-                                                                        bgcolor="#efefef"
-                                                                        style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#efefef"
-                                                                        role="presentation">
-                                                                        <tr>
-                                                                            <td align="center"
-                                                                                style="padding:0;Margin:0;padding-top:10px;padding-left:15px;padding-right:15px;font-size:0px">
-                                                                                <a target="_blank"
-                                                                                    href="https://trivicare.com/my-orders"
-                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#926B4A;font-size:14px"><img
-                                                                                        src="{{ asset('order/ico_round.png') }}"
-                                                                                        alt
-                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
-                                                                                        width="30"></a></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td align="center"
-                                                                                style="Margin:0;padding-top:5px;padding-bottom:10px;padding-left:10px;padding-right:10px">
-                                                                                <p
-                                                                                    style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
-                                                                                    Enviado</p>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                    <td style="padding:0;Margin:0;width:15px"></td>
-                                                    <td class="esdev-mso-td" valign="top" style="padding:0;Margin:0">
-                                                        <table cellpadding="0" cellspacing="0" class="es-right"
-                                                            align="right"
-                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right">
-                                                            <tr>
-                                                                <td align="left" style="padding:0;Margin:0;width:176px">
-                                                                    <table cellpadding="0" cellspacing="0" width="100%"
-                                                                        bgcolor="#efefef"
-                                                                        style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#efefef"
-                                                                        role="presentation">
-                                                                        <tr>
-                                                                            <td align="center"
-                                                                                style="padding:0;Margin:0;padding-top:10px;padding-left:15px;padding-right:15px;font-size:0px">
-                                                                                <a target="_blank"
-                                                                                    href="https://trivicare.com/my-orders"
-                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#926B4A;font-size:14px"><img
-                                                                                        src="{{ asset('order/ico_round.png') }}"
-                                                                                        alt
-                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
-                                                                                        width="30"></a></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td align="center"
-                                                                                style="Margin:0;padding-top:5px;padding-bottom:10px;padding-left:10px;padding-right:10px">
-                                                                                <p
-                                                                                    style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
-                                                                                    Entregado</p>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td align="left"
                                             style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px">
                                             <table cellpadding="0" cellspacing="0" width="100%"
@@ -663,12 +545,15 @@
                                                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                             <tr>
                                                                 <td align="center" style="padding:0;Margin:0">
+                                                                    <h3
+                                                                        style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:18px;font-style:normal;color:#333333">
+                                                                        {{ $mailConfirm['content'] }}</h3>
                                                                     <h2
                                                                         style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:24px;font-style:normal;font-weight:bold;color:#333333">
-                                                                        {{ $mailData['order'] }}</h2>
+                                                                        Número de pedido {{ $mailConfirm['order'] }}</h2>
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
-                                                                        {{ $mailData['date'] }}</p>
+                                                                        {{ $mailConfirm['date'] }}</p>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -705,7 +590,7 @@
                                         style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px">
                                         <table cellpadding="0" cellspacing="0" class="esdev-mso-table"
                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:560px">
-                                            @foreach ($mailData['products'] as $product)
+                                            @foreach ($mailConfirm['products'] as $product)
                                                 <tr>
                                                     <td class="esdev-mso-td" valign="top" style="padding:0;Margin:0;padding-bottom:10px;">
                                                         <table cellpadding="0" cellspacing="0" class="es-left"
@@ -889,10 +774,10 @@
                                                                                 style="padding:0;Margin:0">
                                                                                 <p
                                                                                     style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
-                                                                                    {{ $mailData['subTotal'] }}
-                                                                                    &euro;<br>{{ $mailData['discount'] }} 
-                                                                                    &percnt;<br>{{ $mailData['shipping'] }}
-                                                                                    &euro;<br><strong>{{ $mailData['total'] }}
+                                                                                    {{ $mailConfirm['subTotal'] }}
+                                                                                    &euro;<br>{{ $mailConfirm['discount'] }} 
+                                                                                    &percnt;<br>{{ $mailConfirm['shipping'] }}
+                                                                                    &euro;<br><strong>{{ $mailConfirm['total'] }}
                                                                                         &euro;</strong></p>
                                                                             </td>
                                                                         </tr>
@@ -943,8 +828,8 @@
                                                                 <td align="left" style="padding:0;Margin:0">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
-                                                                        <span>{{ $mailData['user'] }}</span><br>{{ $mailData['address'] }}<br>{{ $mailData['zipcode'] }}<br>{{ $mailData['city'] }}
-                                                                        ({{ $mailData['state'] }})<br>{{ $mailData['country'] }}
+                                                                        <span>{{ $mailConfirm['user'] }}</span><br>{{ $mailConfirm['address'] }}<br>{{ $mailConfirm['zipcode'] }}<br>{{ $mailConfirm['city'] }}
+                                                                        ({{ $mailConfirm['state'] }})<br>{{ $mailConfirm['country'] }}
                                                                     </p>
                                                                 </td>
                                                             </tr>

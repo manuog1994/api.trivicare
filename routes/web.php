@@ -1,17 +1,9 @@
 <?php
 
-use App\Models\User;
-//use App\Http\Controllers\StrapiController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\AuthController;
-use Laravel\Socialite\Facades\Socialite;
-use App\Http\Controllers\StripeController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\VerificationEmailController;
-use Illuminate\Auth\AuthenticationException;
+use App\Http\Controllers\Api\RedsysPay\RedsysPayController;
+
 
 
 /*
@@ -40,16 +32,13 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout')->name('logout');
 });
 
-//Route::get('/payment/{token_id}', [StrapiController::class, 'payment'])->name('payment');
-Route::get('stripe/{token_id}', [StripeController::class, 'stripe']);
 
 Route::get('/cancel', function () {
     return view('cancel');
 })->name('cancel');
 
-//Verify Email
-Route::get('/verify-email/{token}', [ VerificationEmailController::class, 'verify' ])->name('verify.email');
-
+Route::post('/notifications', [RedsysPayController::class, 'notifications'])->name('notifications');
+Route::get('/notifications', [RedsysPayController::class, 'notifications'])->name('notifications');
 
 // // View email !! No Borrar
 
@@ -104,6 +93,31 @@ Route::get('/email', function () {
         'user' => 'John Doe',
         'shippingMethod' => 'gls',
         'password' => '12223112',
+        'discount' => '10'
+    ];
+
+    $mailConfirm = [
+        'name' => 'John Doe',
+        'email' => 'jonhdoe@jonhdoe',
+        'phone' => '123456789',
+        'address' => '1234 Main St',
+        'city' => 'New York',
+        'state' => 'NY',
+        'zipcode' => '12345',
+        'country' => 'USA',
+        'urlTrack' => 'https://www.ordertracker.com/es/track/123456789',
+        'track' => '123456789',
+        'order' => '123456789',
+        'date' => '2021-01-01',
+        'products' => $decode,
+        'subTotal' => '100.00',
+        'shipping' => '10.00',
+        'total' => '110.00',
+        'user' => 'John Doe',
+        'shippingMethod' => 'gls',
+        'password' => '12223112',
+        'discount' => '10',
+        'content' => 'Si aún no ha realizado el pago por Bizum, puede hacerlo enviando el total del importe indicado en su pedido al número de teléfono 613 03 60 42, indicando como concepto el número de pedido.'
     ];
 
     $cupon = [
@@ -119,6 +133,6 @@ Route::get('/email', function () {
         'cupon' => $cupon['code'],
     ];
 
-    return view('emails.newsletter', compact('mailData', 'dataOne'));
+    return view('emails.confirmOrder', compact('mailData', 'mailConfirm', 'dataOne'));
 });
 
