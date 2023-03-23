@@ -239,7 +239,7 @@ class SendEmails extends Command
                 $mailConfirm = [
                     'title' => 'Confirmación de pedido',
                     'body' => 'Gracias por tu pedido. Quedamos a la espera de que nos confirmes el pago.',
-                    'content' => 'Si aún no ha realizado el pago por Bizum, puede hacerlo enviando el total del importe indicado en su pedido al número de teléfono 613 03 60 42, indicando como concepto el número de pedido.',
+                    'content' => 'Si aún no ha realizado el pago por Bizum, puede hacerlo enviando el total del importe indicado en su pedido al número de teléfono 613 03 60 42, indicando como concepto su número de DNI, NIF o NIE.',
                     'date' => $order->order_date,
                     'order' => '#' . $order->id,
                     'user' => $user_profile->name . ' ' . $user_profile->lastname,
@@ -278,7 +278,7 @@ class SendEmails extends Command
                 $mailConfirm = [
                     'title' => 'Confirmación de pedido',
                     'body' => 'Gracias por tu pedido. Quedamos a la espera de que nos confirmes el pago.',
-                    'content' => 'Puede realizar el pago haciendo una transferencia bancaria con el total del importe indicado en su pedido a la siguiente cuenta bancaria: ES61 0049 4398 0328 1008 8938 indicando como concepto el número de pedido.',
+                    'content' => 'Puede realizar el pago haciendo una transferencia bancaria con el total del importe indicado en su pedido a la siguiente cuenta bancaria: ES61 0049 4398 0328 1008 8938 indicando como concepto su número de DNI, NIF o NIE.',
                     'date' => $order->order_date,
                     'order' => '#' . $order->id,
                     'user' => $user_profile->name . ' ' . $user_profile->lastname,

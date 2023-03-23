@@ -32,6 +32,6 @@ class NewOrder extends Mailable
      */
     public function build()
     {
-        return $this->subject('Trivicare.com | Nuevo pedido')->view('emails.newOrder');
+        return $this->subject('Trivicare.com | Hemos recibido el pago de su pedido')->view('emails.newOrder');
     }
 }
