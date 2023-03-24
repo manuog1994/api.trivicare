@@ -550,9 +550,10 @@
                     style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
                     <tr style="text-align:center;">
                         <td>
-                            <h3>Si usted quiere seguir con el pedido:</h3>
-                            <p style="margin-bottom:2rem;">Entre en su perfil y en acciones acceda a la pasarela de pago.</p>
-                            <p>En cuanto recibamos el pago el pedido se reactivara.</p>
+                            <h3>Si usted quiere seguir con el pedido, o ya ha hecho el pago y no ha recibido el correo de confirmación de pago:</h3>
+                            <p style="margin-bottom:2rem;">Ponganse en contacto con nosotros a través del teléfono:</p>
+                            <h3><a href="tel:+34613036942">613 03 69 42</a></h3>
+                            <p>Ya sea por llamada telefónica o por WhatsApp.</p>
                         </td>
                     </tr>
                     </table>

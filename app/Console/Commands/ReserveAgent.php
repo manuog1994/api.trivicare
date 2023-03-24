@@ -29,20 +29,21 @@ class ReserveAgent extends Command
      */
     public function handle()
     {
-        $reserves = Reserve::all();
+        // DEVUELVE TODAS LAS RESERVAS QUE NO SE HAN COMPRADO Y QUE EL PAYMENT_METHOD NO SEA TRANSFER_BANK O BIZUM
+        $reserves = Reserve::where('paid', '!=', 'PAGADO')->where('payment_method', '!=', 'transfer_bank')->where('payment_method', '!=', 'bizum')->where('created_at', '<', now()->subMinutes(15))->get();
 
+        // RECORREMOS TODAS LAS RESERVAS, DEVOLVEMOS EL STOCK Y LAS CANCELAMOS
         foreach ($reserves as $reserve) {
             $json = json_decode($reserve->products);
     
-            if($reserve->created_at < now()->subMinutes(15)) {
-                foreach ($json as $item) {
-                    $product = Product::where('id', $item->id)->first();
-                    $product->stock = $product->stock + $item->cartQuantity;
-                    $product->save();
-                }
-        
-                $reserve->delete();
+            foreach ($json as $item) {
+                $product = Product::where('id', $item->id)->first();
+                $product->stock = $product->stock + $item->cartQuantity;
+                $product->save();
             }
+    
+            $reserve->delete();
+
         }
     }
 }

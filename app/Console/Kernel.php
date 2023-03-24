@@ -18,10 +18,10 @@ class Kernel extends ConsoleKernel
     {
 
         $schedule->command('update:new_status')->monthly();
-        //$schedule->command('reserve:agent')->everyMinute();
-        $schedule->command('order:agent')->everyMinute();		
+        $schedule->command('reserve:agent')->everyFifteenMinutes();
         $schedule->command('send:emails')->everyMinute();		
-
+        $schedule->command('cancel:order')->everyFourHours();
+        $schedule->command('cancel:reserve')->sundays();
 
     }
 
