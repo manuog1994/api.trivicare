@@ -77,6 +77,7 @@ class ProductController extends Controller
             'price_discount' => $request->price - ($request->price * $request->discount / 100),
             'status' => Product::BORRADOR,
             'new' => Product::NUEVO,
+            'meta_description' => $request->meta_description,
         ]);
 
         if ($request->has('tags')) {
@@ -144,6 +145,7 @@ class ProductController extends Controller
             'size' => $request->size,
             'dimensions' => $request->dimensions,
             'price_discount' => $request->price - ($request->price * $request->discount / 100),
+            'meta_description' => $request->meta_description,
         ]);
 
         if ($request->has('tags')) {

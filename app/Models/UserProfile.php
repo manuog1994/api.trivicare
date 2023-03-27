@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Traits\ApiTrait;
 class UserProfile extends Model
 {
-    use HasFactory;
+    use HasFactory, ApiTrait;
 
     protected $fillable = [
         'user_id',
@@ -30,6 +30,12 @@ class UserProfile extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Relacion uno a muchos con Order
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     // Relacion uno a muchos con Invoice

@@ -8,6 +8,7 @@ use App\Models\InvoiceOrder;
 use Illuminate\Http\Request;
 use LaravelDaily\Invoices\Invoice;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\InvoiceResource;
 use App\Mail\ManualOrderMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -16,14 +17,23 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 
 class InvoiceOrderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:create')->only('newInvoice');
+        $this->middleware('can:edit')->only('index');
+        $this->middleware('can:delete')->only('destroy');
+    }
+
     public function index()
     {
-        $invoices = InvoiceOrder::all();
+        // Cargar todas las facturas de la base de datos, ordenadas por fecha de creación descendente, cargando la relación de ordenes y la relación que tiene ordenes con perfiles de usuario
+        $invoices = InvoiceOrder::with(['order', 'order.user_profile', 'order.guest'])->orderBy('created_at', 'desc')->getOrPaginate();
 
-        return response()->json([
-            'success' => true,
-            'data' => $invoices
-        ]);
+
+
+        return InvoiceResource::collection($invoices);
     }
 
     public function show(InvoiceOrder $invoiceOrder)
@@ -53,6 +63,36 @@ class InvoiceOrderController extends Controller
             'success' => true,
             'data' => $invoiceOrder
         ]);
+    }
+
+    // Descarga multiples archivos en un zip
+    public function multipleDownloads(Request $request)
+    {
+        $json = json_decode($request->selecteds);
+
+        $files = [];
+
+        foreach ($json as $id) {
+            $invoiceOrder = InvoiceOrder::where('id', $id)->first();
+            $filename = $invoiceOrder->filename;
+            $path = Storage::disk('public')->exists($filename);
+
+            if ($path) {
+                // Guarda el path de los archivos en un array
+                $files[] = Storage::disk('public')->path($filename);
+            }
+        }
+
+
+        $zip = new \ZipArchive();
+        $zipName = 'invoices.zip';
+        $zip->open($zipName, \ZipArchive::CREATE);
+        foreach ($files as $file) {
+            $zip->addFile($file);
+        }
+        $zip->close();
+
+        return response()->download($zipName);
     }
 
     public function newInvoice(Request $request)
@@ -179,7 +219,8 @@ class InvoiceOrderController extends Controller
             ->save('public');
 
         $link = $invoice->url();
-        $filename = $invoice->filename;
+        // Eliminar los caracteres '/' y '-' del nombre del archivo
+        $filename = str_replace('/', '', $invoice->filename);
 
         // Then send email to party with link
         $inv = InvoiceOrder::create([

@@ -22,7 +22,9 @@ class RegisterController extends Controller
 
     public function indexUserProfile()
     {
-        return UserProfileResource::collection(UserProfile::all());
+        $userProfiles = UserProfile::with('orders')->getOrPaginate();
+
+        return UserProfileResource::collection($userProfiles);
     }
 
     public function registerUserProfile(Request $request)

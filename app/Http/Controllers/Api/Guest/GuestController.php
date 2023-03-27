@@ -5,9 +5,23 @@ namespace App\Http\Controllers\Api\Guest;
 use App\Models\Guest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\GuestResource;
 
 class GuestController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('store');
+        $this->middleware('can:edit')->only('update', 'index');
+        $this->middleware('can:delete')->only('destroy');
+    }
+
+    public function index()
+    {
+        $guests = Guest::with('orders')->getOrPaginate();
+
+        return GuestResource::collection($guests);
+    }
 
     public function store(Request $request)
     {
@@ -36,7 +50,7 @@ class GuestController extends Controller
 
     public function show($id)
     {
-        $this->middleware('auth:sanctum');
+        //$this->middleware('auth:sanctum');
         
         $guest = Guest::findOrFail($id);
 

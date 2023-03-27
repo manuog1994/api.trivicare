@@ -156,8 +156,10 @@ class SendEmails extends Command
                     ->save('public');
         
                 $link = $invoice->url();
-                $filename = $invoice->filename;
-        
+                
+                // eliminar los '/' y '-'del nombre del archivo
+                $filename = str_replace('/', '', $invoice->filename);
+         
                 // Then send email to party with link
                 $inv = InvoiceOrder::create([
                     'user_profile_id' => $order->user_profile->id,

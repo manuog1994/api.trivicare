@@ -54,7 +54,7 @@ class Order extends Model
 
     protected $allowSort = ['id'];
     protected $allowStatus = ['status'];
-    protected $allowFilter = ['status', 'user_id', 'user_profile_id'];
+    protected $allowFilter = ['status', 'user_profile_id'];
     protected $allowHistory = ['status', 'user_id', 'user_profile_id'];
 
     // Relacion uno a muchos inversa con User
@@ -65,6 +65,12 @@ class Order extends Model
 
     // Relacion uno a muchos inversa con UserProfile
     public function user_profile()
+    {
+        return $this->belongsTo(UserProfile::class);
+    }
+
+    // Relacion uno a muchos inversa con UserProfile
+    public function user_profiles()
     {
         return $this->belongsTo(UserProfile::class);
     }

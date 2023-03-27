@@ -29,6 +29,7 @@ class UserProfileResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'user' => User::where('id', $this->user_id)->first('email')->email,
+            'orders' => OrderResource::collection($this->whenLoaded('orders')),
         ];
     }
 }

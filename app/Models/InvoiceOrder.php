@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ApiTrait;
 
 class InvoiceOrder extends Model
 {
-    use HasFactory;
+    use HasFactory, ApiTrait;
 
     protected $fillable = [
         'id',
@@ -18,4 +19,10 @@ class InvoiceOrder extends Model
         'invoice_number',
 
     ];
+
+    // Relación uno a uno con Order
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

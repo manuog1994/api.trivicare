@@ -24,10 +24,16 @@ use App\Http\Resources\UserProfileResource;
 class OrderController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('store');
+        $this->middleware('can:edit')->only('update', 'status');
+        $this->middleware('can:delete')->only('destroy');
+    }
+
     public function index()
     {
-        $this->middleware('auth:sanctum');
-        $orders = Order::with(['user', 'user.user_profile', 'invoice'])->sort()->filter()->status()->history()->getOrPaginate();
+        $orders = Order::with(['user', 'user_profile', 'guest', 'invoice'])->sort()->filter()->status()->history()->getOrPaginate();
 
         return OrderResource::collection($orders);
     }
@@ -70,7 +76,6 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $this->middleware('auth:sanctum');
         return OrderResource::make($order);
     }
 
@@ -86,7 +91,6 @@ class OrderController extends Controller
 
     public function status(Order $order, Request $request)
     {
-        $this->middleware('auth:sanctum');
         $order->status = $request->status;
         $order->save();
 
@@ -207,7 +211,6 @@ class OrderController extends Controller
 
     public function paid($token_id)
     {
-        $this->middleware('auth:sanctum');
         $order = Order::where('token_id', $token_id)->first();
 
         if($order->token_reserve != null){
@@ -228,7 +231,6 @@ class OrderController extends Controller
 
     public function paidPaypal($token_id, Request $request)
     {
-        $this->middleware('auth:sanctum');
         $order = Order::where('id', $request->order_id)->first();
         $order->token_id = $request->token_id;
         $order->status = 1;
@@ -243,7 +245,6 @@ class OrderController extends Controller
 
     public function orderToken($token_id)
     {
-        $this->middleware('auth:sanctum');
         $order = Order::where('token_id', $token_id)->first();
         return response()->json([
             'data' => $order,

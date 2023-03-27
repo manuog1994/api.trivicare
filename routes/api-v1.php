@@ -1,14 +1,10 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\StripeController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\Api\Pdf\PdfController;
 use App\Http\Controllers\Api\Tag\TagController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\GoogleController;
@@ -21,7 +17,7 @@ use App\Http\Controllers\Api\State\StateController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Pickup\PickupController;
 use App\Http\Controllers\Api\Review\ReviewController;
-use App\Http\Controllers\VerificationEmailController;
+use App\Http\Controllers\Api\Search\SearchController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
@@ -61,12 +57,10 @@ Route::post('update-email/{id}', [RegisterController::class, 'updateEmail']);
 Route::post('update-password/{id}', [RegisterController::class, 'updatePassword']);
 
 // User Profile
+Route::get('user-profile', [RegisterController::class, 'indexUserProfile'])->name('user-profile');
 Route::get('show-profile/{userId}', [RegisterController::class, 'showProfile'])->name('show-profile');
-
 Route::post('register-profile', [RegisterController::class, 'registerUserProfile'])->middleware('auth:sanctum')->name('register-profile');
-
 Route::delete('delete-profile/{user_profile}', [RegisterController::class, 'deleteProfile'])->middleware('auth:sanctum')->name('delete-profile');
-
 Route::delete('destroy/{user}', [RegisterController::class, 'destroy'])->middleware('auth:sanctum')->name('destroy');
 
 
@@ -106,9 +100,10 @@ Route::post('verify-email', [OrderController::class, 'verifyEmail'])->name('veri
 // Invoice
 Route::apiResource('invoice', InvoiceOrderController::class)->names('invoice');
 Route::get('invoices/{id}', [InvoiceOrderController::class, 'downloadFile'])->name('invoices.downloadFile');
+Route::get('multiples-invoices', [InvoiceOrderController::class, 'multipleDownloads'])->name('invoices.multipleDownloads');
 
-// Resend Email Verification
-Route::post('resend-email/{id}', [ VerificationEmailController::class, 'resendEmail' ])->name('resend.email');
+// Pdf
+Route::get('invoice-pdf/{id}', [PdfController::class, 'show'])->name('pdf.filename');
 
 // Send Email Forgot Password
 Route::post('forgot-password', [ ForgotPasswordController::class, 'forgotPassword' ])->name('forgot.password');
@@ -117,9 +112,6 @@ Route::post('forgot-password', [ ForgotPasswordController::class, 'forgotPasswor
 Route::post('newsletter', [ NewsletterController::class, 'subscribe' ])->name('newsletter');
 Route::post('unsubscribe-newsletter', [ NewsletterController::class, 'unsubscribe' ])->name('unsubscribe-newsletter');
 Route::post('send-newsletter', [ NewsletterController::class, 'sendNewsletter' ])->name('send-newsletter');
-
-// Stripe
-Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
 //Google auth
 
@@ -135,6 +127,7 @@ Route::middleware('auth:sanctum')->get('auth/user', function (Request $request) 
 Route::post('contact', [ContactFormController::class, 'contactPost'])->name('contact.post');
 
 // Guest
+Route::get('guests', [GuestController::class, 'index'])->name('guests.index');
 Route::post('guest-store', [GuestController::class, 'store'])->name('guests.store');
 Route::get('guests-show/{$id}', [GuestController::class, 'show'])->name('guests.show');
 Route::delete('guests-delete/{$id}', [GuestController::class, 'destroy'])->name('guests.destroy');
@@ -172,5 +165,10 @@ Route::apiResource('locations', StateController::class)->names('locations');
 
 // Redsys Payment
 Route::post('redsys', [RedsysPayController::class, 'payment'])->name('redsys.post');
+
+// Search
+Route::get('search', [SearchController::class, 'index'])->name('search');
+
+
 
 
