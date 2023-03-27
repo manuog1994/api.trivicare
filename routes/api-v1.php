@@ -41,11 +41,6 @@ use App\Http\Controllers\Api\Notification\NotificationController;
 |
 */
 
-// Autentication User
-
-Route::post('/register', [AuthController::class, 'registerAPI']);
-Route::post('/login', [AuthController::class, 'loginAPI']);
-Route::post('/logout', [AuthController::class, 'logoutAPI'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     return $request->user()->load(['user_profile', 'roles', 'notifications']);

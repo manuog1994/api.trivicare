@@ -191,7 +191,7 @@ class InvoiceOrderController extends Controller
 
         }
 
-        $dateInv= Carbon::now()->format('d/m/Y');
+        $dateInv= date('dmY');
 
         $invoice = Invoice::make('receipt')
             //->series('#TNC'. strval($year)) 
@@ -220,7 +220,7 @@ class InvoiceOrderController extends Controller
 
         $link = $invoice->url();
         // Eliminar los caracteres '/' y '-' del nombre del archivo
-        $filename = str_replace('/', '', $invoice->filename);
+        $filename = $invoice->filename;
 
         // Then send email to party with link
         $inv = InvoiceOrder::create([
