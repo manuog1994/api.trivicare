@@ -26,7 +26,7 @@ class OrderController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except('store');
+        $this->middleware('auth:sanctum')->except('store', 'verifyEmail');
         $this->middleware('can:edit')->only('update', 'status');
         $this->middleware('can:delete')->only('destroy');
     }
