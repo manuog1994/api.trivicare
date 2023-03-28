@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Api\Pdf\PdfController;
 use App\Http\Controllers\Api\Tag\TagController;
@@ -44,6 +45,21 @@ use App\Http\Controllers\Api\Notification\NotificationController;
 
 Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     return $request->user()->load(['user_profile', 'roles', 'notifications']);
+});
+
+Route::post('/auth/login', [AuthAdminController::class, 'login']);
+
+Route::group([
+
+    'middleware' => 'auth:admin',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('logout', [AuthAdminController::class, 'logout']);
+    Route::post('refresh', [AuthAdminController::class, 'refresh']);
+    Route::get('me', [AuthAdminController::class, 'me']);
+
 });
 
 // User

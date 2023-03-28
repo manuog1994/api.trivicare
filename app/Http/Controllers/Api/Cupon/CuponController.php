@@ -11,8 +11,8 @@ class CuponController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
-        $this->middleware('can:create')->only('store', 'destroy');
+        $this->middleware('auth:admin')->except('index');
+
     }
     
     public function index()

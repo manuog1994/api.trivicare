@@ -10,8 +10,7 @@ class SearchController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
-        $this->middleware('can:edit')->only('index');
+        $this->middleware('auth:admin');
     }
 
     public function index(Request $request)

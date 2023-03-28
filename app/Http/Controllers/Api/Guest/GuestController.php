@@ -11,9 +11,8 @@ class GuestController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except('store');
-        $this->middleware('can:edit')->only('update', 'index');
-        $this->middleware('can:delete')->only('destroy');
+        $this->middleware('auth:admin')->except('store');
+
     }
 
     public function index()

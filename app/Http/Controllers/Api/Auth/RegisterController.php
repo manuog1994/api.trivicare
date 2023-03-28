@@ -14,8 +14,7 @@ class RegisterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except('registerUserProfile');
-        $this->middleware('can:create')->only('indexUserProfiles', 'showProfile');
+        $this->middleware('auth:admin')->except('registerUserProfile');
 
     }
 

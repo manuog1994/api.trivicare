@@ -11,7 +11,7 @@ class VisitController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:create')->only('index');
+        $this->middleware('auth:admin')->except('store');
     }
 
     public function index()

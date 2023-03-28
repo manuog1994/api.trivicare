@@ -10,7 +10,7 @@ class PdfController extends Controller
 {
     public function __construct()
     {
-       $this->middleware('auth:sanctum');
+       $this->middleware('auth:admin');
        //$this->middleware('can:create')->only('show'); 
     }
 

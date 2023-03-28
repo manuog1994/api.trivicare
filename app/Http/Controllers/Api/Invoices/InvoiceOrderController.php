@@ -20,10 +20,8 @@ class InvoiceOrderController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
-        $this->middleware('can:create')->only('newInvoice');
-        $this->middleware('can:edit')->only('index');
-        $this->middleware('can:delete')->only('destroy');
+        $this->middleware('auth:admin');
+
     }
 
     public function index()

@@ -10,7 +10,7 @@ class StateController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create', ['only' => ['store']]);
+        $this->middleware('auth:admin')->except('index');
     }
 
     public function index()

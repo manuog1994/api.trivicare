@@ -11,9 +11,8 @@ class ImageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except('index', 'show');
-        $this->middleware('can:create')->only('store');
-        $this->middleware('can:delete')->only('destroy');
+        $this->middleware('auth:admin')->except('index', 'show');
+
     }
 
     public function index()
