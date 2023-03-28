@@ -19,7 +19,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\UserProfileResource;
-
+use App\Models\PickupPoint;
 
 class OrderController extends Controller
 {
@@ -44,6 +44,12 @@ class OrderController extends Controller
             'total' => 'required',
         ]);
         
+        if($request->pickup_point != null){
+            // Tranformar el la respuesta en numero
+            $resP = intval($request->pickup_point);
+            $pickupPoint = PickupPoint::where('id', $resP)->first();
+
+        }
 
         $order = Order::create([
             'guest_id' => $request->guest_id,
@@ -61,7 +67,7 @@ class OrderController extends Controller
             'invoice_paper' => $request->invoice_paper,
             'note' => $request->note,
             'token_reserve' => $request->token_reserve,
-            'pickup_point' => $request->pickup_point,
+            'pickup_point' => $pickupPoint->name,
             'payment_method' => $request->payment_method,
         ]);
 
