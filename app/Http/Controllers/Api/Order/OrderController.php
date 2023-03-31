@@ -407,14 +407,11 @@ class OrderController extends Controller
             // eliminar los '/' y '-'del nombre del archivo
             $filename = $invoice->filename;
          
-            // Then send email to party with link
-            $inv = InvoiceOrder::create([
-                'user_profile_id' => $order->user_profile->id,
-                'order_id' => $order->id,
-                'filename' => $filename,
-                'url' => $link,
-                'invoice_number' => $invoice_number->invoice_number,
-            ]);
+            // Actualizamos la factura
+            $invoice_number->filename = $filename;
+            $invoice_number->url = $link;
+            $invoice_number->save();
+
     
             //send email
     
