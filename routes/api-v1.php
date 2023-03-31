@@ -107,6 +107,7 @@ Route::put('orders/paid/{order}', [OrderController::class, 'updatePaid'])->name(
 Route::post('order-paid/{token_id}', [OrderController::class, 'paid'])->name('order-paid');
 Route::post('order-paid-paypal/{token_id}', [OrderController::class, 'paidPaypal'])->name('order-paid-paypal');
 Route::post('verify-email', [OrderController::class, 'verifyEmail'])->name('verify-email');
+Route::put('order-modification', [OrderController::class, 'modificationOrder'])->name('order-modification');
 
 // Invoice
 Route::apiResource('invoice', InvoiceOrderController::class)->names('invoice');

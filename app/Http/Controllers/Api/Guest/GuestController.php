@@ -17,7 +17,7 @@ class GuestController extends Controller
 
     public function index()
     {
-        $guests = Guest::with('orders')->getOrPaginate();
+        $guests = Guest::with('orders')->orderBy('created_at', 'desc')->getOrPaginate();
 
         return GuestResource::collection($guests);
     }

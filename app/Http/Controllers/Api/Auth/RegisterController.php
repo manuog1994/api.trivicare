@@ -21,7 +21,7 @@ class RegisterController extends Controller
 
     public function indexUserProfile()
     {
-        $userProfiles = UserProfile::with('orders')->getOrPaginate();
+        $userProfiles = UserProfile::with('orders')->orderBy('created_at', 'desc')->getOrPaginate();
 
         return UserProfileResource::collection($userProfiles);
     }
