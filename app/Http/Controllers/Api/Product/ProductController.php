@@ -99,7 +99,7 @@ class ProductController extends Controller
                 $value->move(storage_path('app/public/images'), $file_name);
                 Image::create([
                     'name' => $file_name,
-                    'path' => "images/$file_name",
+                    'path' => "storage/images/$file_name",
                     'product_id' => $product->id,
                 ]);
             }
