@@ -96,7 +96,7 @@ class ProductController extends Controller
             $files = $request->images;
             foreach ($files as $key => $value) {
                 $file_name = time().$key. '-' . $value->getClientOriginalName();
-                $value->move(public_path('images'), $file_name);
+                $value->move(storage_path('app/public/images'), $file_name);
                 Image::create([
                     'name' => $file_name,
                     'path' => "images/$file_name",
