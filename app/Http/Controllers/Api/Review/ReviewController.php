@@ -18,7 +18,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::all()->sortByDesc('created_at');
+        //valoraciones con relación a productos
+        $reviews = Review::with('product')->get()->sortByDesc('created_at');
 
         return response()->json([
             'status' => 'success',
