@@ -49,12 +49,14 @@ class OrderController extends Controller
             'products' => 'required',
             'total' => 'required',
         ]);
+
+        $pickupPoint = '';
         
-        if($request->pickup_point != null){
+        if($request->pickup_point != ''){
             // Tranformar el la respuesta en numero
             $resP = intval($request->pickup_point);
+            //si exiten puntos de recogida
             $pickupPoint = PickupPoint::where('id', $resP)->first();
-
         }
 
         $order = Order::create([
@@ -73,9 +75,13 @@ class OrderController extends Controller
             'invoice_paper' => $request->invoice_paper,
             'note' => $request->note,
             'token_reserve' => $request->token_reserve,
-            'pickup_point' => $pickupPoint->name,
             'payment_method' => $request->payment_method,
         ]);
+
+        if($pickupPoint != ''){
+            $order->pickup_point = $pickupPoint->name;
+            $order->save();
+        }
 
 
         return response()->json([
