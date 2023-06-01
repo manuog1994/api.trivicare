@@ -21,12 +21,11 @@ tasks:
     - artisan:view:cache
     - artisan:event:cache
     - artisan:migrate
-    - npm:install
     - build
     - deploy:publish
   build:
     - cd: "{{release_path}}"
-    - run: "npm run build"
+    - run: "npm install && npm run build"
 
 after:
   deploy:failed: deploy:unlock
