@@ -25,7 +25,8 @@ tasks:
     - deploy:publish
   build:
     - cd: "{{release_path}}"
-    - run: "npm install && npm run build"
+    - run: "npm install"
+    - run: "npm run build"
 
 after:
   deploy:failed: deploy:unlock
