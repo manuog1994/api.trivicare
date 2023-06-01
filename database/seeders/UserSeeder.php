@@ -45,12 +45,11 @@ class UserSeeder extends Seeder
             'zipcode' => 00000,
             'gender' => 'Guest',
             'phone' => 000000000,
-            'dni' => '00000000A',
         ]);
 
         $manu->assignRole('admin');
         $cris->assignRole('admin');
         
-        //User::factory()->count(20)->create();
+        User::factory()->count(20)->create();
     }
 }

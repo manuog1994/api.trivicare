@@ -1,15 +1,15 @@
-import:
+import: 
   - recipe/laravel.php
   - contrib/npm.php
 
 config:
-  repository: "git@github.com:manuog1994/api.trivicare.git"
+  repository: 'git@github.com:manuog1994/api.trivicare.git'
 
 hosts:
   api:
-    remote_user: root
-    hostname: api.trivicare.com
-    deploy_path: "/var/www/{{hostname}}"
+    remote_user: tara
+    hostname: 212.227.40.38
+    deploy_path: "/var/www/api.trivicare.com"
 
 tasks:
   deploy:
