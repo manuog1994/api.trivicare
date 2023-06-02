@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('price_base', 10, 2)->nullable();
             $table->integer('stock')->nullable();
             $table->bigInteger('barcode')->unique()->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade')->default(1);
             $table->string('slug')->unique()->nullable();
             $table->integer('sold')->nullable();
             $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR)->nullable();
