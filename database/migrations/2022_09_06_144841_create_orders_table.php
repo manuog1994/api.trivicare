@@ -18,24 +18,24 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreignId('user_profile_id')->constrained()->onDelete('cascade')->nullable();
-            $table->json('products');
-            $table->decimal('subTotal', 8, 2);
-            $table->decimal('total', 8, 2);
+            $table->json('products')->nullable();
+            $table->decimal('subTotal', 8, 2)->nullable();
+            $table->decimal('total', 8, 2)->nullable();
             $table->string('coupon')->nullable();
-            $table->string('order_date');
+            $table->string('order_date')->nullable();
             $table->enum('paid', [
                 Order::PENDIENTE,
                 Order::PROCESANDO,
                 Order::PAGADO,
                 Order::RECHAZADO,
-            ])->default(Order::PENDIENTE);
+            ])->default(Order::PENDIENTE)->nullable();
             $table->enum('status', [
                 Order::RECIBIDO,
                 Order::PREPARANDO,
                 Order::ENVIADO,
                 Order::ENTREGADO,
                 Order::CANCELADO,
-            ])->default(Order::RECIBIDO);
+            ])->default(Order::RECIBIDO)->nullable();
             $table->decimal('shipping', 4, 2)->nullable();
             $table->string('token_id')->nullable();
             $table->timestamps();

@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('invoice_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('filename');
+            $table->string('filename')->nullable();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_profile_id')->constrained()->onDelete('cascade');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

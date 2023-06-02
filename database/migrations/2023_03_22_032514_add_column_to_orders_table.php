@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->boolean('confirmation_sent')->default(false);
+            $table->boolean('confirmation_sent')->default(false)->nullable();
         });
     }
 

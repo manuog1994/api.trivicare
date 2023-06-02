@@ -16,15 +16,15 @@ return new class extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('lastname');
-            $table->string('address');
+            $table->string('name')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('address')->nullable();
             $table->string('optional_address')->nullable();
-            $table->string('city');
-            $table->string('state');
-            $table->string('country');
-            $table->string('zipcode');
-            $table->string('phone');
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zipcode')->nullable();
+            $table->string('phone')->nullable();
             $table->string('gender')->nullable();
             $table->date('birth_date')->nullable();
             $table->timestamps();

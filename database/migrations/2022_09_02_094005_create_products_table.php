@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('specifications')->nullable();
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->nullable();
             $table->decimal('price_base', 10, 2)->nullable();
-            $table->integer('stock');
+            $table->integer('stock')->nullable();
             $table->bigInteger('barcode')->unique()->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->nullable();
             $table->integer('sold')->nullable();
             $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR)->nullable();
             $table->foreignId('review_id')->nullable();
