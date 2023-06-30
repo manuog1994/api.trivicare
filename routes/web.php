@@ -90,7 +90,8 @@ Route::get('/cancel', function () {
 //         'user' => 'John Doe',
 //         'shippingMethod' => 'gls',
 //         'password' => '12223112',
-//         'discount' => '10'
+//         'discount' => '10',
+//         'code'=> 'ABCDEFGH',
 //     ];
 
 //     $mailConfirm = [
@@ -130,6 +131,6 @@ Route::get('/cancel', function () {
 //         'cupon' => $cupon['code'],
 //     ];
 
-//     return view('emails.confirmOrder', compact('mailData', 'mailConfirm', 'dataOne'));
+//     return view('emails.subscribe', compact('mailData', 'mailConfirm', 'dataOne'));
 // });
 

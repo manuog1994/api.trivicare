@@ -78,6 +78,8 @@ class ProductController extends Controller
             'status' => Product::BORRADOR,
             'new' => Product::NUEVO,
             'meta_description' => $request->meta_description,
+            'variations' => $request->variations,
+            'variations_name' => $request->variations_name,
         ]);
 
         if ($request->has('tags')) {
@@ -146,6 +148,8 @@ class ProductController extends Controller
             'dimensions' => $request->dimensions,
             'price_discount' => $request->price - ($request->price * $request->discount / 100),
             'meta_description' => $request->meta_description,
+            'variations' => $request->variations,
+            'variations_name' => $request->variations_name,
         ]);
 
         if ($request->has('tags')) {

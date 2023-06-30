@@ -559,10 +559,9 @@
                         <td>
                             <h3>Te damos las gracias por realizar tu primera compra en TriviCare.</h3>
                             <p style="padding-bottom:20px;width:700px;margin:auto;">Te invitamos a que nos sigas en nuestras redes sociales para que estés al tanto de nuestras promociones y descuentos.</p>
-                            <p style="width: 700px; margin:auto; padding-bottom: 15px;">Además te queremos obsequiar con un cupón de descuento del 10% para tu próxima compra, solo tienes que ingresar el siguiente código en el carrito de compras:</p>
-                            <input style="background-color: #999999; padding: 10px 30px;text-align:center;" type="text" value="{{ $dataOne['cupon'] }}" onclick="copyToClipboard(this)">
-                            <p id="copy" style="font-style:italic;"><small>Haz click sobre el código y se copiará de forma automática a tu portapapeles.</small></p>
-                            <p>Este cupón caducará en 30 días, así que no lo dudes ¡Aprovéchalo en tu pedido!.</p>
+                            <p style="width: 700px; margin:auto; padding-bottom: 15px;">Además te queremos obsequiar con un cupón de descuento del 10% para tu próxima compra, solo tienes que ingresar el siguiente código cuando tramites tu compra:</p>
+                            <input style="background-color: #999999; padding: 10px 30px;text-align:center;" type="text" value="{{ $dataOne['cupon'] }}">
+                            <p>Este cupón caducará en 30 días, así que no lo dudes y aprovéchalo en tu próxima compra.</p>
                         </td>
                     </tr>
                     </table>

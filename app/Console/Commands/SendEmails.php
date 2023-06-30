@@ -205,6 +205,7 @@ class SendEmails extends Command
                         'discount' => 10,
                         'validity' => Carbon::now()->addDays(30)->format('Y-m-d'),
                         'status' => 2,
+                        'unique' => true,
                     ]);
                     $dataOne = [
                         'title' => 'Gracias por tu primer pedido',
@@ -215,10 +216,11 @@ class SendEmails extends Command
                     Mail::to($user->email)->send(new FirstOrderMail($dataOne));
                 } 
         
-                $couponFirst = 'ORDERFIRST';
-        
-                if(strpos($order->coupon, $couponFirst) !== false){
-                    $coupon = Cupon::where('code', $order->coupon)->first();
+                //extraer el cupón a través del código
+                $coupon = Cupon::where('code', $order->coupon)->first();
+
+                //verifica si es único y eliminar en caso afirmativo
+                if($coupon->unique == true) {
                     $coupon->delete();
                 }
         

@@ -17,5 +17,6 @@ class Cupon extends Model
         'discount',
         'validity',
         'status',
+        'unique'
     ];
 }
