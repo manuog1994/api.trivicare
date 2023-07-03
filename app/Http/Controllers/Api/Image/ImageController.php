@@ -33,10 +33,13 @@ class ImageController extends Controller
                 $files = $request->images;
                 foreach ($files as $key => $value) {
                     $file_name = time().$key. '-' . $value->getClientOriginalName();
+                    $file_name_out_ext = pathinfo($file_name, PATHINFO_FILENAME);
+                    $ext = $value->getClientOriginalExtension();
                     $value->move(storage_path('app/public/images'), $file_name);
                     Image::create([
-                        'name' => $file_name,
-                        'path' => "storage/images/$file_name",
+                        'name' => $file_name_out_ext,
+                        'ext' => $ext,
+                        'path' => "storage/images/",
                         'product_id' => $request->product_id,
                     ]);
                 }
