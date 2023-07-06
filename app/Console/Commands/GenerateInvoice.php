@@ -89,7 +89,7 @@ class GenerateInvoice extends Command
 
         foreach($products as $item) {
             //si existe variacion en el producto
-            if($item->variations != null) {
+            if(isset($item->variation)) {
                 $item->name = $item->name . ' -- ' . $item->variation;
             }
 
