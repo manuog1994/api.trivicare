@@ -94,11 +94,10 @@ class SendEmails extends Command
                 ]);
 
                 foreach($products as $item) {
-                    foreach($item->variations as $variation) {
-                        if($item->variation == $variation->model || $item->variation == $variation->color || $item->variation == $variation->size) {
-                            $item->name = $item->name . ' -- ' . $item->variation;
-                        }
+                    if(isset($item->variation)) {
+                        $item->name = $item->name . ' -- ' . $item->variation;
                     }
+                    
                     $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
                 }
 
