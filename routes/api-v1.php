@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Variation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -25,11 +26,10 @@ use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\VisitConter\VisitController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\RedsysPay\RedsysPayController;
+use App\Http\Controllers\Api\Variation\VariationController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
 use App\Http\Controllers\Api\Suggestion\SuggestionController;
 use App\Http\Controllers\Api\Notification\NotificationController;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +89,9 @@ Route::get('review/{token_id}', [OrderController::class, 'orderToken'])->name('r
 
 // Tags
 Route::apiResource('tags', TagController::class)->names('tags');
+
+// Variations
+Route::apiResource('variations', VariationController::class)->names('variations');
 
 // Cupons
 Route::apiResource('cupons', CuponController::class)->names('cupons');

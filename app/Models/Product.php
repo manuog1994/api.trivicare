@@ -41,8 +41,6 @@ class Product extends Model
         'price_discount',
         'new',
         'meta_description',
-        'variations',
-        'variations_name',
      ];
      // Propiedad para filtrar por los campos de la tabla
     protected $allowFilter = ['id', 'name', 'slug', 'price', 'category_id', 'tags', 'status'];
@@ -71,6 +69,12 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+
+    //Relacion de uno a muchos con la table variations
+    public function variations() 
+    {
+        return $this->hasMany(Variation::class);
     }
 
 }

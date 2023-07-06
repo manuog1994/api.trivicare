@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Http\Resources\TagResource;
 use App\Http\Resources\ImageResource;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\VariationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -29,6 +30,7 @@ class ProductResource extends JsonResource
             'slug' => $this->slug,
             'sold' => $this->sold,
             'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
+            'variations' => VariationResource::collection($this->whenLoaded('variations')),
             'weight' => $this->weight,
             'size' => $this->size,
             'dimensions' => $this->dimensions,
@@ -44,8 +46,6 @@ class ProductResource extends JsonResource
             'new' => $this->new == 1 ? 'Nuevo' : 'Viejo',
             'images' => ImageResource::collection($this->whenLoaded('images')),
             'meta_description' => $this->meta_description,
-            'variations' => $this->variations,
-            'variations_name' => $this->variations_name,
         ];
     }
 }

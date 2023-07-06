@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Product;
 
 use App\Models\Tag;
 use App\Models\Image;
+use App\Models\Variation;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with(['category', 'reviews', 'images', 'tags'])->tags()->filter()->sort()->getOrPaginate();
+        $products = Product::with(['category', 'reviews', 'images', 'tags', 'variations.image'])->tags()->filter()->sort()->getOrPaginate();
         
         return ProductResource::collection($products);
     }
@@ -78,8 +79,6 @@ class ProductController extends Controller
             'status' => Product::BORRADOR,
             'new' => Product::NUEVO,
             'meta_description' => $request->meta_description,
-            'variations' => $request->variations,
-            'variations_name' => $request->variations_name,
         ]);
 
         if ($request->has('tags')) {
@@ -148,8 +147,6 @@ class ProductController extends Controller
             'dimensions' => $request->dimensions,
             'price_discount' => $request->price - ($request->price * $request->discount / 100),
             'meta_description' => $request->meta_description,
-            'variations' => $request->variations,
-            'variations_name' => $request->variations_name,
         ]);
 
         if ($request->has('tags')) {

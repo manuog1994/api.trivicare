@@ -19,7 +19,7 @@ use LaravelDaily\Invoices\Invoice;
 use Illuminate\Support\Facades\Mail;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
-
+use Mockery\Undefined;
 
 class SendEmails extends Command
 {
@@ -94,7 +94,12 @@ class SendEmails extends Command
                 ]);
 
                 foreach($products as $item) {
-                     $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
+                    foreach($item->variations as $variation) {
+                        if($item->variation == $variation->model || $item->variation == $variation->color || $item->variation == $variation->size) {
+                            $item->name = $item->name . ' -- ' . $item->variation;
+                        }
+                    }
+                    $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
                 }
 
                    
