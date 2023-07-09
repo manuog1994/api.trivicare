@@ -214,6 +214,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         //'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Invoice' => LaravelDaily\Invoices\Facades\Invoice::class,
+        'Imagen' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
 
 ];
