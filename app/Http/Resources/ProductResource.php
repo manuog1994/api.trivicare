@@ -46,6 +46,7 @@ class ProductResource extends JsonResource
             'new' => $this->new == 1 ? 'Nuevo' : 'Viejo',
             'images' => ImageResource::collection($this->whenLoaded('images')),
             'meta_description' => $this->meta_description,
+            'best_seller' => $this->best_seller,
         ];
     }
 }
