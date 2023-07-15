@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-        $schedule->command('update:new_status')->monthly();
+        //$schedule->command('update:new_status')->monthly();
         $schedule->command('reserve:agent')->everyFifteenMinutes();
         $schedule->command('send:emails')->everyMinute();		
         $schedule->command('cancel:order')->everyFourHours();
