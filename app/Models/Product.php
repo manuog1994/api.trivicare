@@ -32,7 +32,6 @@ class Product extends Model
         'slug',
         'sold',
         'status',
-        'discount',
         'weight',
         'size',
         'dimensions',
@@ -78,4 +77,9 @@ class Product extends Model
         return $this->hasMany(Variation::class);
     }
 
+    // Relacion de uno a uno con la tabla discount
+    public function discount()
+    {
+        return $this->hasOne(Discount::class);
+    }
 }

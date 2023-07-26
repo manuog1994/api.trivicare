@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Search\SearchController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
+use App\Http\Controllers\Api\Discount\DiscountController;
 use App\Http\Controllers\Api\VisitConter\VisitController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\RedsysPay\RedsysPayController;
@@ -95,6 +96,9 @@ Route::apiResource('variations', VariationController::class)->names('variations'
 
 // Cupons
 Route::apiResource('cupons', CuponController::class)->names('cupons');
+
+//Discounts
+Route::apiResource('discounts', DiscountController::class)->names('discounts');
 
 // Images
 Route::apiResource('images', ImageController::class)->names('images');

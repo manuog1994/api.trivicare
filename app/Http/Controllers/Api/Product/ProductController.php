@@ -29,7 +29,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with(['category', 'reviews', 'images', 'tags', 'variations.image'])->tags()->filter()->sort()->getOrPaginate();
+        $products = Product::with(['category', 'reviews', 'images', 'tags', 'discount', 'variations.image'])->tags()->filter()->sort()->getOrPaginate();
         
         return ProductResource::collection($products);
     }
@@ -52,7 +52,6 @@ class ProductController extends Controller
             'barcode' => 'nullable|numeric',
             'category_id' => 'required|numeric|exists:categories,id',
             'slug' => 'required|string',
-            'discount' => 'nullable|numeric',
             'weight' => 'nullable|numeric',
             'size' => 'nullable|numeric',
             'dimensions' => 'nullable|string',
@@ -71,7 +70,6 @@ class ProductController extends Controller
             'barcode' => $request->barcode,
             'category_id' => $request->category_id,
             'slug' => $request->slug,
-            'discount' => $request->discount,
             'weight' => $request->weight,
             'size' => $request->size,
             'dimensions' => $request->dimensions,
@@ -141,7 +139,6 @@ class ProductController extends Controller
             'barcode' => $request->barcode,
             'category_id' => $request->category_id,
             'slug' => $request->slug,
-            'discount' => $request->discount,
             'weight' => $request->weight,
             'size' => $request->size,
             'dimensions' => $request->dimensions,

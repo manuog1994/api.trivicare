@@ -29,8 +29,8 @@ class ReserveAgent extends Command
      */
     public function handle()
     {
-        // DEVUELVE TODAS LAS RESERVAS QUE NO SE HAN COMPRADO Y QUE EL PAYMENT_METHOD NO SEA TRANSFER_BANK O BIZUM
-        $reserves = Reserve::where('paid', '!=', 'PAGADO')->where('payment_method', '!=', 'transfer_bank')->where('payment_method', '!=', 'bizum')->where('created_at', '<', now()->subMinutes(15))->get();
+        // DEVUELVE TODAS LAS RESERVAS QUE NO SE HAN COMPRADO EN 30 MINUTOS
+        $reserves = Reserve::where('created_at', '<', now()->subMinutes(30))->get();
 
         // RECORREMOS TODAS LAS RESERVAS, DEVOLVEMOS EL STOCK Y LAS CANCELAMOS
         foreach ($reserves as $reserve) {

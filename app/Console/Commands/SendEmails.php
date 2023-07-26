@@ -19,7 +19,6 @@ use LaravelDaily\Invoices\Invoice;
 use Illuminate\Support\Facades\Mail;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
-use Mockery\Undefined;
 
 class SendEmails extends Command
 {
@@ -97,8 +96,14 @@ class SendEmails extends Command
                     if(isset($item->variation)) {
                         $item->name = $item->name . ' -- ' . $item->variation;
                     }
+
+                    // if(isset($item->discount)) {
+                    //     foreach($item->discount as $discount) {
+                    //         $item->discount = $discount->discount;
+                    //     }
+                    // }
                     
-                    $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
+                    $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent( $item->discount === null ? 0 : round($item->discount->discount))->taxByPercent(21);
                 }
 
                    
@@ -224,8 +229,10 @@ class SendEmails extends Command
                 $coupon = Cupon::where('code', $order->coupon)->first();
 
                 //verifica si es único y eliminar en caso afirmativo
-                if($coupon->unique == true) {
-                    $coupon->delete();
+                if(isset($coupon->unique)) {
+                    if($coupon->unique == true) {
+                        $coupon->delete();
+                    }
                 }
         
                 $orderToMail = [
@@ -235,7 +242,7 @@ class SendEmails extends Command
                 sleep(5);
 
                 if ($order->payment_method != 'bizum' || $order->payment_method != 'transfer_bank') {
-                    Mail::to('pedidostrivicare@gmail.com')->send(new NewOrder($orderToMail));
+                    Mail::to(config('services.mailorders.email'))->send(new NewOrder($orderToMail));
                 }
                 
             } 
@@ -277,7 +284,7 @@ class SendEmails extends Command
                     'state' => $user_profile->state,
                 ];
                 sleep(5);
-                Mail::to('pedidostrivicare@gmail.com')->send(new NewOrder($orderToMail));
+                Mail::to(config('services.mailorders.email'))->send(new NewOrder($orderToMail));
 
             } else if ($order->payment_method == 'transfer_bank' && $order->paid == 'PENDIENTE' && $order->confirmation_sent == false) {
                 //send email
@@ -314,7 +321,7 @@ class SendEmails extends Command
                     'state' => $user_profile->state,
                 ];
                 sleep(5);
-                Mail::to('pedidostrivicare@gmail.com')->send(new NewOrder($orderToMail));
+                Mail::to(config('services.mailorders.email'))->send(new NewOrder($orderToMail));
             }
         }
 

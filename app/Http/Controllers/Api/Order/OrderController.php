@@ -368,7 +368,7 @@ class OrderController extends Controller
 
             // Iteramos los productos del pedido y los añadimos a la factura
             foreach($products as $item) {
-                    $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
+                $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount->discount)->taxByPercent(21);
             }
 
             // Recuperamos el cupón       

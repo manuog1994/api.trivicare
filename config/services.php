@@ -47,6 +47,10 @@ return [
         'terminal' => env('GETNET_TERMINAL'),
         'url_ok' => env('GETNET_URL_OK'),
         'url_ko' => env('GETNET_URL_KO'),
-    ]
+    ],
+
+    'mailorders' => [
+        'email' => env('MAIL_ORDERS'),
+     ],
 
 ];

@@ -17,11 +17,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-        //$schedule->command('update:new_status')->monthly();
-        $schedule->command('reserve:agent')->everyFifteenMinutes();
-        $schedule->command('send:emails')->everyMinute();		
+        //ejecutar cada minuto
+        $schedule->command('send:emails')->everyMinute();
+        //ejecutar cada 4 horas		
         $schedule->command('cancel:order')->everyFourHours();
-        $schedule->command('cancel:reserve')->sundays();
+        //ejecutar cada 30 minutos
+        $schedule->command('reserve:agent')->everyThirtyMinutes();
+        //ejecutar comando cada dia a las 00:00
+        $schedule->command('discount:agent')->daily();
 
     }
 

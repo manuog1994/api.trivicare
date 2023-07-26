@@ -36,7 +36,7 @@ class ProductResource extends JsonResource
             'dimensions' => $this->dimensions,
             'rating' => $this->rating,
             'total_reviews' => $this->total_reviews,
-            'discount' => $this->discount,
+            'discount' => DiscountResource::make($this->whenLoaded('discount')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'status' => $this->status == 1 ? 'Borrador' : 'Publicado',
@@ -47,6 +47,7 @@ class ProductResource extends JsonResource
             'images' => ImageResource::collection($this->whenLoaded('images')),
             'meta_description' => $this->meta_description,
             'best_seller' => $this->best_seller,
+
         ];
     }
 }
