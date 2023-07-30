@@ -33,12 +33,6 @@ class VariationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'product_id' => 'required',
-            'model' => 'nullable',
-            'color' => 'nullable',
-            'size' => 'nullable',
-        ]);
 
         $variation = Variation::create($request->all());
 

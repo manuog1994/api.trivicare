@@ -102,8 +102,8 @@ class SendEmails extends Command
                     //         $item->discount = $discount->discount;
                     //     }
                     // }
-                    
-                    $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent( $item->discount === null ? 0 : round($item->discount->discount))->taxByPercent(21);
+                    //comprobar si el descuento es un entero o un float
+                    $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent( $item->discount === null ? 0 : $item->discount->discount)->taxByPercent(21);
                 }
 
                    

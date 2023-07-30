@@ -308,8 +308,12 @@
                     </td>
                     @if($invoice->hasItemDiscount)
                         <td class="text-right">
-                            <p>-{{ round($item->discount * 100 / $item->price_per_unit )}} &percnt;</p>
-                            <p>-{{ $item->discount }} &euro;</p>
+                            @if($item->price_per_unit == 0 && $item->discount == 0)
+                                <p>-{{ $item->discount }} &euro;</p>
+                            @else
+                                <p>-{{ round($item->discount * 100 / $item->price_per_unit) }} &percnt;</p>
+                                <p>-{{ $item->discount }} &euro;</p>
+                            @endif
                         </td>
                     @endif
                     @if($invoice->hasItemTax)

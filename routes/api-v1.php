@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Api\Pdf\PdfController;
 use App\Http\Controllers\Api\Tag\TagController;
+use App\Http\Controllers\Api\Gift\GiftController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\GoogleController;
 use App\Http\Controllers\Api\Cupon\CuponController;
@@ -93,6 +94,9 @@ Route::apiResource('tags', TagController::class)->names('tags');
 
 // Variations
 Route::apiResource('variations', VariationController::class)->names('variations');
+
+// Gifts
+Route::apiResource('gifts', GiftController::class)->names('gifts');
 
 // Cupons
 Route::apiResource('cupons', CuponController::class)->names('cupons');

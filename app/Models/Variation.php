@@ -10,7 +10,7 @@ class Variation extends Model
 {
     use HasFactory, ApiTrait;
 
-    protected $fillable = [ 'id', 'model', 'color', 'size' ];
+    protected $fillable = [ 'id', 'product_id', 'model', 'color', 'size', 'stock', 'image_id' ];
 
     // Relacion de uno a muchos con la tabla products
     public function product()

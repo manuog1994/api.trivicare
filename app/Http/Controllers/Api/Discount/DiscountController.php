@@ -27,4 +27,17 @@ class DiscountController extends Controller
         return DiscountResource::collection($discount);
 
     }
+
+    public function store(Request $request)
+    {
+        $discount = Discount::create($request->all());
+
+        return new DiscountResource($discount);
+    }
+
+    public function destroy(Discount $discount)
+    {
+        $discount->delete();
+        return response()->json(null, 204);
+    }
 }

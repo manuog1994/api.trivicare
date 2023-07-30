@@ -20,7 +20,9 @@ class VariationResource extends JsonResource
             'model' => $this->model,
             'color' => $this->color,
             'size' => $this->size,
-            'image' => $this->whenLoaded('image')
+            'image' => $this->whenLoaded('image'),
+            'product' => $this->whenLoaded('product'),
+            'stock' => $this->stock,
         ];
     }
 }
