@@ -51,6 +51,10 @@ return [
 
     'mailorders' => [
         'email' => env('MAIL_ORDERS'),
-     ],
+    ],
+
+    'urlWeb' => [
+        'url' => env('URL_WEB'),
+    ],
 
 ];

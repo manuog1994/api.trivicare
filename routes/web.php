@@ -37,6 +37,16 @@ Route::get('/cancel', function () {
     return view('cancel');
 })->name('cancel');
 
+//success Redsys
+Route::get('/success', function () {
+    return view('RecepcionaPet');
+})->name('success');
+
+//success Paypal
+Route::get('/success-paypal', function () {
+    return view('SuccessPaypal');
+})->name('successPaypal');
+
 // // View email !! No Borrar
 
 // Route::get('/email', function () {

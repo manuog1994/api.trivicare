@@ -25,7 +25,7 @@ class RedsysPayController extends Controller
         $moneda = "978";
         $trans = "0";
         $url = "";
-        $urlOK = config('services.getnet.url_ok') . $order->token_id;
+        $urlOK = config('services.getnet.url_ok') . '?order_id=' . $order->id;
         $urlKO = config('services.getnet.url_ko');
         $id = time();
         $amount = strval($request->amount);

@@ -2,7 +2,7 @@
 <body> 
 <?php
 
-	include 'RedsysAPI.php';
+	use App\Libraries\Redsys\RedsysAPI;
 
 	// Se crea Objeto
 	$miObj = new RedsysAPI;
