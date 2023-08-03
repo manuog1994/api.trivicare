@@ -85,7 +85,7 @@ class OrderController extends Controller
         }
 
         //Enviamos un evento cuando se crea un pedido
-        event(new MyEvent('hello world'));
+        event(new MyEvent('Se ha creado un nuevo pedido'));
 
         return response()->json([
             'message' => 'Pedido creado correctamente',
