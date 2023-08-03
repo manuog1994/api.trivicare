@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Cupon;
 use App\Models\Guest;
 use App\Models\Order;
+use App\Events\MyEvent;
 use App\Models\Product;
 use App\Models\Reserve;
 use App\Mail\OrderModMail;
@@ -83,6 +84,8 @@ class OrderController extends Controller
             $order->save();
         }
 
+        //Enviamos un evento cuando se crea un pedido
+        event(new MyEvent('hello world'));
 
         return response()->json([
             'message' => 'Pedido creado correctamente',
@@ -462,4 +465,5 @@ class OrderController extends Controller
             'data' => $order,
         ]);
     }
+    
 }
