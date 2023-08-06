@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Discount\DiscountController;
+use App\Http\Controllers\Api\EventNot\EventNotController;
 use App\Http\Controllers\Api\VisitConter\VisitController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\RedsysPay\RedsysPayController;
@@ -191,6 +192,12 @@ Route::post('redsys', [RedsysPayController::class, 'payment'])->name('redsys.pos
 
 // Search
 Route::get('search', [SearchController::class, 'index'])->name('search');
+
+//Push Notifications Events
+Route::apiResource('events', EventNotController::class)->names('events');
+Route::delete('events-all', [EventNotController::class, 'destroyAll'])->name('events.destroy.all');
+
+
 
 
 

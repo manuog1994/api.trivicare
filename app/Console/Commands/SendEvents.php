@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\EventNot;
 use Illuminate\Console\Command;
 
 class SendEvents extends Command
@@ -27,6 +28,13 @@ class SendEvents extends Command
      */
     public function handle()
     {
-        event(new \App\Events\MyEvent($this->argument('event')));
+        $event = $this->argument('event');
+        // Crear un evento
+        $notification = EventNot::create([
+            'title' => $event,
+            'description' => 'Evento creado desde consola',
+        ]);
+        
+        event(new \App\Events\MyEvent($notification));
     }
 }

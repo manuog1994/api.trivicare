@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['localhost:3000', 'trivicare.com', '*'],
+    'allowed_origins' => ['localhost:3000', 'localhost:8081', 'localhost:3001', 'trivicare.com', '*'],
 
     'allowed_origins_patterns' => [],
 
