@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\Variation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Api\Pdf\PdfController;
@@ -21,6 +19,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Pickup\PickupController;
 use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\Api\Search\SearchController;
+use App\Http\Controllers\Api\Expo\ExpoTokenController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
@@ -196,6 +195,9 @@ Route::get('search', [SearchController::class, 'index'])->name('search');
 //Push Notifications Events
 Route::apiResource('events', EventNotController::class)->names('events');
 Route::delete('events-all', [EventNotController::class, 'destroyAll'])->name('events.destroy.all');
+
+// Expo Tokens
+Route::post('expo-token', [ExpoTokenController::class, 'store'])->name('expo-token');
 
 
 
