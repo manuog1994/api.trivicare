@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Events\MyEvent;
 use App\Models\Product;
 use App\Models\Reserve;
+use App\Models\EventNot;
 use App\Mail\OrderModMail;
 use App\Mail\SendOrderMail;
 use App\Models\PickupPoint;
@@ -84,8 +85,13 @@ class OrderController extends Controller
             $order->save();
         }
 
+        $event = EventNot::create([
+            'title' => 'Pedido creado',
+            'description' => 'Pedido creado por el usuario',
+        ]);
+        
         //Enviamos un evento cuando se crea un pedido
-        event(new MyEvent('Se ha creado un nuevo pedido'));
+        event(new MyEvent($event));
 
         return response()->json([
             'message' => 'Pedido creado correctamente',
@@ -240,6 +246,13 @@ class OrderController extends Controller
         $order->status = 1;
         $order->paid = 'PAGADO';
         $order->save();
+
+        $event = EventNot::create([
+            'title' => 'Pedido pagado',
+            'description' => 'Pedido pagado por el usuario',
+        ]);
+
+        event(new MyEvent($event));
            
         return response()->json([
             'success' => true,

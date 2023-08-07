@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Product;
 use App\Models\Reserve;
+use App\Models\EventNot;
 use Illuminate\Console\Command;
 
 class ReserveAgent extends Command
@@ -44,6 +45,12 @@ class ReserveAgent extends Command
     
             $reserve->delete();
 
+            $event = EventNot::create([
+                'title' => 'Reserva cancelada',
+                'description' => 'Reserva cancelada por inactividad',
+            ]);
+            
+            event(new \App\Events\MyEvent($event));
         }
     }
 }

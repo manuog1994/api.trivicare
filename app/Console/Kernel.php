@@ -25,7 +25,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('reserve:agent')->everyThirtyMinutes();
         //ejecutar comando cada dia a las 00:00
         $schedule->command('discount:agent')->daily();
-
+        //ejecutar comando cada dia a las 12:00
+        $schedule->command('stock:listen')->dailyAt('12:00');
     }
 
     /**

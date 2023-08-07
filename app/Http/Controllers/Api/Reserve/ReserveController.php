@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Reserve;
 
 use App\Models\Product;
 use App\Models\Reserve;
+use App\Models\EventNot;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,7 +30,12 @@ class ReserveController extends Controller
             $product->save();
         }
 
+        $event = EventNot::create([
+            'title' => 'Reserva creada',
+            'description' => 'Reserva creada desde la web',
+        ]);
 
+        event(new \App\Events\MyEvent($event));
         
         return response()->json($reserve, 201);
     }

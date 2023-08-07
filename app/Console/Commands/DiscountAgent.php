@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Discount;
+use App\Models\EventNot;
 use Illuminate\Console\Command;
 
 class DiscountAgent extends Command
@@ -36,6 +37,13 @@ class DiscountAgent extends Command
         foreach ($discounts as $discount) {
             //eliminamos el descuento
             $discount->delete();
+
+            $event = EventNot::create([
+                'title' => 'Descuento eliminado',
+                'description' => 'Descuento eliminado por fecha de finalización',
+            ]);
+
+            event(new \App\Events\MyEvent($event));
         }
     }
 }
