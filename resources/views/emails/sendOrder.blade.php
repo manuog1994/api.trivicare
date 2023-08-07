@@ -842,7 +842,7 @@
                                                                                 style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px">
                                                                                 <p class="p_price"
                                                                                     style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
-                                                                                    {{ $product->price - ($product->price * ($product->discount / 100)) }}</p>
+                                                                                    {{ $product->price - ($product->price * ($product->discount == null ? 0 : $product->discount->discount / 100)) }}</p>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
