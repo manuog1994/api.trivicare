@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "952a79c7cec5f718337cb7acae10b080",
+    "content-hash": "4228fc7206371e2decaba7a9c14b7189",
     "packages": [
         {
             "name": "alymosul/exponent-server-sdk-php",
