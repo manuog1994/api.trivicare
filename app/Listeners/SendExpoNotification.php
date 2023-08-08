@@ -33,7 +33,11 @@ class SendExpoNotification
         $expo = Expo::normalSetup();
         $channelName = 'my-channel';
 
-        $expo->subscribe($channelName, 'ExponentPushToken[AGK2XVBEGhwLzEgwLqDokN]');
+        $recipient1 = 'ExponentPushToken[AGK2XVBEGhwLzEgwLqDokN]';
+        $recipient2 = 'ExponentPushToken[kQWzJ0I36PBcuaj381Al0M]';
+
+        $expo->subscribe($channelName, $recipient1);
+        $expo->subscribe($channelName, $recipient2);
 
         $notification = ['body' => 
             $new->description,
