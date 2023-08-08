@@ -268,6 +268,15 @@ class OrderController extends Controller
         $order->status = 1;
         $order->paid = 'PROCESANDO';
         $order->save();
+
+
+        $event = EventNot::create([
+            'title' => 'Pedido pagado',
+            'description' => 'Pedido pagado por el usuario',
+        ]);
+
+        event(new MyEvent($event));
+        
         return response()->json([
             'success' => true,
             'data' => $order,

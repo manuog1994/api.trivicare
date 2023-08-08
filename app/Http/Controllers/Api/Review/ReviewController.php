@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\Review;
 
 use App\Models\Review;
+use App\Events\MyEvent;
 use App\Models\Product;
+use App\Models\EventNot;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,7 +57,7 @@ class ReviewController extends Controller
             ]);
         } else {
             $user_profile = UserProfile::where('id', $request->user_profile_id)->first();
-        
+            
             $review = Review::create([
                 'user_id' => $request->user_id,
                 'user_profile_id' => $request->user_profile_id,
@@ -66,7 +68,13 @@ class ReviewController extends Controller
                 'user_lastname' => $user_profile->lastname,
             ]);
         }
-
+        
+        $event = EventNot::create([
+            'title' => 'Se ha creado una nueva valoración',
+            'description' => 'Se ha creado una nueva valoración para el producto ' . $review->product->name
+        ]);
+        
+        event(new MyEvent($event));
 
         $product = Product::findOrFail($request->product_id);
 
