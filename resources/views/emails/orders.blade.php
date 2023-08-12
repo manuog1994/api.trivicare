@@ -513,7 +513,9 @@
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
                                                                         En unas horas el pedido será enviado a su
-                                                                        domicilio.&nbsp;En caso de querer cancelar o
+                                                                        domicilio.&nbsp;
+                                                                        Si ha comprado un artículo en Preventa, el pedido será enviado cuando dispongamos del mismo en un plazo máximo de 20 días.&nbsp;
+                                                                        En caso de querer cancelar o
                                                                         modificar su pedido podrá hacerlo contactando con nosotros a este mismo correo, 
                                                                         siempre y cuando el pedido no haya salido de nuestras instalaciones.</p>
                                                                 </td>
