@@ -157,7 +157,7 @@ class InvoiceOrderController extends Controller
         $products = json_decode($request->products);
         
         foreach($products as $item) {
-            $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
+            $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent( $item->discount === null ? 0 : $item->discount->discount )->taxByPercent(21);
         }
 
 
