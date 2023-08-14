@@ -34,7 +34,7 @@ class OrderController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:admin')->except('store', 'verifyEmail');
+        $this->middleware('auth:admin')->except('store', 'verifyEmail', 'show', 'index');
     }
 
     public function index()
@@ -46,11 +46,15 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'products' => 'required',
             'total' => 'required',
         ]);
+
+        if($request->token_reserve){
+            $reserve = Reserve::where('token_reserve', $request->token_reserve)->first();
+            $reserve->delete();
+        }
 
         $pickupPoint = '';
         
@@ -61,8 +65,20 @@ class OrderController extends Controller
             $pickupPoint = PickupPoint::where('id', $resP)->first();
         }
 
+        //si el usuario esta logueado
+        $user = UserProfile::where('id', $request->user_profile_id)->first();
+
         $order = Order::create([
-            'guest_id' => $request->guest_id,
+            'name' => $request->name ?? $user->name,
+            'lastname' => $request->lastname ?? $user->lastname,
+            'email' => $request->email ?? $user->user->email,
+            'phone' => $request->phone ?? $user->phone,
+            'address' => $request->address ?? $user->address,
+            'city' => $request->city ?? $user->city,
+            'state' => $request->state ?? $user->state,
+            'country' => $request->country ?? $user->country,
+            'zipcode' => $request->zipcode ?? $user->zipcode,
+            'dni' => $request->dni ?? $user->dni,
             'user_id' => $request->user_id,
             'user_profile_id' => $request->user_profile_id,
             'products' => $request->products,

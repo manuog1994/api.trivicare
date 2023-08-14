@@ -37,10 +37,6 @@ if (!empty( $_POST ) ) {//URL DE RESP. ONLINE
 						//ejecutar el pago
 						$order = Order::where('id', $order_id)->first();
 
-						//borrar reserva
-						$reserve = Reserve::where('token_reserve', $order->token_reserve)->first();
-						$reserve->delete();
-
 						//cambiar estado del pedido
 						$order->status = 1;
 						$order->paid = 'PAGADO';
@@ -74,10 +70,6 @@ if (!empty( $_POST ) ) {//URL DE RESP. ONLINE
 
 				//ejecutar el pago
 				$order = Order::where('id', $order_id)->first();
-
-				//borrar reserva
-				$reserve = Reserve::where('token_reserve', $order->token_reserve)->first();
-				$reserve->delete();
 
 				//cambiar estado del pedido
 				$order->status = 1;

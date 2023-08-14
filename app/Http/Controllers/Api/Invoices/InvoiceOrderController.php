@@ -112,8 +112,16 @@ class InvoiceOrderController extends Controller
         ]);
 
         $order = Order::create([
-            'user_id' => 2,
-            'user_profile_id' => 1,
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'country' => $request->country,
+            'state' => $request->state,
+            'city' => $request->city,
+            'zipcode' => $request->zipcode,
+            'dni' => $request->dni,
             'products' => $request->products,
             'subTotal' => $request->subTotal,
             'total' => $request->total,
@@ -222,11 +230,21 @@ class InvoiceOrderController extends Controller
 
         // Then send email to party with link
         $inv = InvoiceOrder::create([
-            'user_profile_id' => $order->user_profile->id,
-            'order_id' => $order->id,
             'filename' => $filename,
             'url' => $link,
             'invoice_number' => $invoice_number,
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'address' => $request->address,
+            'city' => $request->city,
+            'zipcode' => $request->zipcode,
+            'state' => $request->state,
+            'country' => $request->country,
+            'dni' => $request->dni,
+            'phone' => $request->phone,
+            'total' => $request->total,
+            'type' => 'Particular',
         ]);
         $mailDiscount = $request->total * $request->discount / 100;
         $mailData = [

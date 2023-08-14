@@ -2,12 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\VisitController;
 use App\Http\Controllers\Api\Pdf\PdfController;
 use App\Http\Controllers\Api\Tag\TagController;
 use App\Http\Controllers\Api\Gift\GiftController;
-use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\GoogleController;
 use App\Http\Controllers\Api\Cupon\CuponController;
 use App\Http\Controllers\Api\Error\ErrorController;
@@ -25,7 +26,6 @@ use App\Http\Controllers\Api\Reserve\ReserveController;
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Discount\DiscountController;
 use App\Http\Controllers\Api\EventNot\EventNotController;
-use App\Http\Controllers\Api\VisitConter\VisitController;
 use App\Http\Controllers\Api\Contact\ContactFormController;
 use App\Http\Controllers\Api\RedsysPay\RedsysPayController;
 use App\Http\Controllers\Api\Variation\VariationController;
@@ -176,10 +176,6 @@ Route::post('notification-delete', [NotificationController::class, 'delete'])->n
 // Invoices
 Route::post('new-invoice', [InvoiceOrderController::class, 'newInvoice'])->name('new-invoice');
 
-// Visit Counter
-Route::post('visit', [VisitController::class, 'store'])->name('visit-counter');
-Route::get('visits', [VisitController::class, 'index'])->name('visits');
-
 // Pickup Points
 Route::apiResource('pickup-points', PickupController::class)->names('pickup-points');
 
@@ -199,8 +195,6 @@ Route::delete('events-all', [EventNotController::class, 'destroyAll'])->name('ev
 // Expo Tokens
 Route::post('expo-token', [ExpoTokenController::class, 'store'])->name('expo-token');
 
-
-
-
-
-
+// Visits 
+Route::post('visit', [VisitController::class, 'incrementVisit'])->name('visit-increment');
+Route::get('visits', [VisitController::class, 'getVisits'])->name('get-visits');

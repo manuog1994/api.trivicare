@@ -112,15 +112,13 @@ class GoogleController extends Controller
          * Select user if already exists
          */
 
-        $user = User::where('provider_name', 'google')
-            ->where('provider_id', $userFromGoogle->id)
-            ->first();
+        $provider_id = User::where('provider_id', $userFromGoogle->id)->first();
 
         $email = User::where('email', $userFromGoogle->email)->first();
 
         /**
          */
-        if($user == null && $email == null) {
+        if($provider_id == null && $email == null) {
             $user = User::create([
                 'provider_id' => $userFromGoogle->id,
                 'provider_name' => 'google',
@@ -130,32 +128,12 @@ class GoogleController extends Controller
                 //'password' => bcrypt('C0d3c@mp'),
             ]);
             
-            // //generate random string
-            // $rand_token = openssl_random_pseudo_bytes(16);
-            // //change binary to hexadecimal
-            // $token = bin2hex($rand_token);
-
-            // VerificationToken::create([
-            //     'user_id' => $user->id,
-            //     'token' => $token,
-            // ]);
-            
-            // //generate email verification
-            // $mailData = [
-            //     'title' => 'Muchas gracias por registrarte en Trivicare.com',
-            //     'body' => 'Gracias por registrarte en Trivicare.com. Ahora puedes disfrutar de todos nuestros servicios.',
-            //     'email' => $user->email,
-            //     'url' => 'https://api.trivicare.com/verify-email/' . $token,
-            // ];
-
-            // Mail::to($user->email)->send(new VerificationMail($mailData));
-
             return response()->json([
                 'message' => 'User created',
                 'user' => $user
             ], 200);
             
-        } else if ($email != null && $user == null) {
+        } else if($email != null && $provider_id == null) {
             $user = User::where('email', $email)->first();
             $user->provider_id = $userFromGoogle->id;
             $user->provider_name = 'google';
@@ -168,17 +146,15 @@ class GoogleController extends Controller
             ], 200);
 
         } else {
-            $user->google_access_token_json = json_encode($accessToken);
-            $user->save();
+            $provider_id->google_access_token_json = json_encode($accessToken);
+            $provider_id->save();
 
             return response()->json([
                 'message' => 'User already exists',
-                'user' => $user
+                'user' => $provider_id
             ], 200);
         }
 
-        
-        //$token = $user->createToken("Google")->accessToken;
     } // postLogin
 
 

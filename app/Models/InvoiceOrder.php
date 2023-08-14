@@ -17,7 +17,20 @@ class InvoiceOrder extends Model
         'user_profile_id',
         'url',
         'invoice_number',
-
+        'order_seller_id',
+        'seller_id',
+        'name',
+        'lastname',
+        'email',
+        'phone',
+        'address',
+        'city',
+        'state',
+        'zipcode',
+        'country',
+        'dni',
+        'total',
+        'type',
     ];
 
     // Relación uno a uno con Order

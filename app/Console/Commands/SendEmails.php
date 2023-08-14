@@ -48,12 +48,9 @@ class SendEmails extends Command
 
         foreach ($orders as $order) {
             // si el usuario es invitado o no
-            if($order->guest_id == null){
+            if($order->user != null){
                 $user = User::where('id', $order->user_id)->first();
                 $user_profile = UserProfile::where('id', $order->user_profile_id)->first();
-            }else{
-                $user = Guest::where('id', $order->guest_id)->first();
-                $user_profile = Guest::where('id', $order->guest_id)->first();
             }
 
             // decode the products
@@ -79,16 +76,16 @@ class SendEmails extends Command
                 ]);
         
                 $customer = new Party([
-                    'name'          =>  $user_profile->name . ' ' . $user_profile->lastname,
-                    'address'       => $user_profile->address,
-                    'postal_code'   => $user_profile->zipcode,
-                    'city'          => $user_profile->city,
-                    'state'         => $user_profile->state,
-                    'country'       => $user_profile->country,
+                    'name'          =>  $user_profile->name . ' ' . $user_profile->lastname ?? $order->name . ' ' . $order->lastname,
+                    'address'       => $user_profile->address ?? $order->address,
+                    'postal_code'   => $user_profile->zipcode ?? $order->zipcode,
+                    'city'          => $user_profile->city ?? $order->city,
+                    'state'         => $user_profile->state ?? $order->state,
+                    'country'       => $user_profile->country ?? $order->country,
                     'custom_fields' => [
-                        'DNI' => $user_profile->dni,
-                        'email' => $user->email,
-                        'teléfono' => $user_profile->phone,
+                        'DNI' => $user_profile->dni ?? $order->dni,
+                        'email' => $user->email ?? $order->email,
+                        'teléfono' => $user_profile->phone ?? $order->phone,
                     ],
                 ]);
 
@@ -170,11 +167,23 @@ class SendEmails extends Command
          
                 // Then send email to party with link
                 $inv = InvoiceOrder::create([
-                    'user_profile_id' => $order->user_profile->id,
-                    'order_id' => $order->id,
+                    'user_profile_id' => $order->user_profile->id ?? null,
+                    'order_id' => $order->id ?? null,
                     'filename' => $filename,
                     'url' => $link,
                     'invoice_number' => $invoice_number,
+                    'name' => $user_profile->name ?? $order->name,
+                    'lastname' => $user_profile->lastname ?? $order->lastname,
+                    'email' => $user->email ?? $order->email,
+                    'address' => $user_profile->address ?? $order->address,
+                    'city' => $user_profile->city ?? $order->city,
+                    'zipcode' => $user_profile->zipcode ?? $order->zipcode,
+                    'state' => $user_profile->state ?? $order->state,
+                    'country' => $user_profile->country ?? $order->country,
+                    'phone' => $user_profile->phone ?? $order->phone,
+                    'dni' => $user_profile->dni ?? $order->dni,
+                    'total' => ($order->total * 1.21) + $order->shipping,
+                    'type' => 'Particular',
                 ]);
         
                 //send email
@@ -184,13 +193,13 @@ class SendEmails extends Command
                     'body' => 'Gracias por tu pedido. Te adjuntamos la factura de tu pedido.',
                     'date' => $order->order_date,
                     'order' => $invoice_number,
-                    'user' => $user_profile->name . ' ' . $user_profile->lastname,
-                    'address' => $user_profile->address,
-                    'city' => $user_profile->city,
-                    'zipcode' => $user_profile->zipcode,
-                    'state' => $user_profile->state,
-                    'country' => $user_profile->country,
-                    'email' => $user->email,
+                    'user' => $user_profile->name . ' ' . $user_profile->lastname ?? $order->name . ' ' . $order->lastname,
+                    'address' => $user_profile->address ?? $order->address,
+                    'city' => $user_profile->city ?? $order->city,
+                    'zipcode' => $user_profile->zipcode ?? $order->zipcode,
+                    'state' => $user_profile->state ?? $order->state,
+                    'country' => $user_profile->country ?? $order->country,
+                    'email' => $user->email ?? $order->email,
                     'products' => $products,
                     'subTotal' => round($order->total * 1.21, 2),
                     'shipping' => $order->shipping,
@@ -201,7 +210,7 @@ class SendEmails extends Command
                 
                 sleep(10);
                 
-                Mail::to($user->email)->send(new OrderMail($mailData));
+                Mail::to($user->email ?? $order->email)->send(new OrderMail($mailData));
 
                 $order->email_sent = true;
                 $order->save();
@@ -210,7 +219,7 @@ class SendEmails extends Command
         
                 if($user->orders()->count() == 1 && $order->guest_id == null){
                     $cupon = Cupon::create([
-                        'code' => 'ORDERFIRST' . $user->id . $user_profile->id,
+                        'code' => 'ORDERFIRST' . $user->id . $user_profile->id ?? $order->id . $order->name,
                         'discount' => 10,
                         'validity' => Carbon::now()->addDays(30)->format('Y-m-d'),
                         'status' => 2,
@@ -222,7 +231,7 @@ class SendEmails extends Command
                         'cupon' => $cupon->code,
                     ];
                     sleep(5);
-                    Mail::to($user->email)->send(new FirstOrderMail($dataOne));
+                    Mail::to($user->email ?? $order->email)->send(new FirstOrderMail($dataOne));
                 } 
         
                 //extraer el cupón a través del código
@@ -236,8 +245,8 @@ class SendEmails extends Command
                 }
         
                 $orderToMail = [
-                    'name' => $user_profile->name . ' ' . $user_profile->lastname,
-                    'state' => $user_profile->state,
+                    'name' => $user_profile->name . ' ' . $user_profile->lastname ?? $order->name . ' ' . $order->lastname,
+                    'state' => $user_profile->state ?? $order->state,
                 ];
                 sleep(5);
 
@@ -256,13 +265,13 @@ class SendEmails extends Command
                     'content' => 'Si aún no ha realizado el pago por Bizum, puede hacerlo enviando el total del importe indicado en su pedido al número de teléfono 613 03 60 42, indicando como concepto su número de DNI, NIF o NIE.',
                     'date' => $order->order_date,
                     'order' => '#' . $order->id,
-                    'user' => $user_profile->name . ' ' . $user_profile->lastname,
-                    'address' => $user_profile->address,
-                    'city' => $user_profile->city,
-                    'zipcode' => $user_profile->zipcode,
-                    'state' => $user_profile->state,
-                    'country' => $user_profile->country,
-                    'email' => $user->email,
+                    'user' => $user_profile->name . ' ' . $user_profile->lastname ?? $order->name . ' ' . $order->lastname,
+                    'address' => $user_profile->address ?? $order->address,
+                    'city' => $user_profile->city ?? $order->city,
+                    'zipcode' => $user_profile->zipcode ?? $order->zipcode,
+                    'state' => $user_profile->state ?? $order->state,
+                    'country' => $user_profile->country ?? $order->country,
+                    'email' => $user->email ?? $order->email,
                     'products' => $products,
                     'subTotal' => round($order->total * 1.21, 2),
                     'shipping' => $order->shipping,
@@ -273,15 +282,15 @@ class SendEmails extends Command
                 // descansar 5 segundos 
                 sleep(5);
                 
-                Mail::to($user->email)->send(new ConfirmOrderMail($mailConfirm));
+                Mail::to($user->email ?? $order->email)->send(new ConfirmOrderMail($mailConfirm));
 
                 
                 $order->confirmation_sent = true;
                 $order->save();
 
                 $orderToMail = [
-                    'name' => $user_profile->name . ' ' . $user_profile->lastname,
-                    'state' => $user_profile->state,
+                    'name' => $user_profile->name . ' ' . $user_profile->lastname ?? $order->name . ' ' . $order->lastname,
+                    'state' => $user_profile->state ?? $order->state,
                 ];
                 sleep(5);
                 Mail::to(config('services.mailorders.email'))->send(new NewOrder($orderToMail));
@@ -295,13 +304,13 @@ class SendEmails extends Command
                     'content' => 'Puede realizar el pago haciendo una transferencia bancaria con el total del importe indicado en su pedido a la siguiente cuenta bancaria: ES61 0049 4398 0328 1008 8938 indicando como concepto su número de DNI, NIF o NIE.',
                     'date' => $order->order_date,
                     'order' => '#' . $order->id,
-                    'user' => $user_profile->name . ' ' . $user_profile->lastname,
-                    'address' => $user_profile->address,
-                    'city' => $user_profile->city,
-                    'zipcode' => $user_profile->zipcode,
-                    'state' => $user_profile->state,
-                    'country' => $user_profile->country,
-                    'email' => $user->email,
+                    'user' => $user_profile->name . ' ' . $user_profile->lastname ?? $order->name . ' ' . $order->lastname,
+                    'address' => $user_profile->address ?? $order->address,
+                    'city' => $user_profile->city ?? $order->city,
+                    'zipcode' => $user_profile->zipcode ?? $order->zipcode,
+                    'state' => $user_profile->state ?? $order->state,
+                    'country' => $user_profile->country ?? $order->country,
+                    'email' => $user->email ?? $order->email,
                     'products' => $products,
                     'subTotal' => round($order->total * 1.21, 2),
                     'shipping' => $order->shipping,
@@ -312,13 +321,13 @@ class SendEmails extends Command
                 // descansar 5 segundos 
                 sleep(5);
                 
-                Mail::to($user->email)->send(new ConfirmOrderMail($mailConfirm));
+                Mail::to($user->email ?? $order->email)->send(new ConfirmOrderMail($mailConfirm));
                 $order->confirmation_sent = true;
                 $order->save();
 
                 $orderToMail = [
-                    'name' => $user_profile->name . ' ' . $user_profile->lastname,
-                    'state' => $user_profile->state,
+                    'name' => $user_profile->name . ' ' . $user_profile->lastname ?? $order->name . ' ' . $order->lastname,
+                    'state' => $user_profile->state ?? $order->state,
                 ];
                 sleep(5);
                 Mail::to(config('services.mailorders.email'))->send(new NewOrder($orderToMail));

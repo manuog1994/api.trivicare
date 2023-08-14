@@ -16,6 +16,16 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name, // 'name' => $this->name,
+            'lastname' => $this->lastname, // 'lastname' => $this->lastname,
+            'email' => $this->email, // 'email' => $this->email,
+            'phone' => $this->phone, // 'phone' => $this->phone,
+            'address' => $this->address, // 'address' => $this->address,
+            'city' => $this->city, // 'city' => $this->city,
+            'state' => $this->state, // 'state' => $this->state,
+            'zipcode' => $this->zipcode, // 'zipcode' => $this->zipcode,
+            'country' => $this->country, // 'country' => $this->country,
+            'dni' => $this->dni, // 'dni' => $this->dni,
             'user_id' => $this->user_id,
             'user_profile_id' => $this->user_profile_id,
             'products' => $this->products,
