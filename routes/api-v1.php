@@ -2,13 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\AuthAdminController;
-use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\VisitController;
+use App\Http\Controllers\AuthAdminController;
+use App\Http\Controllers\ImagesPostController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Api\Pdf\PdfController;
 use App\Http\Controllers\Api\Tag\TagController;
 use App\Http\Controllers\Api\Gift\GiftController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\GoogleController;
 use App\Http\Controllers\Api\Cupon\CuponController;
 use App\Http\Controllers\Api\Error\ErrorController;
@@ -198,3 +200,9 @@ Route::post('expo-token', [ExpoTokenController::class, 'store'])->name('expo-tok
 // Visits 
 Route::post('visit', [VisitController::class, 'incrementVisit'])->name('visit-increment');
 Route::get('visits', [VisitController::class, 'getVisits'])->name('get-visits');
+
+//Blog
+Route::apiResource('blogs', BlogController::class)->names('blogs');
+
+//ImagesPost
+Route::apiResource('images-post', ImagesPostController::class)->names('imagesPost');

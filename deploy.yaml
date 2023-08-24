@@ -23,8 +23,7 @@ tasks:
     - artisan:migrate
     - install
     - build
-    - deploy:symlink
-    - link:from_shared
+    - fromshared
     - deploy:publish
   install:
     - cd: "{{ release_path }}"
@@ -34,8 +33,7 @@ tasks:
     - cd: "{{release_path}}"
     - run: "yarn build"
 
-  link:from_shared:
-    script:
-      - ln -sfn {{ deploy_path }}/shared/config.json {{ release_path }}/config.json 
+  fromshared:
+    - run: ln -sfn {{ deploy_path }}/shared/config.json {{ release_path }}/config.json 
 after:
   deploy:failed: deploy:unlock
