@@ -206,3 +206,6 @@ Route::apiResource('blogs', BlogController::class)->names('blogs');
 
 //ImagesPost
 Route::apiResource('images-post', ImagesPostController::class)->names('imagesPost');
+
+//Status Blog
+Route::put('blogs/status/{blog}', [BlogController::class, 'status'])->name('blogs.status');

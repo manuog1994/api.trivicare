@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('metaDescription')->nullable();
             $table->string('metaTitle')->nullable();
             $table->json('tags')->nullable();
-            $table->json('minTags')->nullable();
+            $table->text('minTags')->nullable();
             $table->enum('status', ['Publicado', 'Borrador'])->default('Borrador');
             $table->timestamps();
         });

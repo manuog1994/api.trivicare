@@ -38,4 +38,12 @@ class BlogController extends Controller
 
         return response()->json();
     }
+
+    public function status(Blog $blog)
+    {
+        $blog->status = $blog->status == 'Publicado' ? 'Borrador' : 'Publicado';
+        $blog->save();
+
+        return response()->json('Status actualizado con exito');
+    }
 }

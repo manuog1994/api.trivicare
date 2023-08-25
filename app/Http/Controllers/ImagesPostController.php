@@ -92,6 +92,8 @@ class ImagesPostController extends Controller
      */
     public function destroy(ImagesPost $imagesPost)
     {
-        //
+        $imagesPost->delete();
+
+        return response()->json('Imagen eliminada con exito');
     }
 }
