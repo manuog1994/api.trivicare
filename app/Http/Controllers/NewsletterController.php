@@ -19,7 +19,9 @@ class NewsletterController extends Controller
     public function subscribe(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'fullname' => 'nullable|string|max:255',
             'email' => 'required|email|unique:newsletters',
+            'phone' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -31,28 +33,30 @@ class NewsletterController extends Controller
         }
 
         $newsletter = Newsletter::create([
+            'fullname' => $request->fullname,
             'email' => $request->email,
+            'phone' => $request->phone,
         ]);
 
-        //Generador de cupón único
-        $code = Str::random(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        // //Generador de cupón único
+        // $code = Str::random(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
     
-        while (Cupon::where('code', $code)->exists()) {
-            $code = Str::random(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        }
+        // while (Cupon::where('code', $code)->exists()) {
+        //     $code = Str::random(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        // }
 
-        //Guardar en tabla Cupones
-        $coupon = Cupon::create([
-            'code' => $code,
-            'discount' => 10,
-            'validity' => Carbon::now()->addDays(30)->format('Y-m-d'),
-            'status' => 2,
-            'unique' => true,
-        ]);
+        // //Guardar en tabla Cupones
+        // $coupon = Cupon::create([
+        //     'code' => $code,
+        //     'discount' => 10,
+        //     'validity' => Carbon::now()->addDays(30)->format('Y-m-d'),
+        //     'status' => 2,
+        //     'unique' => true,
+        // ]);
 
         $mailData = [
             'email' => $newsletter->email,
-            'code' => $code,
+            // 'code' => $code,
         ];
 
         Mail::to($newsletter->email)->send(new SubscribeMail($mailData));

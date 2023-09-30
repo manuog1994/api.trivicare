@@ -10,6 +10,8 @@ class Newsletter extends Model
     use HasFactory;
 
     protected $fillable = [
+        'fullname',
         'email',
+        'phone',
     ];
 }

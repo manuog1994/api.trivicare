@@ -514,10 +514,14 @@
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
                                                                         Gracias por suscribirte a nuestro newsletter, desde ahora en adelante recibirás noticias, tips de cuidado de la piel, últimos productos, ofertas y mucho más...
                                                                     </p>
+                                                                    <p
+                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#666666;font-size:14px">
+                                                                        Además por ser parte de la comunidad entras en el sorteo de un cheque regalo de 100€ para gastar en nuestra tienda online. El ganador/a se anunciará el 1 de noviembre de 2023 en nuestras redes sociales y además de ponernos en contacto con el/ella.</p>
+                                                                    </p>
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                        <table cellpadding="0" cellspacing="0" class="es-content" align="center"
+                                                        {{-- <table cellpadding="0" cellspacing="0" class="es-content" align="center"
                                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
                                                         <tr style="text-align:center;">
                                                             <td>
@@ -526,7 +530,7 @@
                                                                 <p>Este cupón caducará en 30 días, así que no lo dudes y aprovéchalo en tu próximo pedido.</p>
                                                             </td>
                                                         </tr>
-                                                        </table>
+                                                        </table> --}}
                                                     </td>
                                                 </tr>
                                             </table>
