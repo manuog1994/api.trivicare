@@ -50,13 +50,34 @@ class ImageController extends Controller
                     $imagePath = storage_path('app/public/images').'/'.$file_name;
                     $utf8ImagePath = mb_convert_encoding($imagePath, 'UTF-8', 'auto');
 
+                    //if not exit file /image/270x360 create
+                    if(!file_exists(storage_path('app/public/images/270x360'))){
+                        mkdir(storage_path('app/public/images/270x360'));
+                    }
+
                     //resize image of min
-                    $img = ImageManagerStatic::make($utf8ImagePath)->resize(280, 280);
-                    $img->save(storage_path('app/public/images/280x280').'/'.$file_name_out_ext.'.'.$ext);
+                    $img = ImageManagerStatic::make($utf8ImagePath)->resize(270, 360);
+                    $img->save(storage_path('app/public/images/270x360').'/'.$file_name_out_ext.'.'.$ext);
+
+
+                    //if not exit file /image/600x800 create
+                    if(!file_exists(storage_path('app/public/images/600x800'))){
+                        mkdir(storage_path('app/public/images/600x800'));
+                    }
 
                     //resize image of mid
-                    $imgMid = ImageManagerStatic::make($utf8ImagePath)->resize(800, 800);
-                    $imgMid->save(storage_path('app/public/images/800x800').'/'.$file_name_out_ext.'.'.$ext);
+                    $imgMid = ImageManagerStatic::make($utf8ImagePath)->resize(600, 800);
+                    $imgMid->save(storage_path('app/public/images/600x800').'/'.$file_name_out_ext.'.'.$ext);
+
+                    //if not exit file /image/450x600 create
+                    if(!file_exists(storage_path('app/public/images/450x600'))){
+                        mkdir(storage_path('app/public/images/450x600'));
+                    }
+
+                    //cut image of max
+                    $imgMax = ImageManagerStatic::make($utf8ImagePath)->fit(450, 600);
+                    $imgMax->save(storage_path('app/public/images/450x600').'/'.$file_name_out_ext.'.'.$ext);
+                    
                 }
             }
             return response()->json([
@@ -77,19 +98,19 @@ class ImageController extends Controller
     public function destroy(Image $image)
     {
         $imagePath = storage_path('app/public/images').'/'.$image->name.'.'.$image->ext;
-        $imagePath280 = storage_path('app/public/images/280x280').'/'.$image->name.'.'.$image->ext;
-        $imagePath800 = storage_path('app/public/images/800x800').'/'.$image->name.'.'.$image->ext;
+        $imagePathMin = storage_path('app/public/images/270x360').'/'.$image->name.'.'.$image->ext;
+        $imagePathMax = storage_path('app/public/images/600x800').'/'.$image->name.'.'.$image->ext;
 
         if(file_exists($imagePath)){
             unlink($imagePath);
         }
 
-        if(file_exists($imagePath280)){
-            unlink($imagePath280);
+        if(file_exists($imagePathMin)){
+            unlink($imagePathMin);
         }
 
-        if(file_exists($imagePath800)){
-            unlink($imagePath800);
+        if(file_exists($imagePathMax)){
+            unlink($imagePathMax);
         }
 
         $image->delete();

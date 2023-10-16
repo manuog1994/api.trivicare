@@ -41,6 +41,7 @@ class Product extends Model
         'new',
         'meta_description',
         'best_seller',
+        'ingredients',
      ];
      // Propiedad para filtrar por los campos de la tabla
     protected $allowFilter = ['id', 'name', 'slug', 'price', 'category_id', 'tags', 'status'];

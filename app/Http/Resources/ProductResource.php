@@ -48,6 +48,7 @@ class ProductResource extends JsonResource
             'meta_description' => $this->meta_description,
             'best_seller' => $this->best_seller,
             'presale' => $this->presale == 'yes' ? 'Si' : 'No',
+            'ingredients' => $this->ingredients,
         ];
     }
 }
