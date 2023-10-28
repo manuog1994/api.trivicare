@@ -1,6 +1,6 @@
 import: 
   - recipe/laravel.php
-  - contrib/yarn.php
+  - contrib/npm.php
 
 config:
   repository: 'git@github.com:manuog1994/api.trivicare.git'
@@ -27,11 +27,11 @@ tasks:
     - deploy:publish
   install:
     - cd: "{{ release_path }}"
-    - run: "yarn install"
+    - run: "npm install"
     
   build:
     - cd: "{{release_path}}"
-    - run: "yarn build"
+    - run: "npm run build"
 
   fromshared:
     - run: ln -sfn {{ deploy_path }}/shared/config.json {{ release_path }}/config.json 
