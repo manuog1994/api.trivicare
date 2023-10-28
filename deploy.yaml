@@ -27,7 +27,7 @@ tasks:
     - deploy:publish
 
   build:
-    - cd: {{ release_path }}
+    - cd: "{{ release_path }}"
     - run: npm run build
     
 
