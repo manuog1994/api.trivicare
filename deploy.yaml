@@ -1,6 +1,6 @@
 import: 
   - recipe/laravel.php
-  - contrib/npm.php
+  - recipe/npm.php
 
 config:
   repository: 'git@github.com:manuog1994/api.trivicare.git'
