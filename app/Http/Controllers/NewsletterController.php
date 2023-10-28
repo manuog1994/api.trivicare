@@ -53,7 +53,6 @@ class NewsletterController extends Controller
 
             Mail::to($newsletter->email)->send(new SubscribeMail($mailData));
 
-            return response()->json(['message' => 'You are already subscribed to our newsletter.']); 
         } else {
             //Guardar en tabla Cupones
             $coupon = Cupon::create([
@@ -71,9 +70,9 @@ class NewsletterController extends Controller
 
             Mail::to($newsletter->email)->send(new SubscribeMail($mailData));
             
-            return response()->json(['message' => 'You are already subscribed to our newsletter.']); 
         }
-
+        
+        return response()->json(['message' => 'You are already subscribed to our newsletter.']); 
 
     
     }

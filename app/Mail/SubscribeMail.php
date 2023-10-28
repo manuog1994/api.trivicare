@@ -31,10 +31,11 @@ class SubscribeMail extends Mailable
     public function build()
     {
         // Si la fecha actual es menor que la fecha de expiración, se envia el mail subscribe
-        if (Carbon::now()->lessThan(Carbon::parse('2023-10-28'))) {
+        if (Carbon::now()->lessThan(Carbon::parse('2023-11-01'))) {
             return $this->subject('Trivicare.com | Bienvenid@ a nuestro newsletter')->view('emails.subscribe');
+        } else {
+            return $this->subject('Trivicare.com | Bienvenid@ a nuestro newsletter')->view('emails.subscribe_standard');
         }
 
-        return $this->subject('Trivicare.com | Bienvenid@ a nuestro newsletter')->view('emails.subscribe_standard');
     }
 }
