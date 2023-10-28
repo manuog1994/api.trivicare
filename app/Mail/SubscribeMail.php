@@ -2,10 +2,11 @@
 
 namespace App\Mail;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SubscribeMail extends Mailable
 {
@@ -29,6 +30,11 @@ class SubscribeMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Trivicare.com | Bienvenid@ a nuestro newsletter')->view('emails.subscribe');
+        // Si la fecha actual es menor que la fecha de expiración, se envia el mail subscribe
+        if (Carbon::now()->lessThan(Carbon::parse('2023-10-28'))) {
+            return $this->subject('Trivicare.com | Bienvenid@ a nuestro newsletter')->view('emails.subscribe');
+        }
+
+        return $this->subject('Trivicare.com | Bienvenid@ a nuestro newsletter')->view('emails.subscribe_standard');
     }
 }

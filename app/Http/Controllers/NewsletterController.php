@@ -38,30 +38,43 @@ class NewsletterController extends Controller
             'phone' => $request->phone,
         ]);
 
-        // //Generador de cupón único
-        // $code = Str::random(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        //Generador de cupón único
+        $code = Str::random(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
     
-        // while (Cupon::where('code', $code)->exists()) {
-        //     $code = Str::random(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        // }
+        while (Cupon::where('code', $code)->exists()) {
+            $code = Str::random(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        }
 
-        // //Guardar en tabla Cupones
-        // $coupon = Cupon::create([
-        //     'code' => $code,
-        //     'discount' => 10,
-        //     'validity' => Carbon::now()->addDays(30)->format('Y-m-d'),
-        //     'status' => 2,
-        //     'unique' => true,
-        // ]);
+        // Si la fecha actual es menor que la fecha de expiración, no se genera cupón
+        if (Carbon::now()->lessThan(Carbon::parse('2023-11-01'))) {
+            $mailData = [
+                'email' => $newsletter->email,
+            ];
 
-        $mailData = [
-            'email' => $newsletter->email,
-            // 'code' => $code,
-        ];
+            Mail::to($newsletter->email)->send(new SubscribeMail($mailData));
 
-        Mail::to($newsletter->email)->send(new SubscribeMail($mailData));
-        
-        return response()->json(['message' => 'You are already subscribed to our newsletter.']); 
+            return response()->json(['message' => 'You are already subscribed to our newsletter.']); 
+        } else {
+            //Guardar en tabla Cupones
+            $coupon = Cupon::create([
+                'code' => $code,
+                'discount' => 15,
+                'validity' => Carbon::now()->addDays(30)->format('Y-m-d'),
+                'status' => 2,
+                'unique' => true,
+            ]);
+
+            $mailData = [
+                'email' => $newsletter->email,
+                'code' => $code,
+            ];
+
+            Mail::to($newsletter->email)->send(new SubscribeMail($mailData));
+            
+            return response()->json(['message' => 'You are already subscribed to our newsletter.']); 
+        }
+
+
     
     }
 
