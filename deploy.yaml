@@ -21,12 +21,10 @@ tasks:
     - artisan:view:cache
     - artisan:event:cache
     - artisan:migrate
-    - install
-    - build
-    - fromshared
-    - deploy:publish
     - npm:install
     - npm:build
+    - fromshared
+    - deploy:publish
     
 
   fromshared:
