@@ -22,9 +22,13 @@ tasks:
     - artisan:event:cache
     - artisan:migrate
     - npm:install
-    - npm:build
+    - build
     - fromshared
     - deploy:publish
+
+  build:
+    - cd: {{ release_path }}
+    - run: npm run build
     
 
   fromshared:
