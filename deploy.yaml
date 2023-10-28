@@ -25,8 +25,9 @@ tasks:
     - build
     - fromshared
     - deploy:publish
-  npm:install
-  npm:build
+  npm:
+    - install
+    - build
     
 
   fromshared:
