@@ -27,6 +27,7 @@ tasks:
     - npm_build
     - fromshared
     - deploy:publish
+    - permission
 
   npm_install:
     - run: "cd {{ release_path }} && {{nvm_source}} npm install"
@@ -37,8 +38,9 @@ tasks:
   fromshared:
     - run: "ln -sfn {{ deploy_path }}/shared/config.json {{ release_path }}/config.json"
 
-after:
   permission:
     - run: "cd {{ release_path }} && chmod -R 777 vendor"
+
+after:
   deploy:failed: 
     - deploy:unlock
