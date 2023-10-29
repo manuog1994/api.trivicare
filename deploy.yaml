@@ -28,7 +28,10 @@ tasks:
     - deploy:publish
 
   nvm_install:
-    - run: "export NVM_DIR=\"$HOME/.nvm\" && [ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\""
+    - run: |
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        nvm use 16
     - run: "nvm use 16"
 
   npm_install:
