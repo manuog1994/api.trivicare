@@ -4,6 +4,7 @@ import:
 
 config:
   repository: 'git@github.com:manuog1994/api.trivicare.git'
+  nvm_source: 'source $HOME/.nvm/nvm.sh &&'
 
 hosts:
   api:
@@ -12,6 +13,7 @@ hosts:
     deploy_path: "/var/www/api.trivicare.com"
 
 tasks:
+
   deploy:
     - deploy:prepare
     - deploy:vendors
@@ -21,10 +23,14 @@ tasks:
     - artisan:view:cache
     - artisan:event:cache
     - artisan:migrate
+    - nvm
     - npm_install
     - npm_build
     - fromshared
     - deploy:publish
+
+  nvm:
+    - run: "{{nvm_source}} npm --version"
 
   npm_install:
     - run: "cd {{ release_path }} && npm install"
