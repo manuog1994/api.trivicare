@@ -23,7 +23,6 @@ tasks:
     - artisan:view:cache
     - artisan:event:cache
     - artisan:migrate
-    - nvm
     - npm_install
     - npm_build
     - fromshared
