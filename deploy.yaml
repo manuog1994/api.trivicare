@@ -28,7 +28,7 @@ tasks:
     - deploy:publish
 
   nvm:
-    - nvm use 16
+    - run: nvm use 16
 
   install:
     - cd: "{{ release_path }}"
