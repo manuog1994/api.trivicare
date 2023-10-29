@@ -21,17 +21,10 @@ tasks:
     - artisan:view:cache
     - artisan:event:cache
     - artisan:migrate
-    - nvm_install
     - npm_install
     - npm_build
     - fromshared
     - deploy:publish
-
-  nvm_install:
-    - run: |
-        export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-    - run: nvm use 16
 
   npm_install:
     - run: "cd {{ release_path }} && npm install"
