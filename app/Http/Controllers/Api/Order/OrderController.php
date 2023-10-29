@@ -14,6 +14,7 @@ use App\Models\EventNot;
 use App\Mail\OrderModMail;
 use App\Mail\SendOrderMail;
 use App\Models\PickupPoint;
+use App\Models\SpecialLink;
 use App\Models\UserProfile;
 use App\Models\InvoiceOrder;
 use Illuminate\Http\Request;
@@ -63,6 +64,17 @@ class OrderController extends Controller
             $resP = intval($request->pickup_point);
             //si exiten puntos de recogida
             $pickupPoint = PickupPoint::where('id', $resP)->first();
+        }
+
+        // Si el pedido tiene un producto con precio especial
+        if ($request->exclusiveProducts) {
+            $exclusiveProducts = json_decode($request->exclusiveProducts);
+
+            foreach($exclusiveProducts as $item){
+                $special_link = SpecialLink::where('product_id', $item)->first();
+                $special_link->max_uses = $special_link->max_uses - 1;
+                $special_link->save();
+            }
         }
 
         //si el usuario esta logueado

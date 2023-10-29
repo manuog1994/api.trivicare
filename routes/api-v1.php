@@ -34,6 +34,7 @@ use App\Http\Controllers\Api\Variation\VariationController;
 use App\Http\Controllers\Api\Invoices\InvoiceOrderController;
 use App\Http\Controllers\Api\Suggestion\SuggestionController;
 use App\Http\Controllers\Api\Notification\NotificationController;
+use App\Http\Controllers\Api\SpecialLink\SpecialLinkController;
 use App\Models\SpecialLink;
 
 /*
@@ -212,10 +213,4 @@ Route::apiResource('images-post', ImagesPostController::class)->names('imagesPos
 Route::put('blogs/status/{blog}', [BlogController::class, 'status'])->name('blogs.status');
 
 //Verify UUID Special Link
-Route::get('/special-link/{uuid}', function(){
-    $special_link = SpecialLink::where('id', request()->uuid)->firstOrFail();
-
-    if ($special_link->max_uses > 0 && $special_link->is_active == true) {
-        return response()->json($special_link, 200);
-    }
-})->name('special-link');
+Route::get('/special-link/{uuid}', [SpecialLinkController::class, 'show'])->name('special-link');
