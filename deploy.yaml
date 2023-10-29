@@ -28,15 +28,15 @@ tasks:
     - deploy:publish
 
   nvm:
-    - run: nvm use 16
+    - run: "nvm use 16"
 
   install:
     - cd: "{{ release_path }}"
-    - run: npm install
+    - run: "npm install"
 
   build:
     - cd: "{{ release_path }}"
-    - run: npm run build
+    - run: "npm run build"
     
 
   fromshared:
