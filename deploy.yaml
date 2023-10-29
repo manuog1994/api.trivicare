@@ -29,9 +29,6 @@ tasks:
     - fromshared
     - deploy:publish
 
-  nvm:
-    - run: "{{nvm_source}} npm --version"
-
   npm_install:
     - run: "cd {{ release_path }} && {{nvm_source}} npm install"
 
