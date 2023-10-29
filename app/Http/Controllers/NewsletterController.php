@@ -109,7 +109,7 @@ class NewsletterController extends Controller
 
             return response()->json(['message' => 'Newsletter sent.']);
         } else {
-            return response()->json(['message' => 'Unauthorizeds.']);
+            return response()->json(['message' => 'Unauthorized.']);
         }
     }
 }
