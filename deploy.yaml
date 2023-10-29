@@ -38,5 +38,7 @@ tasks:
     - run: "ln -sfn {{ deploy_path }}/shared/config.json {{ release_path }}/config.json"
 
 after:
+  permission:
+    - run: "cd {{ release_path }} && chmod -R 777 vendor"
   deploy:failed: 
     - deploy:unlock
