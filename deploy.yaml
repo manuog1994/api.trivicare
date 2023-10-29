@@ -21,26 +21,25 @@ tasks:
     - artisan:view:cache
     - artisan:event:cache
     - artisan:migrate
-    - nvm
-    - install
-    - build
+    - nvm_install
+    - npm_install
+    - npm_build
     - fromshared
     - deploy:publish
 
-  nvm:
-    - run: "export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm use 16"
+  nvm_install:
+    - run: "export NVM_DIR=\"$HOME/.nvm\" && [ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\""
     - run: "nvm use 16"
 
-  install:
-    - cd: "{{ release_path }}"
-    - run: "npm install"
+  npm_install:
+    - run: "cd {{ release_path }} && npm install"
 
-  build:
-    - cd: "{{ release_path }}"
-    - run: "npm run build"
-    
+  npm_build:
+    - run: "cd {{ release_path }} && npm run build"
 
   fromshared:
-    - run: ln -sfn {{ deploy_path }}/shared/config.json {{ release_path }}/config.json 
+    - run: "ln -sfn {{ deploy_path }}/shared/config.json {{ release_path }}/config.json"
+
 after:
-  deploy:failed: deploy:unlock
+  deploy:failed: 
+    - deploy:unlock
