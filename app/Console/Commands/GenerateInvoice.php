@@ -42,14 +42,6 @@ class GenerateInvoice extends Command
 
         // enviar email de confirmacion de la ordenes que no han sido enviadas y que hayan sido creadas hace un máximo de 10 minutos
         $order = Order::find($number);
-        // si el usuario es invitado o no
-        if($order->guest_id == null){
-            $user = User::where('id', $order->user_id)->first();
-            $user_profile = UserProfile::where('id', $order->user_profile_id)->first();
-        }else{
-            $user = Guest::where('id', $order->guest_id)->first();
-            $user_profile = Guest::where('id', $order->guest_id)->first();
-        }
 
         // decode the products
         $products = json_decode($order->products);
@@ -74,16 +66,16 @@ class GenerateInvoice extends Command
         ]);
 
         $customer = new Party([
-            'name'          =>  $user_profile->name . ' ' . $user_profile->lastname,
-            'address'       => $user_profile->address,
-            'postal_code'   => $user_profile->zipcode,
-            'city'          => $user_profile->city,
-            'state'         => $user_profile->state,
-            'country'       => $user_profile->country,
+            'name'          => $order->name . ' ' . $order->lastname,
+            'address'       => $order->address,
+            'postal_code'   => $order->zipcode,
+            'city'          => $order->city,
+            'state'         => $order->state,
+            'country'       => $order->country,
             'custom_fields' => [
-                'DNI' => $user_profile->dni,
-                'email' => $user->email,
-                'teléfono' => $user_profile->phone,
+                'DNI' => $order->dni,
+                'email'=> $order->email,
+                'teléfono' => $order->phone,
             ],
         ]);
 
