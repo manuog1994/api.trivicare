@@ -43,6 +43,40 @@ class GenerateInvoice extends Command
         // enviar email de confirmacion de la ordenes que no han sido enviadas y que hayan sido creadas hace un máximo de 10 minutos
         $order = Order::find($number);
 
+        // Si la orden no existe
+        if ($order == null) {
+            $this->error('La orden no existe');
+            return;
+        }
+
+        // Si la orden ya tiene una factura
+        if ($order->invoice != null) {
+            $qOne = $this->ask('La orden ya tiene una factura. Desea continuar S/N?');
+
+            if ($qOne == 'N' || $qOne == 'n') {
+                return;
+            }
+        }
+
+        // Si la orden no está pagada
+        if ($order->paid != 'PAGADO') {
+            $qTwo = $this->ask('La orden no está pagada. Desea continuar S/N?');
+
+            if ($qTwo == 'N' || $qTwo == 'n') {
+                return;
+            }
+
+            $qThree = $this->ask('Desea cambiar el estado de la orden a PAGADO? S/N');
+
+            if ($qThree == 'S' || $qThree == 's') {
+                $order->paid = 'PAGADO';
+                $order->save();
+            }
+
+        }
+
+        $this->info('Generando factura...');
+
         // decode the products
         $products = json_decode($order->products);
 
@@ -51,8 +85,7 @@ class GenerateInvoice extends Command
             $product = Product::where('id', $product->id)->first();
         } 
 
-        // si el pago es por paypal o redsys y el estado es pagado
-        if ($order->payment_method == 'paypal' && $order->paid == 'PAGADO' || $order->payment_method == 'redsys' && $order->paid == 'PAGADO' || $order->payment_method == 'transfer_bank' && $order->paid == 'PAGADO' || $order->payment_method == 'bizum' && $order->paid == 'PAGADO' || $order->payment_method == 'paylater' && $order->paid == 'PAGADO') {
+
 
         // fill the data for the invoice
         $client = new Party([
@@ -80,12 +113,17 @@ class GenerateInvoice extends Command
         ]);
 
         foreach($products as $item) {
-            //si existe variacion en el producto
             if(isset($item->variation)) {
                 $item->name = $item->name . ' -- ' . $item->variation;
             }
 
-            $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent($item->discount)->taxByPercent(21);
+            // if(isset($item->discount)) {
+            //     foreach($item->discount as $discount) {
+            //         $item->discount = $discount->discount;
+            //     }
+            // }
+            //comprobar si el descuento es un entero o un float
+            $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price_base)->quantity($item->cartQuantity)->discountByPercent( $item->discount === null ? 0 : $item->discount->discount)->taxByPercent(21);
         }
 
             
@@ -97,7 +135,33 @@ class GenerateInvoice extends Command
         }
         //find number for the invoice
         $inv = InvoiceOrder::where('order_id', $order->id)->first();
-        $invoice_number = $inv->invoice_number;
+        if ($inv == null) {
+            //make a generator number for the invoice
+            $invt = InvoiceOrder::all();
+            $year = Carbon::now()->format('y');
+
+            if($invt->count() == 0){
+
+                $invoice_number = '#TNC'. $year . '/' . str_pad(1, 5, '0', STR_PAD_LEFT);
+    
+            }else {
+    
+                $last = substr($invt->last()->invoice_number, 0, -6);
+                $headerInv = '#TNC' . $year;
+    
+                if($last != $headerInv) {
+                    $invoice_number = '#TNC'. $year . '/' . str_pad(1, 5, '0', STR_PAD_LEFT);
+                } else {
+                    $last_invoice = $invt->last();
+                    $invoice_number = str_replace('#TNC' . $year . '/', '', $last_invoice->invoice_number);
+                    $invoice_number += 1;
+                    $invoice_number = '#TNC'. $year . '/' . str_pad($invoice_number, 5, '0', STR_PAD_LEFT);
+                } 
+    
+            }
+        } else {
+            $invoice_number = $inv->invoice_number;
+        }
 
 
         $dateInv= date('dmY');
@@ -126,8 +190,36 @@ class GenerateInvoice extends Command
             ->logo(public_path('img/logofactura.png'))
             // You can additionally save generated invoice to configured disk
             ->save('public');
-            
-        }
+        
+            $link = $invoice->url();
+            // eliminar los '/' y '-'del nombre del archivo
+            $filename = $invoice->filename;
+    
+            // Update dates in the database
+            InvoiceOrder::updateOrCreate([
+                'user_profile_id' => $order->user_profile->id ?? null,
+                'order_id' => $order->id ?? null,
+                'filename' => $filename,
+                'url' => $link,
+                'invoice_number' => $invoice_number,
+                'name' => $order->name,
+                'lastname' => $order->lastname,
+                'email' => $order->email,
+                'address' => $order->address,
+                'city' => $order->city,
+                'zipcode' => $order->zipcode,
+                'state' => $order->state,
+                'country' => $order->country,
+                'phone' => $order->phone,
+                'dni' => $order->dni,
+                'total' => ($order->total * 1.21) + $order->shipping,
+                'type' => 'Particular',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+    
+            $this->info('La factura se ha generado correctamente');
+            $this->info('El link de la factura es: ' . $link);
     }
 
     
