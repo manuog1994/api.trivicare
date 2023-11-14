@@ -196,9 +196,8 @@ class GenerateInvoice extends Command
             $filename = $invoice->filename;
     
             // Update dates in the database
-            InvoiceOrder::updateOrCreate([
+            InvoiceOrder::updateOrCreate(['order_id' => $order->id],[
                 'user_profile_id' => $order->user_profile->id ?? null,
-                'order_id' => $order->id ?? null,
                 'filename' => $filename,
                 'url' => $link,
                 'invoice_number' => $invoice_number,
@@ -214,8 +213,8 @@ class GenerateInvoice extends Command
                 'dni' => $order->dni,
                 'total' => ($order->total * 1.21) + $order->shipping,
                 'type' => 'Particular',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'created_at' => $order->created_at,
+                'updated_at' => $order->updated_at,
             ]);
     
             $this->info('La factura se ha generado correctamente');
