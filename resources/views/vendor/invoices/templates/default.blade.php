@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>#Fatura electrónica</title>
+        <title>#Factura electrónica</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
         <style type="text/css" media="screen">
