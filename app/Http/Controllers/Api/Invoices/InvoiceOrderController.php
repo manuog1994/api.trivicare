@@ -273,4 +273,22 @@ class InvoiceOrderController extends Controller
             'data' => $inv->url
         ]);
     }
+
+    public function destroy(InvoiceOrder $invoice)
+    {
+        // Eliminar el archivo de la carpeta public
+        $filename = $invoice->filename;
+        $path = Storage::disk('public')->exists($filename);
+
+        if ($path) {
+            Storage::disk('public')->delete($filename);
+        }
+
+        $invoice->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Factura eliminada correctamente'
+        ]);
+    }
 }
