@@ -41,6 +41,8 @@ class CreateSpecialLink extends Command
         11. Pack Básico
         12. Pack Imprescindibles
         13. Pack Completo
+        14. Little SkinMas!
+        15. Big SkinMas!
         ');
         $discount = $this->ask('Cuál es el descuento?');
         $max_uses = $this->ask('Cuál es el máximo de usos?');
@@ -74,7 +76,11 @@ class CreateSpecialLink extends Command
             $product = 59;
         } elseif ($product == 13) {
             $product = 61;
-        } 
+        } elseif ($product == 14) {
+            $product = 72;
+        } elseif ($product == 15) {
+            $product = 73;
+        }
 
         $product_id = \App\Models\Product::find($product)->id;
 
