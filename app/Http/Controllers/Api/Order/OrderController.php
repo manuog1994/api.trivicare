@@ -52,10 +52,10 @@ class OrderController extends Controller
             'total' => 'required',
         ]);
 
-        if($request->token_reserve){
-            $reserve = Reserve::where('token_reserve', $request->token_reserve)->first();
-            $reserve->delete();
-        }
+        // if($request->token_reserve){
+        //     $reserve = Reserve::where('token_reserve', $request->token_reserve)->first();
+        //     $reserve->delete();
+        // }
 
         $pickupPoint = '';
         

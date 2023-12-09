@@ -25,7 +25,7 @@ class ReserveController extends Controller
         $json = json_decode($reserve->products);
 
         foreach ($json as $item) {
-            if($item->presale == 'no'){
+            if(!$item->presale){
                 $product = Product::where('id', $item->id)->first();
                 $product->stock = $product->stock - $item->cartQuantity;
                 $product->save();
